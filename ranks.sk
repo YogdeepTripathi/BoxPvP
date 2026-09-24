@@ -1,0 +1,106 @@
+on load:
+    send "" to all players
+    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/joueur/ranks&f.sk&7!" to all players
+    send "" to all players
+
+command /ranks:
+    aliases: /rank
+    trigger:
+        ranks(player)
+
+function ranks(p: player):
+    create a gui with chest inventory with 3 rows named "&8&l             RANKS":
+        # first row
+        make gui 0 with black stained glass pane named " "
+        make gui 1 with black stained glass pane named " "
+        make gui 2 with black stained glass pane named " "
+        make gui 3 with black stained glass pane named " "
+        make gui 4 with black stained glass pane named " "
+        make gui 5 with black stained glass pane named " "
+        make gui 6 with black stained glass pane named " "
+        make gui 7 with black stained glass pane named " "
+        make gui 8 with black stained glass pane named " "
+        # second row
+        make gui 9 with black stained glass pane named " "
+        make gui 10 with ultimateRank()
+        make gui 11 with championRank()
+        make gui 12 with royalRank()
+        make gui 13 with guardianRank()
+        make gui 14 with angelRank()
+        make gui 16 with rankmoney({_p})
+        make gui 17 with black stained glass pane named " "
+        # third row
+        make gui 18 with black stained glass pane named " "
+        make gui 19 with black stained glass pane named " "
+        make gui 20 with black stained glass pane named " "
+        make gui 21 with black stained glass pane named " "
+        make gui 22 with black stained glass pane named " "
+        make gui 23 with black stained glass pane named " "
+        make gui 24 with black stained glass pane named " "
+        make gui 25 with black stained glass pane named " "
+        make gui 26 with black stained glass pane named " "
+    open last gui to {_p}
+
+function ultimateRank() :: item:
+    set {_ultimate} to lime concrete powder named "<##00FFD6>[<##00FFC8>U<##00FFBA>L<##00FFAD>T<##00FF9F>I<##00FF88>M<##00FF68>A<##00FF47>T<##00FF27>E<##00FF07>]" with lore "&8ʀᴀɴᴋ" and "" and "&fCost:" and "&f | &e⛃50,000" and "" and "&fRank Boosts:" and "&f | &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d1.25x" and "&f | &7xᴘ &a1.5x" and "" and "&fExtras:" and "&f | &7Access &9/enderchest &7| &9/ec"
+    return {_ultimate}
+
+function championRank() :: item:
+    set {_champion} to blue concrete powder named "<##2532E2>[<##3933CF>C<##4D34BD>H<##6035AA>A<##743697>M<##883685>P<##9C3772>I<##AF385F>O<##C3394D>N<##D73A3A>]" with lore "&8ʀᴀɴᴋ" and "" and "&fCost:" and "&f | &e⛃200,000" and "" and "&fRank Boosts:" and "&f | &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d1.5x" and "&f | &7xᴘ &a2x" and "" and "&fExtras:" and "&f | &7Access &9/enderchest &7| &9/ec"
+    return {_champion}
+
+function royalRank() :: item:
+    set {_royal} to yellow concrete powder named "<##EEF105>[<##ECCA2C>R<##EBA254>O<##E97B7B>Y<##E754A2>A<##E62CCA>L<##E405F1>]" with lore "&8ʀᴀɴᴋ" and "" and "&fCost:" and "&f | &e⛃1,000,000" and "" and "&fRank Boosts:" and "&f | &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d1.75x" and "&f | &7xᴘ &a3x" and "" and "&fExtras:" and "&f | &7Access &9/enderchest &7| &9/ec"
+    return {_royal}
+
+function guardianRank() :: item:
+    set {_guardian} to magenta concrete powder named "<##FF0053>[<##FB0066>G<##F70079>U<##F4008C>A<##F0009F>R<##EC00B3>D<##E800C6>I<##E500D9>A<##E100EC>N<##DD00FF>]" with lore "&8ʀᴀɴᴋ" and "" and "&fCost:" and "&f | &e⛃8,000,000" and "" and "&fRank Boosts:" and "&f | &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d2x" and "&f | &7xᴘ &a4x" and "" and "&fExtras:" and "&f | &7Access &9/enderchest &7| &9/ec"
+    return {_guardian}
+
+function angelRank() :: item:
+    set {_angel} to white concrete powder named "<##D4D4D4>[<##D7D4BC>A<##DAD4A3>N<##DED58B>G<##E1D573>E<##E4D55A>L<##E7D542>]" with lore "&8ʀᴀɴᴋ" and "" and "&fCost:" and "&f | &e⛃50,000,000" and "" and "&fRank Boosts:" and "&f | &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d3x" and "&f | &7xᴘ &a5x" and "" and "&fExtras:" and "&f | &7Access &9/enderchest &7| &9/ec"
+    return {_angel}
+
+function rankmoney(p: player) :: item:
+    set {_rankmoney} to end crystal named "&fYou have &e⛃%{season1PlayerToken::%uuid of {_p}%}%"
+    return {_rankmoney}
+
+on inventory click:
+    if inventory name of event-inventory is "&8&l             RANKS":
+        if clicked slot is 10:
+            if {season1PlayerToken::%uuid of player%} >= 50000:
+                remove 50000 from {season1PlayerToken::%uuid of player%}
+                execute console command "lp user %uuid of player% parent set ultimate"
+            else:
+                send "&f&lRANKS ▸&r &7You do not have enough tokens for this purchase."
+
+command /warp:
+    permission: warp.access
+    trigger:
+        warp(player)
+
+function warp(p: player):
+    create a gui with chest inventory with 1 rows named "&8&l             WARPS":
+        # first row
+        make gui 0 with black stained glass pane named " "
+        make gui 1 with black stained glass pane named " "
+        make gui 2 with netherrack named "&c&lNETHER" with lore "&8ᴡᴀʀᴘ" and "" and "&8&o(( click to teleport ))":
+            set {_nether} to location(116.500, 23.000, 263.500)
+            set pitch of {_nether} to 0
+            set yaw of {_nether} to 0
+            send "&8&lCONSOLE ▸&r &7Teleporting to &cNether &7in &a2 seconds&7." to player
+            wait 2 seconds
+            teleport player to {_nether}
+        make gui 3 with end stone named "&e&lEND" with lore "&8ᴡᴀʀᴘ" and "" and "&8&o(( click to teleport ))":
+            set {_end} to location(94.500, 44.500, 414.500)
+            set pitch of {_end} to 0
+            set yaw of {_end} to 0
+            send "&8&lCONSOLE ▸&r &7Teleporting to &eEnd &7in &a2 seconds&7." to player
+            wait 2 seconds
+            teleport player to {_end}
+        make gui 4 with black stained glass pane named " "
+        make gui 5 with black stained glass pane named " "
+        make gui 6 with black stained glass pane named " "
+        make gui 7 with black stained glass pane named " "
+        make gui 8 with black stained glass pane named " "
+    open last gui to {_p}

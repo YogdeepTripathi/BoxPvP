@@ -1,0 +1,22 @@
+command /multiplier [<text>] [<offline player>] [<number>]:
+    permission: op
+    usage: &a» &7Use &a/multiplier &7[<&areset&7/&aset&7/&aadd&7>] [<&aplayer&7>] [<&anumber&7>].
+    trigger:
+        if arg-1 is "reset":
+            if arg-2 is set:
+                if arg-3 is not set:
+                    set {player's multiplier::%uuid of arg-2%} to 1
+                    send "&a&l▸ MULTIPLIER&r &7Reset &f%arg-2% &aMultiplier &7to &a1" to player
+            else:
+                if arg-3 is not set:
+                    set {player's multiplier::%uuid of player%} to 1
+                    send "&a&l▸ MULTIPLIER&r &7Reset &f%player% &aMultiplier &7to &a1" to player
+        else if arg-1 is "set":
+            set {player's multiplier::%uuid of arg-2%} to arg-3
+            send "&a&l▸ MULTIPLIER&r &7Set &f%arg-2% &aMultiplier &7to &a%arg-3%" to player
+        else if arg-1 is "add":
+            add arg-3 to {player's multiplier::%uuid of arg-2%}
+            send "&a&l▸ MULTIPLIER&r &7Added &a%arg-3% Multiplier &7to %arg-2%" to player
+
+on tab complete of "/multiplier":
+	set tab completions for position 1 to "reset" and "set" and "add"

@@ -1,0 +1,8 @@
+command /discord:
+    aliases: /apply, /staff
+    trigger:
+        send " " to player
+        send "        <link:https://discord.gg/54raVNSdxS>&b&lDISCORD" to player
+        send "    <link:https://discord.gg/54raVNSdxS>&8(( click to join ))" to player
+        send "<link:https://discord.gg/54raVNSdxS>&fdiscord.gg/54raVNSdxS" to player
+        send " " to player

@@ -1,0 +1,21 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+
+command /pweather <w:weather> [<p:player>]:
+    aliases: /playerweather
+    permission: player.weather
+    trigger:
+        if {_p} is set:
+            if player is op:
+                set (weather of {_p}) to {_w}
+            else:
+                set (weather of player) to {_w}
+        else:
+            set (weather of player) to {_w}
+on tab complete of ("/pweather" or "/playerweather"):
+    set (tab completions for position 1) to ("clear","rain","thunder")

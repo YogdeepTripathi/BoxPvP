@@ -1,0 +1,20 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+
+
+# Make sure you use `/gamerule showDeathMessages false` in-game.
+# These messages only send if the they are both players.
+
+# You may have to adjust this depending on your PvP system
+on death:
+    victim is a player
+    attacker is a player
+    set {_death} to ({player::deathmessage::%(victim's uuid)%} ? "You have killed &e%victim%")
+    set {_kill} to ({player::killmessage::%(attacker's uuid)%} ? "You have died to &e%attacker%")
+    send "%getPrefix("kill",true)%&f "+{_death} to attacker
+    send "%getPrefix("death",true)%&f "+{_kill} to victim

@@ -1,0 +1,147 @@
+on block break:
+    if player's tool is a diamond pickaxe:
+        set {_location} to location of event-block
+        if pitch of player is between 45 and 90:
+            set {_1} to block at {_location} offset by vector(1, 0, 0)
+            set {_2} to block at {_location} offset by vector(0, 0, 1)
+            set {_3} to block at {_location} offset by vector(1, 0, 1)
+            set {_4} to block at {_location} offset by vector(-1, 0, 0)
+            set {_5} to block at {_location} offset by vector(-1, 0, -1)
+            set {_6} to block at {_location} offset by vector(0, 0, -1)
+            set {_7} to block at {_location} offset by vector(-1, 0, 1)
+            set {_8} to block at {_location} offset by vector(1, 0, -1)
+            set {_9} to block at {_location}
+
+        else if pitch of player is between -45 and -90:
+            set {_1} to block at {_location} offset by vector(1, 0, 0)
+            set {_2} to block at {_location} offset by vector(0, 0, 1)
+            set {_3} to block at {_location} offset by vector(1, 0, 1)
+            set {_4} to block at {_location} offset by vector(-1, 0, 0)
+            set {_5} to block at {_location} offset by vector(-1, 0, -1)
+            set {_6} to block at {_location} offset by vector(0, 0, -1)
+            set {_7} to block at {_location} offset by vector(-1, 0, 1)
+            set {_8} to block at {_location} offset by vector(1, 0, -1)
+            set {_9} to block at {_location}
+            
+        else:
+            if player's facing is north:
+                set {_1} to block at {_location} offset by vector(1, 0, 0)
+                set {_2} to block at {_location} offset by vector(0, 1, 0)
+                set {_3} to block at {_location} offset by vector(1, 1, 0)
+                set {_4} to block at {_location} offset by vector(-1, -1, 0)
+                set {_5} to block at {_location} offset by vector(-1, 1, 0)
+                set {_6} to block at {_location} offset by vector(0, -1, 0)
+                set {_7} to block at {_location} offset by vector(-1, 0, 0)
+                set {_8} to block at {_location} offset by vector(1, -1, 0)
+                set {_9} to block at {_location}
+
+            else if player's facing is east:
+                set {_1} to block at {_location} offset by vector(0, 0, 1)
+                set {_2} to block at {_location} offset by vector(0, 1, 0)
+                set {_3} to block at {_location} offset by vector(0, 1, 1)
+                set {_4} to block at {_location} offset by vector(0, -1, -1)
+                set {_5} to block at {_location} offset by vector(0, 1, -1)
+                set {_6} to block at {_location} offset by vector(0, -1, 0)
+                set {_7} to block at {_location} offset by vector(0, 0, -1)
+                set {_8} to block at {_location} offset by vector(0, -1, 1)
+                set {_9} to block at {_location}
+
+            else if player's facing is south:
+                set {_1} to block at {_location} offset by vector(1, 0, 0)
+                set {_2} to block at {_location} offset by vector(0, 1, 0)
+                set {_3} to block at {_location} offset by vector(1, 1, 0)
+                set {_4} to block at {_location} offset by vector(-1, -1, 0)
+                set {_5} to block at {_location} offset by vector(-1, 1, 0)
+                set {_6} to block at {_location} offset by vector(0, -1, 0)
+                set {_7} to block at {_location} offset by vector(-1, 0, 0)
+                set {_8} to block at {_location} offset by vector(1, -1, 0)
+                set {_9} to block at {_location}
+
+            else if player's facing is west:
+                set {_1} to block at {_location} offset by vector(0, 0, 1)
+                set {_2} to block at {_location} offset by vector(0, 1, 0)
+                set {_3} to block at {_location} offset by vector(0, 1, 1)
+                set {_4} to block at {_location} offset by vector(0, -1, -1)
+                set {_5} to block at {_location} offset by vector(0, 1, -1)
+                set {_6} to block at {_location} offset by vector(0, -1, 0)
+                set {_7} to block at {_location} offset by vector(0, 0, -1)
+                set {_8} to block at {_location} offset by vector(0, -1, 1)
+                set {_9} to block at {_location}
+            
+        autocomp(player, blastItem(player, {_1}), black dye, blastDrops(player, {_1}))
+        autocomp(player, blastItem(player, {_2}), black dye, blastDrops(player, {_2}))
+        autocomp(player, blastItem(player, {_3}), black dye, blastDrops(player, {_3}))
+        autocomp(player, blastItem(player, {_4}), black dye, blastDrops(player, {_4}))
+        autocomp(player, blastItem(player, {_5}), black dye, blastDrops(player, {_5}))
+        autocomp(player, blastItem(player, {_6}), black dye, blastDrops(player, {_6}))
+        autocomp(player, blastItem(player, {_7}), black dye, blastDrops(player, {_7}))
+        autocomp(player, blastItem(player, {_8}), black dye, blastDrops(player, {_8}))
+        autocomp(player, blastItem(player, {_9}), black dye, blastDrops(player, {_9}))
+           
+        if %region at {_1}% is "<region name>": # or "<region name>":
+            set block at {_1} to air
+        if %region at {_2}% is "<region name>":
+            set block at {_2} to air
+        if %region at {_3}% is "<region name>":
+            set block at {_3} to air
+        if %region at {_4}% is "<region name>":
+            set block at {_4} to air
+        if %region at {_5}% is "<region name>":
+            set block at {_5} to air
+        if %region at {_6}% is "<region name>":
+            set block at {_6} to air
+        if %region at {_7}% is "<region name>":
+            set block at {_7} to air
+        if %region at {_8}% is "<region name>":
+            set block at {_8} to air
+        if %region at {_9}% is "<region name>":
+            set block at {_9} to air
+                
+function blastDrops(p: player, i: item) :: int:
+    set {_fortune} to level of fortune of {_p}'s tool
+    if {_fortune} is not set:
+        set {_amount} to 1
+    else:
+        set {_amount} to random integer between floor(({_fortune} + 1) / 2) and ({_fortune} + 1) 
+    set {_a} to 0
+    if {_i} = diamond ore:
+        add {_amount} to {_a}
+    if {_i} = diamond block:
+        add ({_amount} * 9) to {_a}
+    return {_a}
+
+function blastItem(p: player, i: item) :: item:
+    if {_i} = diamond ore:
+        set {_a} to diamond
+    else if {_i} = diamond block:
+        set {_a} to diamond
+    return {_a}
+    
+function autocomp(p: player, b: item, cb: item, a: int):
+
+    set {_amountB} to (amount of {_b} in {_p}'s inventory + {_a})
+    set {_amountCB} to 0
+
+    if {_amountB} >= 64:
+        set {_amt} to floor({_amountB} / 64)
+        set {_rem} to ({_amountB} - ({_amt} * 64))
+        set {_amountCB} to ({_amountCB} + {_amt})
+    else:
+        if {_p} has space for {_a} of {_b}:
+            give {_a} of {_b} to {_p}
+            stop
+        else:
+            send title "&c&lFULL INVENTORY" with subtitle "&fCompress your items!" to {_p} for 2 seconds
+            stop
+
+    if {_p} has space for {_amt} of {_cb}:
+        if {_p} has space for {_rem} of {_b}:
+            remove {_amountB} of {_b} from {_p}'s inventory
+            give {_amt} of {_cb} to {_p}
+            give {_rem} of {_b} to {_p}
+        else:
+            send title "&c&lFULL INVENTORY" with subtitle "&fCompress your items!" to {_p} for 2 seconds
+            stop
+    else:
+        send title "&c&lFULL INVENTORY" with subtitle "&fCompress your items!" to {_p} for 2 seconds
+        stop

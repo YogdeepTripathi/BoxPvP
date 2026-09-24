@@ -1,0 +1,34 @@
+on join:
+    set {_jspawn} to location(100.500, 8.000, 80.500)
+    set pitch of {_jspawn} to 0
+    set yaw of {_jspawn} to 0
+    teleport player to {_jspawn}
+on death of player:
+    if attacker is a player:
+        add 1 to {season1PlayerKills::%uuid of player%}
+        set {_dspawn} to location(100.500, 8.000, 80.500)
+        set pitch of {_dspawn} to 0
+        set yaw of {_dspawn} to 0
+        wait 10 ticks
+        teleport the victim to {_dspawn}
+command /spawn:
+    trigger:
+        set {_spawn} to location(100.500, 8.000, 80.500)
+        set pitch of {_spawn} to 0
+        set yaw of {_spawn} to 0
+        send "&8&lCONSOLE ▸&r &fTeleporting to spawn in &a2 seconds&f." to player
+        wait 2 seconds
+        teleport player to {_spawn}
+#on player move:
+#    if y-coordinate of location of player is less than 0:
+#        set {_spawn} to location(100.500, 8.000, 80.500)
+#        set pitch of {_spawn} to 0
+#        set yaw of {_spawn} to 0
+#        teleport player to {_spawn}
+#    else if y-coordinate of location of player is less than 43:
+#        if player is in region "end":
+#            set {_end} to location(94.500, 44.500, 414.500)
+#            set pitch of {_end} to 0
+#            set yaw of {_end} to 0
+#            send "&8&lCONSOLE ▸&r &7You fell into the &8void&7." to player
+#        teleport player to {_end}

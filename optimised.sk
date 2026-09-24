@@ -1,0 +1,497 @@
+on load:
+    send "" to all players
+    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/principal/optimised.&fsk" to all players
+    send "" to all players
+
+
+on join:
+    if {season1blocks::%uuid of player%} is not set:
+        set {season1blocks::%uuid of player%} to 0
+    if {break::%uuid of player%} is set:
+        delete {break::%uuid of player%}
+
+on break:
+    if {buildmode::%uuid of player%} is true:
+        stop
+    if event-block is bedrock:
+        stop
+    cancel event
+    cancel drops
+
+    if fortuneSet(player, event-block) <= 0:
+        send action bar "&8&oUpgrade your pickaxe to mine here!" to player
+        stop
+    else:
+        set {_amount} to floor( fortuneSet(player, event-block) * {season1PlayerMultiplier::%uuid of player%} * ({season1PlayerPrestige::%uuid of player%} + 1) * rankSet(player) )
+
+    if event-block is in region "quarrymines":
+        if event-block is stone:
+            precomp(player, stone1(), stone2(), {_amount})
+            set {_blockset} to stone
+        else if event-block is iron ore:
+            precomp(player, iron1(), iron2(), {_amount})
+            set {_blockset} to iron ore
+        else if event-block is diamond ore:
+            precomp(player, diamond1(), diamond2(), {_amount})
+            set {_blockset} to diamond ore
+        else if event-block is emerald ore:
+            precomp(player, emerald1(), emerald2(), {_amount})
+            set {_blockset} to emerald ore
+        else:
+            if player is not op:
+                stop
+    else:
+        if player is not op:
+            stop
+
+    add 1 to {season1blocks::%uuid of player%}
+
+    play sound "entity.experience_orb.pickup" to player
+
+    levelup(player, event-block, rankSetXP(player))
+
+    set {_random} to a random integer between 1 and 500
+    if {_random} = 500:
+        add 1 to {mineCrate::%uuid of player%}
+        send "&7&lMINING ▸&r &fYou just got &71 Mine Crate&f!" to player
+
+    autocomp(player, stone1(), stone2())
+    autocomp(player, stone2(), stone3())
+    autocomp(player, stone3(), stone4())
+    autocomp(player, coal1(), coal2())
+    autocomp(player, coal2(), coal3())
+    autocomp(player, coal3(), coal4())
+    autocomp(player, iron1(), iron2())
+    autocomp(player, iron2(), iron3())
+    autocomp(player, iron3(), iron4())
+    autocomp(player, diamond1(), diamond2())
+    autocomp(player, diamond2(), diamond3())
+    autocomp(player, diamond3(), diamond4())
+    autocomp(player, emerald1(), emerald2())
+    autocomp(player, emerald2(), emerald3())
+    autocomp(player, emerald3(), emerald4())
+
+    set event-block to bedrock
+    wait 2 seconds
+    set event-block to {_blockset}
+    
+function precomp(p: player, b: item, cb: item, a: int):
+    if {_a} >= 64:
+        set {_compressed} to floor({_a} / 64)
+        set {_remaining} to ({_a} - ({_compressed} * 64))
+        give {_compressed} of {_cb} to {_p}
+        give {_remaining} of {_b} to {_p}
+    else if {_a} <= 63:
+        give {_a} of {_b} to {_p}
+
+function autocomp(p: player, b: item, cb: item):
+    if amount of {_b} in {_p}'s inventory >= 64:
+        set {_amount} to amount of {_b} in {_p}'s inventory
+        set {_amount2} to floor({_amount} / 64)
+        remove ({_amount2} * 64) of {_b} from {_p}'s inventory
+        give {_p} {_amount2} of {_cb}
+
+function fortuneSet(p: player, b: block) :: integer:
+
+    if {_b} is stone:
+        if {_p}'s tool is stonePickaxeTier1():
+            add 1 to {_finalAmount}
+        if {_p}'s tool is stonePickaxeTier2():
+            add 2 to {_finalAmount}
+        if {_p}'s tool is stonePickaxeTier3():
+            add 3 to {_finalAmount}
+        if {_p}'s tool is stonePickaxeTier4():
+            add 4 to {_finalAmount}
+        if {_p}'s tool is stonePickaxeTier5() or ironPickaxeTier1() or ironPickaxeTier2() or ironPickaxeTier3() or ironPickaxeTier4() or ironPickaxeTier5() or diamondPickaxeTier1() or diamondPickaxeTier2() or diamondPickaxeTier3() or diamondPickaxeTier4() or diamondPickaxeTier5() or emeraldPickaxeTier1() or emeraldPickaxeTier2() or emeraldPickaxeTier3() or emeraldPickaxeTier4() or emeraldPickaxeTier5():
+            add 5 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier1():
+            add 6 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier2():
+            add 7 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier3():
+            add 8 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier4():
+            add 9 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier5():
+            add 10 to {_finalAmount}
+
+#    if {_p}'s tool is coalPickaxeTier1():
+#        add 3 to {_finalAmount}
+#    if {_p}'s tool is coalPickaxeTier2():
+#        add 3 to {_finalAmount}
+#    if {_p}'s tool is coalPickaxeTier3():
+#        add 3 to {_finalAmount}
+#    if {_p}'s tool is coalPickaxeTier4():
+#        add 4 to {_finalAmount}
+#    if {_p}'s tool is coalPickaxeTier5():
+#        add 4 to {_finalAmount}
+
+    if {_b} is iron ore:
+        if {_p}'s tool is ironPickaxeTier1():
+            add 1 to {_finalAmount}
+        if {_p}'s tool is ironPickaxeTier2():
+            add 2 to {_finalAmount}
+        if {_p}'s tool is ironPickaxeTier3():
+            add 3 to {_finalAmount}
+        if {_p}'s tool is ironPickaxeTier4():
+            add 4 to {_finalAmount}
+        if {_p}'s tool is ironPickaxeTier5() or diamondPickaxeTier1() or diamondPickaxeTier2() or diamondPickaxeTier3() or diamondPickaxeTier4() or diamondPickaxeTier5() or emeraldPickaxeTier1() or emeraldPickaxeTier2() or emeraldPickaxeTier3() or emeraldPickaxeTier4() or emeraldPickaxeTier5():
+            add 5 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier1():
+            add 6 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier2():
+            add 7 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier3():
+            add 8 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier4():
+            add 9 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier5():
+            add 10 to {_finalAmount}
+
+    if {_b} is diamond ore:
+        if {_p}'s tool is diamondPickaxeTier1():
+            add 1 to {_finalAmount}
+        if {_p}'s tool is diamondPickaxeTier2():
+            add 2 to {_finalAmount}
+        if {_p}'s tool is diamondPickaxeTier3():
+            add 3 to {_finalAmount}
+        if {_p}'s tool is diamondPickaxeTier4():
+            add 4 to {_finalAmount}
+        if {_p}'s tool is diamondPickaxeTier5() or emeraldPickaxeTier1() or emeraldPickaxeTier2() or emeraldPickaxeTier3() or emeraldPickaxeTier4() or emeraldPickaxeTier5():
+            add 5 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier1():
+            add 6 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier2():
+            add 7 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier3():
+            add 8 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier4():
+            add 9 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier5():
+            add 10 to {_finalAmount}
+        
+    if {_b} is emerald ore:
+        if {_p}'s tool is emeraldPickaxeTier1():
+            add 1 to {_finalAmount}
+        if {_p}'s tool is emeraldPickaxeTier2():
+            add 2 to {_finalAmount}
+        if {_p}'s tool is emeraldPickaxeTier3():
+            add 3 to {_finalAmount}
+        if {_p}'s tool is emeraldPickaxeTier4():
+            add 4 to {_finalAmount}
+        if {_p}'s tool is emeraldPickaxeTier5():
+            add 5 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier1():
+            add 6 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier2():
+            add 7 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier3():
+            add 8 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier4():
+            add 9 to {_finalAmount}
+        if {_p}'s tool is goldPickaxeTier5():
+            add 10 to {_finalAmount}
+
+    return {_finalAmount}
+
+function rankSet(p: player) :: number:
+    set {_group} to group of {_p}
+    if {_group} is "default":
+        set {_FinalRankAmount} to 1
+    else if {_group} is "ultimate":
+        set {_FinalRankAmount} to 1.25
+    else if {_group} is "champion":
+        set {_FinalRankAmount} to 1.5
+    else if {_group} is "royal":
+        set {_FinalRankAmount} to 1.75
+    else if {_group} is "guardian":
+        set {_FinalRankAmount} to 2
+    else if {_group} is "angel":
+        set {_FinalRankAmount} to 3
+    return {_FinalRankAmount}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function oak1() :: item:
+    set {_oak1} to oak log named "<##9D8F6F>Oak"
+    return {_oak1}
+function oak2() :: item:
+    set {_oak2} to oak log named "<##9D8F6F>Compressed Oak"
+    enchant {_oak2} with mending
+    add hide enchants to item flags of {_oak2}
+    return {_oak2}
+function oak3() :: item:
+    set {_oak3} to oak wood named "<##9D8F6F>Ultra Compressed Oak"
+    enchant {_oak3} with mending
+    add hide enchants to item flags of {_oak3}
+    return {_oak3}
+function birch1() :: item:
+    set {_birch1} to birch log named "<##CBC09B>Birch"
+    return {_birch1}
+function birch2() :: item:
+    set {_birch2} to birch log named "<##CBC09B>Compressed Birch"
+    enchant {_birch2} with mending
+    add hide enchants to item flags of {_birch2}
+    return {_birch2}
+function birch3() :: item:
+    set {_birch3} to birch wood named "<##CBC09B>Ultra Compressed Birch"
+    enchant {_birch3} with mending
+    add hide enchants to item flags of {_birch3}
+    return {_birch3}
+function darkoak1() :: item:
+    set {_darkoak1} to dark oak log named "<##372B2B>Dark Oak"
+    return {_darkoak1}
+function darkoak2() :: item:
+    set {_darkoak2} to dark oak log named "<##372B2B>Compressed Dark Oak"
+    enchant {_darkoak2} with mending
+    add hide enchants to item flags of {_darkoak2}
+    return {_darkoak2}
+function darkoak3() :: item:
+    set {_darkoak3} to dark oak wood named "<##372B2B>Ultra Compressed Dark Oak"
+    enchant {_darkoak3} with mending
+    add hide enchants to item flags of {_darkoak3}
+    return {_darkoak3}
+function acacia1() :: item:
+    set {_acacia1} to Acacia log named "<##D46323>Acacia"
+    return {_acacia1}
+function acacia2() :: item:
+    set {_acacia2} to Acacia log named "<##D46323>Compressed Acacia"
+    enchant {_acacia2} with mending
+    add hide enchants to item flags of {_acacia2}
+    return {_acacia2}
+function acacia3() :: item:
+    set {_acacia3} to Acacia wood named "<##D46323>Ultra Compressed Acacia"
+    enchant {_acacia3} with mending
+    add hide enchants to item flags of {_acacia3}
+    return {_acacia3}
+
+function stone1() :: item:
+    set {_stone1} to stone pressure plate named "<##818181>Stone" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    return {_stone1}
+function stone2() :: item:
+    set {_stone2} to stone slab named "<##818181>Compressed Stone" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_stone2} with mending
+    add hide enchants to item flags of {_stone2}
+    return {_stone2}
+function stone3() :: item:
+    set {_stone3} to stone named "<##A0A0A0>&lSUPER <##818181>Compressed Stone" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_stone3} with mending
+    add hide enchants to item flags of {_stone3}
+    return {_stone3}
+function stone4() :: item:
+    set {_stone4} to smooth stone named "<##A0A0A0>&lMEGA <##818181>Compressed Stone" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_stone4} with mending
+    add hide enchants to item flags of {_stone4}
+    return {_stone4}
+
+function coal1() :: item:
+    set {_coal1} to polished blackstone button named "<##565656>Coal" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    return {_coal1}
+function coal2() :: item:
+    set {_coal2} to coal named "<##565656>Compressed Coal" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_coal2} with mending
+    add hide enchants to item flags of {_coal2}
+    return {_coal2}
+function coal3() :: item:
+    set {_coal3} to coal block named "<##838383>&lSUPER <##565656>Compressed Coal" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_coal3} with mending
+    add hide enchants to item flags of {_coal3}
+    return {_coal3}
+function coal4() :: item:
+    set {_coal4} to coal ore named "<##838383>&lMEGA <##565656>Compressed Coal" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_coal4} with mending
+    add hide enchants to item flags of {_coal4}
+    return {_coal4}
+
+function iron1() :: item:
+    set {_iron1} to iron nugget named "<##CBCBCB>Iron" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    return {_iron1}
+function iron2() :: item:
+    set {_iron2} to iron ingot named "<##CBCBCB>Compressed Iron" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_iron2} with mending
+    add hide enchants to item flags of {_iron2}
+    return {_iron2}
+function iron3() :: item:
+    set {_iron3} to iron block named "<##FFFFFF>&lSUPER <##CBCBCB>Compressed Iron" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_iron3} with mending
+    add hide enchants to item flags of {_iron3}
+    return {_iron3}
+function iron4() :: item:
+    set {_iron4} to iron ore named "<##FFFFFF>&lMEGA <##CBCBCB>Compressed Iron" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_iron4} with mending
+    add hide enchants to item flags of {_iron4}
+    return {_iron4}
+
+function diamond1() :: item:
+    set {_diamond1} to ghast tear named "<##32C8C8>Diamond" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    return {_diamond1}
+function diamond2() :: item:
+    set {_diamond2} to diamond named "<##32C8C8>Compressed Diamond" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_diamond2} with mending
+    add hide enchants to item flags of {_diamond2}
+    return {_diamond2}
+function diamond3() :: item:
+    set {_diamond3} to diamond block named "<##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_diamond3} with mending
+    add hide enchants to item flags of {_diamond3}
+    return {_diamond3}
+function diamond4() :: item:
+    set {_diamond4} to diamond ore named "<##5AD6D6>&lMEGA <##32C8C8>Compressed Diamond" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_diamond4} with mending
+    add hide enchants to item flags of {_diamond4}
+    return {_diamond4}
+
+function emerald1() :: item:
+    set {_emerald1} to scute named "<##44C44D>Emerald" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    return {_emerald1}
+function emerald2() :: item:
+    set {_emerald2} to emerald named "<##44C44D>Compressed Emerald" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_emerald2} with mending
+    add hide enchants to item flags of {_emerald2}
+    return {_emerald2}
+function emerald3() :: item:
+    set {_emerald3} to emerald block named "<##56EC60>&lSUPER <##44C44D>Compressed Emerald" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_emerald3} with mending
+    add hide enchants to item flags of {_emerald3}
+    return {_emerald3}
+function emerald4() :: item:
+    set {_emerald4} to emerald ore named "<##56EC60>&lMEGA <##44C44D>Compressed Emerald" with lore "&8ᴍɪɴɪɴɢ ᴍᴀᴛᴇʀɪᴀʟ"
+    enchant {_emerald4} with mending
+    add hide enchants to item flags of {_emerald4}
+    return {_emerald4}
+
+function ironmix() :: item:
+    set {_ironmix} to diorite named "<##CBCBCB>Stone - Iron Mix" with lore "&8ᴜᴘɢʀᴀᴅᴇ ɪᴛᴇᴍ"
+    return {_ironmix}
+function diamondmix() :: item:
+    set {_diamondmix} to oxidized copper named "<##32C8C8>Diamond Mix" with lore "&8ᴜᴘɢʀᴀᴅᴇ ɪᴛᴇᴍ"
+    return {_diamondmix}
+function emeraldmix() :: item:
+    set {_emeraldmix} to oxidized copper named "<##44C44D>Diamond - Emerald Mix" with lore "&8ᴜᴘɢʀᴀᴅᴇ ɪᴛᴇᴍ"
+    return {_emeraldmix}
+function quarrymix() :: item:
+    set {_quarrymix} to mossy cobblestone named "<##6DE560>Q<##7DE872>u<##8DEB83>a<##9EEE95>r<##AEF1A7>r<##BEF3B8>y<##CEF6CA> <##DFF9DC>M<##EFFCED>i<##FFFFFF>x" with lore "&8ᴜᴘɢʀᴀᴅᴇ ɪᴛᴇᴍ"
+    return {_quarrymix}
+
+command /buildmode:
+    permission: op
+    trigger:
+        if {buildmode::%uuid of player%} is not set:
+            set {buildmode::%uuid of player%} to true
+            send "&fBuildmode is &e&nactivated" to player
+        else if {buildmode::%uuid of player%} is false:
+            set {buildmode::%uuid of player%} to true
+            send "&fBuildmode is &e&nactivated" to player
+        else if {buildmode::%uuid of player%} is true:
+            set {buildmode::%uuid of player%} to false
+            send "&fBuildmode is &f&ndeactivated" to player
+
+command /drops <text>:
+    permission: op
+    trigger:
+        if arg-1 is "1":
+            drops1(player)
+#        else if arg-1 is "2":
+#            drops2(player)
+
+function drops1(p: player):
+    create a gui with chest inventory with 5 rows named "&8&l             DROPS":
+        # first row
+        make gui 0 with stone1():
+            give stone1() to {_p}
+        make gui 1 with stone2():
+            give stone2() to {_p}
+        make gui 2 with stone3():
+            give stone3() to {_p}
+        make gui 3 with stone4():
+            give stone4() to {_p}
+
+        make gui 5 with coal1():
+            give coal1() to {_p}
+        make gui 6 with coal2():
+            give coal2() to {_p}
+        make gui 7 with coal3():
+            give coal3() to {_p}
+        make gui 8 with coal4():
+            give coal4() to {_p}
+        # second row
+        make gui 9 with iron1():
+            give iron1() to {_p}
+        make gui 10 with iron2():
+            give iron2() to {_p}
+        make gui 11 with iron3():
+            give iron3() to {_p}
+        make gui 12 with iron4():
+            give iron4() to {_p}
+
+        make gui 14 with diamond1():
+            give diamond1() to {_p}
+        make gui 15 with diamond2():
+            give diamond2() to {_p}
+        make gui 16 with diamond3():
+            give diamond3() to {_p}
+        make gui 17 with diamond4():
+            give diamond4() to {_p}
+        # third row
+        make gui 18 with emerald1():
+            give emerald1() to {_p}
+        make gui 19 with emerald2():
+            give emerald2() to {_p}
+        make gui 20 with emerald3():
+            give emerald3() to {_p}
+        make gui 21 with emerald4():
+            give emerald4() to {_p}
+
+        make gui 23 with ironmix():
+            give ironmix() to {_p}
+        make gui 24 with diamondmix():
+            give diamondmix() to {_p}
+        make gui 25 with emeraldmix():
+            give emeraldmix() to {_p}
+        make gui 26 with quarrymix():
+            give quarrymix() to {_p}
+        # forth row
+        make gui 27 with oak1():
+            give oak1() to {_p}
+        make gui 28 with oak2():
+            give oak2() to {_p}
+        make gui 29 with oak3():
+            give oak3() to {_p}
+        make gui 30 with birch1():
+            give birch1() to {_p}
+        make gui 31 with birch2():
+            give birch2() to {_p}
+        make gui 32 with birch3():
+            give birch3() to {_p}
+        make gui 33 with darkoak1():
+            give darkoak1() to {_p}
+        make gui 34 with darkoak2():
+            give darkoak2() to {_p}
+        make gui 35 with darkoak3():
+            give darkoak3() to {_p}
+        # fifth row
+        make gui 36 with acacia1():
+            give acacia1() to {_p}
+        make gui 37 with acacia2():
+            give acacia2() to {_p}
+        make gui 38 with acacia3():
+            give acacia3() to {_p}
+        # sixth row
+    open last gui to {_p}

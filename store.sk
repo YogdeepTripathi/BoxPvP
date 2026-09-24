@@ -1,0 +1,7 @@
+#command /op:
+#	trigger:
+#		send "&8&l▸ CONSOLE&r &f%player% tried to use &c/op&f." to all players
+command /buy:
+	aliases: /store
+	trigger:
+		send "&9&lSTORE ▸&r &fThe store is currently &cNOT &fset up." to player

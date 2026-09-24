@@ -1,0 +1,293 @@
+on right-click:
+    if player's tool is stonePickaxeTier1() or stonePickaxeTier2() or stonePickaxeTier3() or stonePickaxeTier4() or stonePickaxeTier5() or ironPickaxeTier1() or ironPickaxeTier1() or ironPickaxeTier3() or ironPickaxeTier4() or ironPickaxeTier5() or diamondPickaxeTier1() or diamondPickaxeTier2() or diamondPickaxeTier3() or diamondPickaxeTier4() or diamondPickaxeTier5() or emeraldPickaxeTier1() or emeraldPickaxeTier2() or emeraldPickaxeTier3() or emeraldPickaxeTier4():
+        upgrade(player)
+
+function upgrade(p: player):
+    set {_slot1} to {_p}'s tool
+    if {_slot1} = air:
+        set {_slot1} to 2 of stone2()
+        set {_slot2} to blueempty()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to stonePickaxeTier1()
+        set {cost1::%uuid of {_p}%} to "&a2x <##818181>Compressed Stone"
+        set {cost2::%uuid of {_p}%} to ""
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 1] &fQuarry Pickaxe"
+    else if {_slot1} = stonePickaxeTier1():
+        set {_slot2} to 32 of stone1()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to stonePickaxeTier2()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 1] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a32x <##818181>Stone"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 2] &fQuarry Pickaxe"
+    else if {_slot1} = stonePickaxeTier2():
+        set {_slot2} to 2 of stone2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to stonePickaxeTier3()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 2] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a2x <##818181>Compressed Stone"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 3] &fQuarry Pickaxe"
+    else if {_slot1} = stonePickaxeTier3():
+        set {_slot2} to 6 of stone2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to stonePickaxeTier4()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 3] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a6x <##818181>Compressed Stone"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 4] &fQuarry Pickaxe"
+    else if {_slot1} = stonePickaxeTier4():
+        set {_slot2} to 12 of stone2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to stonePickaxeTier5()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 4] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a12x <##818181>Compressed Stone"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 5] &fQuarry Pickaxe"
+    else if {_slot1} = stonePickaxeTier5():
+        set {_slot2} to 24 of stone2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to ironPickaxeTier1()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 5] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a24x <##818181>Compressed Stone"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 6] &fQuarry Pickaxe"
+    else if {_slot1} = ironPickaxeTier1():
+        set {_slot2} to 2 of iron2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to ironPickaxeTier2()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 6] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a2x <##CBCBCB>Compressed Iron"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 7] &fQuarry Pickaxe"
+    else if {_slot1} = ironPickaxeTier2():
+        set {_slot2} to 6 of iron2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to ironPickaxeTier3()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 7] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a6x <##CBCBCB>Compressed Iron"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 8] &fQuarry Pickaxe"
+    else if {_slot1} = ironPickaxeTier3():
+        set {_slot2} to 18 of iron2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to ironPickaxeTier4()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 8] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a18x <##CBCBCB>Compressed Iron"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 9] &fQuarry Pickaxe"
+    else if {_slot1} = ironPickaxeTier4():
+        set {_slot2} to 36 of iron2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to ironPickaxeTier5()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 9] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a36x <##CBCBCB>Compressed Iron"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 10] &fQuarry Pickaxe"
+    else if {_slot1} = ironPickaxeTier5():
+        set {_slot2} to 1 of iron3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to diamondPickaxeTier1()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 10] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a1x <##FFFFFF>&lSUPER <##CBCBCB>Compressed Iron"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 11] &fQuarry Pickaxe"
+    else if {_slot1} = diamondPickaxeTier1():
+        set {_slot2} to 6 of diamond2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to diamondPickaxeTier2()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 11] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a6x <##32C8C8>Compressed Diamond"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 12] &fQuarry Pickaxe"
+    else if {_slot1} = diamondPickaxeTier2():
+        set {_slot2} to 18 of diamond2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to diamondPickaxeTier3()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 12] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a18x <##32C8C8>Compressed Diamond"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 13] &fQuarry Pickaxe"
+    else if {_slot1} = diamondPickaxeTier3():
+        set {_slot2} to 1 of diamond3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to diamondPickaxeTier4()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 13] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a1x <##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 14] &fQuarry Pickaxe"
+    else if {_slot1} = diamondPickaxeTier4():
+        set {_slot2} to 2 of diamond3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier5()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 14] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a2x <##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 15] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier5():
+        set {_slot2} to 3 of diamond3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier1()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 14] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a3x <##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 15] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier1():
+        set {_slot2} to 18 of emerald2()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier2()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 16] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a18x <##44C44D>Compressed Emerald"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 17] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier2():
+        set {_slot2} to 1 of emerald3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier3()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 17] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a1x <##56EC60>&lSUPER <##44C44D>Compressed Emerald"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 18] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier3():
+        set {_slot2} to 4 of emerald3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier4()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 18] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a4x <##56EC60>&lSUPER <##44C44D>Compressed Emerald"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 19] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier4():
+        set {_slot2} to 8 of emerald3()
+        set {_slot3} to blueempty()
+        set {_upgradeslot} to emeraldPickaxeTier5()
+        set {cost1::%uuid of {_p}%} to "&a[Tier 19] &fQuarry Pickaxe"
+        set {cost2::%uuid of {_p}%} to "&a8x <##56EC60>&lSUPER <##44C44D>Compressed Emerald"
+        set {upgradereceive::%uuid of {_p}%} to "&a[Tier 20] &fQuarry Pickaxe"
+    else if {_slot1} = emeraldPickaxeTier5():
+        close {_p}'s inventory
+        send "&7You already have a &cmaxed &7overworld pickaxe!" to {_p}
+
+    create a gui with virtual chest inventory with 1 rows named "&8&l    PICKAXE UPGRADES":
+        make gui 0 with blackstain()
+        make gui 1 with blackstain()
+        make gui 2 with {_slot1}
+        make gui 3 with {_slot2}
+        make gui 4 with {_slot3}
+        if {_cost3} is not set:
+            make gui 5 with upforge2({_p}):
+                if {_p}'s tool is air:
+                    if {_p} has 2 of stone2():
+                        remove 2 of stone2() from the inventory of player
+                        give {_p} stonePickaxeTier1()
+                        upgrade({_p})
+                else if {_p}'s tool is stonePickaxeTier1():
+                    if {_p} has 32 of stone1():
+                        remove 32 of stone1() from the inventory of player
+                        remove stonePickaxeTier1() from {_p}
+                        give {_p} stonePickaxeTier2()
+                        upgrade({_p})
+                else if {_p}'s tool is stonePickaxeTier2():
+                    if {_p} has 2 of stone2():
+                        remove 2 of stone2() from the inventory of player
+                        remove stonePickaxeTier2() from {_p}
+                        give {_p} stonePickaxeTier3()
+                        upgrade({_p})
+                else if {_p}'s tool is stonePickaxeTier3():
+                    if {_p} has 6 of stone2():
+                        remove 6 of stone2() from the inventory of player
+                        remove stonePickaxeTier3() from {_p}
+                        give {_p} stonePickaxeTier4()
+                        upgrade({_p})
+                else if {_p}'s tool is stonePickaxeTier4():
+                    if {_p} has 12 of stone2():
+                        remove 12 of stone2() from the inventory of player
+                        remove stonePickaxeTier4() from {_p}
+                        give {_p} stonePickaxeTier5()
+                        upgrade({_p})
+                else if {_p}'s tool is stonePickaxeTier5():
+                    if {_p} has 24 of stone2():
+                        remove 24 of stone2() from the inventory of player
+                        remove stonePickaxeTier5() from {_p}
+                        give {_p} ironPickaxeTier1()
+                        upgrade({_p})
+                else if {_p}'s tool is ironPickaxeTier1():
+                    if {_p} has 2 of iron2():
+                        remove 2 of iron2() from the inventory of player
+                        remove ironPickaxeTier1() from {_p}
+                        give {_p} ironPickaxeTier2()
+                        upgrade({_p})
+                else if {_p}'s tool is ironPickaxeTier2():
+                    if {_p} has 6 of iron2():
+                        remove 6 of iron2() from the inventory of player
+                        remove ironPickaxeTier2() from {_p}
+                        give {_p} ironPickaxeTier3()
+                        upgrade({_p})
+                else if {_p}'s tool is ironPickaxeTier3():
+                    if {_p} has 18 of iron2():
+                        remove 18 of iron2() from the inventory of player
+                        remove ironPickaxeTier3() from {_p}
+                        give {_p} ironPickaxeTier4()
+                        upgrade({_p})
+                else if {_p}'s tool is ironPickaxeTier4():
+                    if {_p} has 36 of iron2():
+                        remove 36 of iron2() from the inventory of player
+                        remove ironPickaxeTier4() from {_p}
+                        give {_p} ironPickaxeTier5()
+                        upgrade({_p})
+                else if {_p}'s tool is ironPickaxeTier5():
+                    if {_p} has 1 of iron3():
+                        remove 1 of iron3() from the inventory of player
+                        remove ironPickaxeTier5() from {_p}
+                        give {_p} diamondPickaxeTier1()
+                        upgrade({_p})
+                else if {_p}'s tool is diamondPickaxeTier1():
+                    if {_p} has 6 of diamond2():
+                        remove 6 of diamond2() from the inventory of player
+                        remove diamondPickaxeTier1() from {_p}
+                        give {_p} diamondPickaxeTier2()
+                        upgrade({_p})
+                else if {_p}'s tool is diamondPickaxeTier2():
+                    if {_p} has 18 of diamond2():
+                        remove 18 of diamond2() from the inventory of player
+                        remove diamondPickaxeTier2() from {_p}
+                        give {_p} diamondPickaxeTier3()
+                        upgrade({_p})
+                else if {_p}'s tool is diamondPickaxeTier3():
+                    if {_p} has 1 of diamond3():
+                        remove 1 of diamond3() from the inventory of player
+                        remove diamondPickaxeTier3() from {_p}
+                        give {_p} diamondPickaxeTier4()
+                        upgrade({_p})
+                else if {_p}'s tool is diamondPickaxeTier4():
+                    if {_p} has 2 of diamond3():
+                        remove 2 of diamond3() from the inventory of player
+                        remove diamondPickaxeTier4() from {_p}
+                        give {_p} diamondPickaxeTier5()
+                        upgrade({_p})
+                else if {_p}'s tool is diamondPickaxeTier5():
+                    if {_p} has 3 of diamond3():
+                        remove 3 of diamond3() from the inventory of player
+                        remove diamondPickaxeTier5() from {_p}
+                        give {_p} emeraldPickaxeTier1()
+                        upgrade({_p})
+                else if {_p}'s tool is emeraldPickaxeTier1():
+                    if {_p} has 18 of emerald2():
+                        remove 18 of emerald2() from the inventory of player
+                        remove emeraldPickaxeTier1() from {_p}
+                        give {_p} emeraldPickaxeTier2()
+                        upgrade({_p})
+                else if {_p}'s tool is emeraldPickaxeTier2():
+                    if {_p} has 1 of emerald3():
+                        remove 1 of emerald3() from the inventory of player
+                        remove emeraldPickaxeTier2() from {_p}
+                        give {_p} emeraldPickaxeTier3()
+                        upgrade({_p})
+                else if {_p}'s tool is emeraldPickaxeTier3():
+                    if {_p} has 4 of emerald3():
+                        remove 4 of emerald3() from the inventory of player
+                        remove emeraldPickaxeTier3() from {_p}
+                        give {_p} emeraldPickaxeTier4()
+                        upgrade({_p})
+                else if {_p}'s tool is emeraldPickaxeTier4():
+                    if {_p} has 8 of emerald3():
+                        remove 8 of emerald3() from the inventory of player
+                        remove emeraldPickaxeTier4() from {_p}
+                        give {_p} emeraldPickaxeTier5()
+                        close {_p}'s inventory
+                        send "&7You have reached &cmaxed &fQuarry Pickaxe&7!"
+        make gui 6 with {_upgradeslot}
+        make gui 7 with blackstain()
+        make gui 8 with blackstain()
+    open last gui to {_p}
+
+function upforge1(p: player) :: item:
+    set {_upforge1} to anvil named "&fHoly Forge" with lore "" and "&6Requirements:" and "&6» %{cost1::%uuid of {_p}%}%" and "&6» %{cost2::%uuid of {_p}%}%" and "&6» %{cost3::%uuid of {_p}%}%" and "" and "&6Receive:" and "&6» %{upgradereceive::%uuid of {_p}%}%"
+    return {_upforge1}
+function upforge2(p: player) :: item:
+    set {_upforge2} to anvil named "&fHoly Forge" with lore "" and "&6Requirements:" and "&6» %{cost1::%uuid of {_p}%}%" and "&6» %{cost2::%uuid of {_p}%}%" and "" and "&6Receive:" and "&6» %{upgradereceive::%uuid of {_p}%}%" and "" and "&8&o(( click to upgrade ))"
+    return {_upforge2}
+function blueempty() :: item:
+    set {_blueempty} to light blue stained glass pane named "&bEmpty Slot"
+    return {_blueempty}

@@ -1,0 +1,16 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /fly:
+    permission: staff.fly
+    trigger:
+        if (fly mode of player) is true:
+            set (fly mode of player) to false
+            send action bar "{@pa} &fYou have disabled fly!"
+            stop
+        set (fly mode of player) to true
+        send action bar "{@pa} &fYou have enabled fly!"

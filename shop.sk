@@ -1,0 +1,130 @@
+command /shop:
+    trigger:
+        mainShopGUI(player)
+
+on join:
+    if {playerCurrencyToken::%uuid of player%} is not set:
+        set {playerCurrencyToken::%uuid of player%} to 0
+
+command /tokenset <integer>:
+    permission: op
+    trigger:
+        set {playerCurrencyToken::%uuid of player%} to arg-1
+
+every 2 seconds:
+    loop all players:
+        clear scoreboard of loop-player
+        set title of loop-player's scoreboard to "<##7C08C3>U<##7A1AC6>n<##782BC9>i<##753DCC>t<##734ECE>y <##6F71D4>N<##6C83D7>e<##6A94DA>t<##68A6DD>w<##66B7DF>o<##63C9E2>r<##61DAE5>k"
+        set line 1 of loop-player's scoreboard to " "
+        set line 2 of loop-player's scoreboard to "&b«&b&m                          &r&b»"
+        set line 3 of loop-player's scoreboard to " %loop-player%"
+        set line 4 of loop-player's scoreboard to " &b◆ &fᴛᴏᴋᴇɴ &6⛃%{playerCurrencyToken::%uuid of loop-player%}%"
+        set line 5 of loop-player's scoreboard to "&b«&b&m                          &r&b»"
+        set line 6 of loop-player's scoreboard to "  "
+        set line 7 of loop-player's scoreboard to "&7ᴜɴɪᴛʏɴᴇᴛᴡᴏʀᴋ.ɴᴇᴛ"
+
+
+
+
+
+function mainShopGUI(p: player):
+    create a gui with chest inventory with 1 rows named "                &8&lSHOPS":
+        make gui 0 with gray stained glass pane named " "
+        make gui 1 with gray stained glass pane named " "
+        make gui 2 with gray stained glass pane named " "
+        make gui 3 with gray stained glass pane named " "
+        make gui 4 with oak log named "&aWood" with lore "&e&lCLICK"
+        make gui 5 with gray stained glass pane named " "
+        make gui 6 with gray stained glass pane named " "
+        make gui 7 with gray stained glass pane named " "
+        make gui 8 with gray stained glass pane named " "
+        #make gui 34 with lime concrete powder named "<##47FF08>UFO" with lore "&8ᴄʟɪᴄᴋ ᴛᴏ ᴡᴀʀᴘ"
+    open last gui to {_p}
+
+function woodShopGUI(p: player):
+    create a gui with chest inventory with 6 rows named "&0[All] Woods (1/1)":
+    
+        make gui 0 with oak log named "&fOak Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 1 with spruce log named "&fSpruce Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 2 with birch log named "&fBirch Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 3 with jungle log named "&fJungle Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 4 with acacia log named "&fAcacia Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 5 with dark oak log named "&fDark Oak Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 6 with mangrove log named "&fMangrove Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 7 with cherry log named "&fCherry Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        
+        make gui 9 with oak wood named "&fOak Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 10 with spruce wood named "&fSpruce Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 11 with birch wood named "&fBirch Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 12 with jungle wood named "&fJungle Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 13 with acacia wood named "&fAcacia Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 14 with dark oak wood named "&fDark Oak Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 15 with mangrove wood named "&fMangrove Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 16 with cherry wood named "&fCherry Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        
+        make gui 18 with stripped oak log named "&fStripped Oak Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 19 with stripped spruce log named "&fStripped Spruce Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 20 with stripped birch log named "&fStripped Birch Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 21 with stripped jungle log named "&fStripped Jungle Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 22 with stripped acacia log named "&fAStripped cacia Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 23 with stripped dark oak log named "&fStripped Dark Oak Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 24 with stripped mangrove log named "&fStripped Mangrove Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 25 with stripped cherry log named "&fStripped Cherry Log" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        
+        make gui 27 with stripped oak wood named "&fStripped Oak Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 28 with stripped spruce wood named "&fStripped Spruce Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 29 with stripped birch wood named "&fStripped Birch Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 30 with stripped jungle wood named "&fStripped Jungle Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 31 with stripped acacia wood named "&fStripped Acacia Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 32 with stripped dark oak wood named "&fStripped Dark Oak Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 33 with stripped mangrove wood named "&fStripped Mangrove Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 34 with stripped cherry wood named "&fStripped Cherry Wood" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+         
+        make gui 36 with oak planks named "&fOak Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 37 with spruce planks named "&fSpruce Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 38 with birch planks named "&fBirch Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 39 with jungle planks named "&fJungle Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 40 with acacia planks named "&fAcacia Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 41 with dark oak planks named "&fDark Oak Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 42 with mangrove planks named "&fMangrove Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        make gui 43 with cherry planks named "&fCherry Planks" with lore "" and " &aPrice: &f$4" and " &cSell: &f$1" and "" and "<##93F693>Left-Click to Buy 1" and "<##93F693>Shift Left-Click to Buy 64" and "<##FF9292>Right-Click to Sell 1" and "<##FF9292>Shift Right-Click to Sell All"
+        
+        make gui 45 with gray stained glass pane named " "
+        make gui 46 with gray stained glass pane named " "
+        make gui 47 with gray stained glass pane named " "
+        
+        make gui 48 with barrier named "&aPrevious Page" with lore "&e&lCLICK"
+        make gui 49 with sunflower named "&aCategory Menu" with lore "&e&lCLICK"
+        make gui 50 with arrow named "&aNext Page" with lore "&e&lCLICK"
+        
+        make gui 51 with gray stained glass pane named " "
+        make gui 52 with gray stained glass pane named " "
+        make gui 53 with gray stained glass pane named " "
+        
+    open last gui to {_p}
+
+
+
+on inventory click:
+    if inventory name of current inventory is "                &8&lSHOPS":
+        if clicked slot is 4:
+            woodShopGUI(player)
+    else if inventory name of current inventory is "&0[All] Woods (1/1)":
+        if clicked slot is 0:
+            if click action is left mouse button:
+                if {playerCurrencyToken::%uuid of player%} >= 2:
+                    if player has space for 1 of oak log:
+                        remove 2 from {playerCurrencyToken::%uuid of player%}
+                        give player 1 oak log
+                    else:
+                        send action bar "&cNot enough room inside of inventory." to player
+                else:
+                    send action bar "&cNot enough funds for this purchase." to player
+        if clicked slot is 49:
+            mainShopGUI(player)
+
+function warpSpawn(p: player):
+    set {_spawn} to location(0.500, 65.000, 9.500)
+    set pitch of {_spawn} to 0
+    set yaw of {_spawn} to -180
+    teleport {_p} to {_spawn}

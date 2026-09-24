@@ -1,0 +1,47 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /nickname <t:text> [<n:text>]:
+    aliases: /nick
+    permission: nickname.change
+    trigger:
+        if {_t} is "change":
+            if {_n} contains "&#":
+                set {_n} to hex({_n})
+            set {_n} to (formatted {_n})
+            if length of (unformatted {_n}) > 16:
+                send "{@pa} &fMust be between 3-16 characters!"
+                stop
+            if length of (unformatted {_n}) < 3:
+                send "{@pa} &fMust be between 3-16 characters!"
+                stop
+            set {player::nickname::%(player's uuid)%} to {_n}+"&r"
+            send "{@pa} &fYour nickname has been set to {@c2}%{_n}%&f!"
+        else if {_t} is "reset":
+            if {_n} is set:
+                player is op
+                set {_p} to ({_n} parsed as player)
+                delete {player::nickname::%({_p}'s uuid)%}
+                send "{@pa} &fYou have cleared {@c2}%{_p}%&f's nickname!"
+                send "{@pa} &fYour nickname has been cleared!" to {_p}
+                stop
+            delete {player::nickname::%(player's uuid)%}
+            send "{@pa} &fYour nickname has been cleared!"
+        else if {_t} is "list":
+            send "%nl%{@l} %getPrefix("nicknames")%"
+            loop all players:
+                {player::nickname::%({_player}'s uuid)%} is set
+                send "{@l} &f%loop-player% &8→ &r%(formatted {player::nickname::%(loop-player's uuid)%})%"
+            send ""
+        else:
+            send usage
+
+on tab complete of ("/nickname","/nick"):
+    set tab completions for position 1 to ("change","reset","list")
+    if tab arg-1 is "reset":
+        player is op
+        set tab completions for position 2 to (all players)

@@ -1,0 +1,289 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+on load:
+    set {serverColorLight} to "<#E999F5>"
+    set {serverColorDark} to "<#DA6FEA>"
+    set {serverLine} to "<#DA6FEA>│"
+    set {serverPrefix} to "<#DA6FEA>&lT<#DE7AED>&lE<#E284F0>&lM<#E58FF2>&lP<#E999F5>&lL<#E48BF1>&lA<#DF7DEE>&lT<#DA6FEA>&lE"
+    set {serverPrefixArrow} to "<#DA6FEA>&lT<#DE7AED>&lE<#E284F0>&lM<#E58FF2>&lP<#E999F5>&lL<#E48BF1>&lA<#DF7DEE>&lT<#DA6FEA>&lE&8 →"
+    set {serverIP} to "template.your.ip"
+    set {serverMiniIP} to small("template.your.ip")
+
+function getPrefix(string:string,arrow:boolean=false) :: string:
+    set {_} to (minimessage from "<gradient:#DA6FEA:#E999F5:#DA6FEA><b>%(uppercase {_string})%</b></gradient>")
+    {_arrow} = true:
+        return ({_}+"&8 →")
+    return {_}
+
+placeholderapi placeholder with prefix "ASkript":
+    if the identifier is "miniName":
+        set the result to small("%player%")
+
+# This makes /minecraft:kill useless
+on damage:
+    victim is a player
+    damage cause is suffocation
+    (y-coord of victim) > (-64)
+    cancel event
+
+on falling block fall:
+    cancel event
+on fade:
+    cancel event
+on craft:
+    cancel event if player is not op
+
+placeholderapi placeholder with prefix "ASkript":
+    if the identifier is "displayName":
+        set the result to displayName(player)
+function displayName(player:player) :: string:
+    return ({player::nickname::%({_player}'s uuid)%} ? {_player})
+
+function getLongTime(time: timespan) :: string:
+    set {_time} to "%{_time}%"
+    replace all " seconds" and " second" in {_time} with "s"
+    replace all " minutes" and " minute" in {_time} with "m"
+    replace all " hours" and " hour" in {_time} with "h"
+    replace all " days" and " day" in {_time} with "d"
+    replace all " weeks" and " week" in {_time} with "w"
+    replace all " months" and " month" in {_time} with "Mo"
+    replace all " and" in {_time} with ""
+    set {_time::*} to {_time} split at " "
+    replace all "M", "w", "d", "m", "s" and "h" in {_time::*} with ""
+    loop {_time::*}:
+        set {_1} to round("%loop-value%" parsed as a number)
+        replace "%loop-value%" in {_time} with "%{_1}%"
+    return {_time}
+function getShortTime(s:number) :: string:
+    set {_days} to floor({_s} / 86400)
+    set {_remainder} to mod({_s},86400)
+    set {_h} to floor({_remainder} / 3600)
+    set {_remainder} to mod({_remainder},3600)
+    set {_m} to floor({_remainder} / 60)
+    set {_s} to mod({_remainder},60)
+    if {_days} > 0:
+        set {_time} to "%{_days}%d %{_h}%h"
+    else if {_h} > 0:
+        set {_time} to "%{_h}%h %{_m}%m"
+    else if {_m} > 0:
+        set {_time} to "%{_m}%m %{_s}%s"
+    else:
+        set {_time} to "%{_s}%s"
+    return {_time}
+
+
+function small(text: text) :: text:
+    set {_tiny::*} to "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" split at ""
+    set {_lower::*} to "abcdefghijklmnopqrstuvwxyz" split at ""
+    set {_upper::*} to (uppercase "abcdefghijklmnopqrstuvwxyz") split at ""
+    loop {_tiny::*}:
+        replace {_lower::%loop-index%} and {_upper::%loop-index%} with loop-value in {_text}
+        replace "&%loop-value%" with "&%{_lower::%loop-index%}%" in {_text}
+    return {_text}
+function unsmall(text: text) :: text:
+    set {_tiny::*} to "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" split at ""
+    set {_lower::*} to "abcdefghijklmnopqrstuvwxyz" split at ""
+    loop {_lower::*}:
+        replace {_tiny::%loop-index%} with loop-value in {_text}
+    return {_text}
+function makeTextComponent(string:string) :: text component:
+    return (text component from {_string})
+
+
+on command ("/sk reload","/skript reload","/skript:skript reload" or "/skript:sk reload"):
+    event-player is op
+    set {_command::*} to ((full command) split at " ")
+    set {_reloadTime} to now
+    send "%getPrefix("skript",true)% {@c2}%({_command::3})% &fis reloading..." to (all players)
+    wait 1 tick
+    send "%getPrefix("skript",true)% &fReloaded {@c2}%({_command::3})% &8[{@c1}%(seconds of (1000*(difference between now and {_reloadTime})))%ms&8]" to (all players)
+on command:
+    executor is a player
+    command contains ("minecraft" or ":"):
+        player is not op
+        cancel event    
+    command is ("tell","tellraw","ver","version","bukkit:version","bukkit:ver","?","bukkit:?","help","bukkit:help","about","bukkit:about","icanhasbukkit","pl","plugins","bukkit:pl","bukkit:plugins" or "me"):
+        player is not op
+        cancel event
+
+
+on load:
+    set {-numberSuffix::*} to split "k,M,B,T,Qa,Qi,Sx,Sp,Oc,No" at ","
+function format(n: number) :: string:
+    set {_div} to floor(log(max(abs({_n}), 1), 1000))
+    return "%{_n} / (1000 ^ {_div})%%{-numberSuffix::%{_div}%} ? ""%"
+function regex(n: object) :: text:
+    if "%{_n}%" contains ".":
+        set {_s::*} to split "%{_n}%" at "."
+        set {_n} to "%a({_s::1})%.%last 2 characters of {_s::2}%"
+        return "%{_n}%"
+    else:
+        set {_n} to a("%{_n}%")
+        return "%{_n} ? 0%"
+function a(b: text) :: text:
+    if length of {_b} > 3:
+        return "%a(first length of {_b} - 3 characters of {_b})%,%last 3 characters of {_b}%"
+    return {_b}
+
+
+function line(t:string, i:integer=1) :: string:
+    return "%{_t}%&m " repeated {_i} times
+function repeat(t:string, i:integer=1) :: string:
+    return "%{_t}%" repeated {_i} times
+function percentLine(t1:string="&a&m ",t2:string="&8&m ",p:number, b:number=20) :: string:
+    set {_1} to floor(({_p} / 100) * {_b})
+    set {_2} to {_b} - {_1}
+    set {_a} to "%{_t1}%" repeated {_1} times if {_1} > 0 else ""
+    set {_b} to "%{_t2}%" repeated {_2} times if {_2} > 0 else ""
+    return formatted "%{_a}%%{_b}%"
+
+
+function center(rows:number) :: objects:
+    set {_totalSlots} to ({_rows} * 9)
+    loop (integers from 0 to {_totalSlots} - 1):
+        set {_row} to floor(loop-value / 9)
+        set {_col} to mod(loop-value, 9)
+        ({_row} and {_col}) is not 0
+        {_row} is not ({_rows} - 1)
+        {_col} is not 8
+        add loop-value to {_slots::*}
+    return {_slots::*}
+function border(rows:number, type:text="none") :: objects:
+    set {_totalSlots} to ({_rows} * 9)
+    if {_type} = "corner":
+        add (0,1,9) to {_slots::*}
+        add ({_totalSlots} - 1) to {_slots::*}
+        add ({_totalSlots} - 2) to {_slots::*}
+        add ({_totalSlots} - 10) to {_slots::*}
+    else:
+        add (integers from 0 to 8) to {_slots::*}
+        loop (integers from 0 to 8):
+            add (({_totalSlots} - 9) + loop-value) to {_slots::*}
+        loop (integers from 1 to {_rows} - 2):
+            add (loop-value * 9) to {_slots::*}
+            add ((loop-value * 9) + 8) to {_slots::*}
+    return {_slots::*}
+
+function hexChar(c:text) :: number:
+    set {_c} to ({_c} in lowercase)
+    set {_l::*} to ("0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f") split at ","
+    loop {_l::*}:
+        {_c} = loop-value
+        return (loop-iteration - 1)
+    return 0
+function rgbToHex(r:number, g:number, b:number) :: text:
+    set {_h::*} to ("0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f") split at ","
+    return "%{_h::%floor({_r}/16)+1%}%%{_h::%mod({_r}, 16)+1%}%%{_h::%floor({_g}/16)+1%}%%{_h::%mod({_g}, 16)+1%}%%{_h::%floor({_b}/16)+1%}%%{_h::%mod({_b}, 16)+1%}%"
+function hexToRGB(hex:text) :: numbers:
+    set {_h} to {_hex}
+    replace all "<#" and ">" with "" in {_h}
+    set {_r1} to (subtext of {_h} from 1 to 1)
+    set {_r2} to (subtext of {_h} from 2 to 2)
+    set {_g1} to (subtext of {_h} from 3 to 3)
+    set {_g2} to (subtext of {_h} from 4 to 4)
+    set {_b1} to (subtext of {_h} from 5 to 5)
+    set {_b2} to (subtext of {_h} from 6 to 6)
+    add ((hexChar({_r1}) * 16) + hexChar({_r2})) to {_r::*}
+    add ((hexChar({_g1}) * 16) + hexChar({_g2})) to {_r::*}
+    add ((hexChar({_b1}) * 16) + hexChar({_b2})) to {_r::*}
+function hex(s: string) :: string:
+    set {_s::*} to {_s} split at "&#"
+    loop {_s::*}:
+        loop-iteration > 1
+        #set {_part} to loop-value
+        set {_part} to ("<#"+loop-value)
+        if length of {_part} >= 9:
+            set {_prefix} to substring of {_part} from 1 to 8
+            set {_rest} to substring of {_part} from 9 to 99
+            set {_s::%loop-index%} to ({_prefix} + ">" + {_rest})
+        else:
+            set {_s::%loop-index%} to ({_part} + ">")
+    set {_result} to join {_s::*} with ""
+    #set {_result::*} to split {_result} at " "
+    #return "%{_result::1}%&r"
+    return "%{_result}%"
+
+
+import:
+    java.net.URL
+    javax.imageio.ImageIO
+    net.md_5.bungee.api.ChatColor
+    java.awt.Color
+    java.awt.image.BufferedImage
+function getHeadPixels(player: offline player, display.char: string="█") :: strings:
+    set {_image} to ImageIO.read(new URL("https://crafatar.com/avatars/%uuid of {_player}%/?size=8"))
+    loop 8 times:
+        loop 8 times:
+            set {_line} to ((loop-value-1) - 1)
+            set {_rgb} to {_image}.getRGB((loop-value-2) - 1, {_line})
+            set {_color} to new Color({_rgb}, true)
+            set {_skin::%{_line}%} to join {_skin::%{_line}%} and "%ChatColor.of({_color})%%{_display.char}%"
+    return {_skin::*}
+
+
+function shiny(i:item) :: item:
+    enchant {_i} with mending
+    return hideFlags({_i})
+function hideFlags(i:item) :: item:
+    add ((hide enchants),(hide additional tooltip)) to (item flags of {_i})
+    return {_i}
+
+function customHead(v:string) :: item:
+    set {_i} to a player head
+    set {_n} to nbt of {_i}
+    add nbt compound of "{""minecraft:profile"":{properties:[{name:""textures"",value:""%{_v}%""}]}}" to {_n}
+    return {_i}
+
+function previousPage() :: item:
+    set {_} to customHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjllYTFkODYyNDdmNGFmMzUxZWQxODY2YmNhNmEzMDQwYTA2YzY4MTc3Yzc4ZTQyMzE2YTEwOThlNjBmYjdkMyJ9fX0=")
+    set {_} to ((({_}) named "{@c2}Previous page") with lore ("&8ʙᴜᴛᴛᴏɴ","","{@l} ɪɴғᴏʀᴍᴀᴛɪᴏɴ","{@l} &fɢᴏᴇs ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ","{@l} &fᴘʀᴇᴠɪᴏᴜs ᴘᴀɢᴇ","","&8→ &fᴄʟɪᴄᴋ ᴛᴏ sᴡɪᴛᴄʜ"))
+    return {_}
+    
+function nextPage() :: item:
+    set {_} to customHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODI3MWE0NzEwNDQ5NWUzNTdjM2U4ZTgwZjUxMWE5ZjEwMmIwNzAwY2E5Yjg4ZTg4Yjc5NWQzM2ZmMjAxMDVlYiJ9fX0=")
+    set {_} to hideFlags((({_}) named "{@c2}Next page") with lore ("&8ʙᴜᴛᴛᴏɴ","","{@l} ɪɴғᴏʀᴍᴀᴛɪᴏɴ","{@l} &fɢᴏᴇs ғᴏʀᴡᴀʀᴅ ᴛᴏ","{@l} &fᴛʜᴇ ɴᴇxᴛ ᴘᴀɢᴇ","","&8→ &fᴄʟɪᴄᴋ ᴛᴏ sᴡɪᴛᴄʜ"))
+    return {_}
+
+function clickToClose() :: item:
+    set {_} to customHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTJkN2E3NTFlYjA3MWUwOGRiYmM5NWJjNWQ5ZDY2ZTVmNTFkYzY3MTI2NDBhZDJkZmEwM2RlZmJiNjhhN2YzYSJ9fX0=")
+    set {_} to hideFlags((({_}) named "{@c2}Close inventory") with lore ("&8ʙᴜᴛᴛᴏɴ","","{@l} ɪɴғᴏʀᴍᴀᴛɪᴏɴ","{@l} &fᴄʟᴏsᴇs ʏᴏᴜʀ ɪɴᴠᴇɴᴛᴏʀʏ","","&8→ &fᴄʟɪᴄᴋ ᴛᴏ ᴄʟᴏsᴇ"))
+    return {_}
+function clickToGoBack() :: item:
+    set {_} to customHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTJkN2E3NTFlYjA3MWUwOGRiYmM5NWJjNWQ5ZDY2ZTVmNTFkYzY3MTI2NDBhZDJkZmEwM2RlZmJiNjhhN2YzYSJ9fX0=")
+    set {_} to hideFlags((({_}) named "{@c2}Go back") with lore ("&8ʙᴜᴛᴛᴏɴ","","{@l} ɪɴғᴏʀᴍᴀᴛɪᴏɴ","{@l} &fʀᴇᴛᴜʀɴ ᴛᴏ ᴛʜᴇ","{@l} &fᴘʀᴇᴠɪᴏᴜs ᴘᴀɢᴇ","","&8→ &fᴄʟɪᴄᴋ ᴛᴏ ᴄʟᴏsᴇ"))
+    return {_}
+
+function glass(s:string) :: item:
+    return (("%{_s}% stained glass pane" parsed as item) named "&0")
+
+expression %itemtype% with hidden attributes:
+    get:
+        set {_i} to expr-1.getRandom()
+        set {_meta} to {_i}.getItemMeta()
+        {_meta}.addItemFlags(hide attributes)
+        set {_map} to {_i}.getType().getDefaultAttributeModifiers()
+        loop ...{_map}.keySet():
+            {_meta}.addAttributeModifier(loop-value, {_map}.get(loop-value).get(0))
+        {_i}.setItemMeta({_meta})
+        return {_i}
+
+
+function setWorld(loc:location, world:string) :: location:
+    return location((x-coord of {_loc}),(y-coord of {_loc}),(z-coord of {_loc}),world {_world})
+
+
+# USELESS FUNCTION DUE TO RECENT SKRIPT FEATURES
+# ONLY USE IF YOU WANT TO USE A LOWER VERSION
+# I WILL NOT GIVE ANY SUPPORT
+#
+# set {_list::*} to sort((indices of {serverTemplate::*}),{serverTemplate::*})
+#
+#function sort(indices: strings, values: numbers, descending: boolean = true) :: strings:
+#    loop {_indices::*}: 
+#        set {_sort::%{_values::%loop-index%}%.%loop-index%} to loop-value
+#    return (reversed {_sort::*}) if {_descending} is true, else {_sort::*}

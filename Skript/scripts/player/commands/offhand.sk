@@ -1,0 +1,12 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /offhand:
+    trigger:
+        set {_hand} to (player's tool)
+        set (player's tool) to (player's offhand tool)
+        set (player's offhand tool) to {_hand}

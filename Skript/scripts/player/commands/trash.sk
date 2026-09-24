@@ -1,0 +1,28 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+
+command /trash:
+    trigger:
+        trashGUI(player)
+function trashGUI(p:player):
+    set {_gui} to chest inventory with 4 rows named "&0Trash"
+    set (metadata tag "trashGUI" of {_p}) to {_gui}
+    open {_gui} to {_p}
+on inventory close:
+    event-inventory = (metadata tag "trashGUI" of player)
+    send ""
+    send "%getPrefix("trash",true)% &fDelete something wrong? Make a ticket!"
+    send "&8( &7Use this as evidence&8 )"
+    send ""
+    loop items in event-inventory:
+        loop-item is not air
+        if name of loop-item is set:
+            send "{@l} &f%(amount of loop-item)%x %(formatted name of loop-item)%"
+        else:
+            send "{@l} &f%(amount of loop-item)%x %(type of loop-item)%"
+    send ""

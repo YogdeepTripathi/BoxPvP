@@ -1,0 +1,84 @@
+function compEndStone() :: item:
+    set {_comp} to shiny light gray wool named "<##E2E39E>Compressed End Stone"
+    return {_comp}
+function compEndBricks() :: item:
+    set {_comp} to shiny light gray concrete named "<##E2E39E>Compressed End Bricks"
+    return {_comp}
+function compPurpur() :: item:
+    set {_comp} to shiny purple glazed terracotta named "<##DF98F3>Compressed Purpur"
+    return {_comp}
+function compPurpurPillar() :: item:
+    set {_comp} to shiny magenta terracotta named "<##DF98F3>Compressed Purpur Pillar"
+    return {_comp}
+function compPurpleGlass() :: item:
+    set {_comp} to shiny magenta stained glass named "<##934BDB>Compressed Purple Glass"
+    return {_comp}
+function compCryingObsidian() :: item:
+    set {_comp} to shiny purple concrete named "<##6016AB>Compressed Crying Obi"
+    return {_comp}
+
+    if compcheck(player, end stone) = true:
+        autocomp(player, end stone, compEndStone(), 64)
+    if compcheck(player, end stone bricks) = true:
+        autocomp(player, end stone bricks, compEndBricks(), 64)
+    if compcheck(player, purpur block) = true:
+        autocomp(player, purpur block, compPurpur(), 64)
+    if compcheck(player, purpur pillar) = true:
+        autocomp(player, purpur pillar, PurpurPillar(), 64)
+    if compcheck(player, purple stained glass) = true:
+        autocomp(player, purple stained glass, compPurpleGlass(), 64)
+    if compcheck(player, crying obsidian) = true:
+        autocomp(player, crying obsidian, compCryingObsidian(), 64)
+
+function compSpruce() :: item:
+    set {_comp} to shiny spruce wood named "<#&#41352D>Compressed Spruce"
+    return {_comp}
+function compBirch() :: item:
+    set {_comp} to shiny birch wood named "<##D2D2D2>Compressed Birch"
+    return {_comp}
+function compJungle() :: item:
+    set {_comp} to shiny jungle wood named "<##927951>Compressed Jungle"
+    return {_comp}
+function compAcacia() :: item:
+    set {_comp} to shiny acacia wood named "<##F67435>Compressed Acacia"
+    return {_comp}
+function compMangrove() :: item:
+    set {_comp} to shiny mangrove wood named "<##DB4154>Compressed Mangrove"
+    return {_comp}
+function compWarped() :: item:
+    set {_comp} to shiny warped hyphae named "<##19B8BA>Compressed Warped"
+    return {_comp}
+function compBamboo() :: item:
+    set {_comp} to shiny stripped bamboo block named "<##7C9F43>Compressed Bamboo"
+    return {_comp}
+function compCrimson() :: item:
+    set {_comp} to shiny crimson hyphae named "<##CA1F1F>Compressed Crimson"
+    return {_comp}
+function compCherry() :: item:
+    set {_comp} to shiny cherry wood named "<##EAA1AA>Compressed Cherry"
+    return {_comp}
+
+function compSandstone() :: item:
+    set {_comp} to shiny sandstone named "<##F5F3B2>Compressed Sandstone"
+    return {_comp}
+function compPrismarine() :: item:
+    set {_comp} to shiny prismarine named "<##39C6AA>Compressed Prismarine"
+    return {_comp}
+function compPrismarineBricks() :: item:
+    set {_comp} to shiny prismarine bricks named "<##39C6AA>Compressed Prismarine Bricks"
+    return {_comp}
+function compDarkPrismarine() :: item:
+    set {_comp} to shiny dark prismarine named "<##1E5F3F>Compressed Dark Prismarine"
+    return {_comp}
+function compBrainCoral() :: item:
+    set {_comp} to shiny brain coral block named "<##E27BDF>Compressed Brain Coral"
+    return {_comp}
+function compFireCoral() :: item:
+    set {_comp} to shiny fire coral block named "<##C8263A>Compressed Fire Coral"
+    return {_comp}
+function compBubbleCoral() :: item:
+    set {_comp} to shiny bubble coral block named "<##CE16D0>Compressed Bubble Coral"
+    return {_comp}
+function compTubeCoral() :: item:
+    set {_comp} to shiny tube coral block named "<##3553FF>Compressed Tube Coral"
+    return {_comp}

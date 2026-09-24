@@ -1,0 +1,21 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+
+command /ptime <t:time> [<p:player>]:
+    aliases: /playertime
+    permission: player.time
+    trigger:
+        if {_p} is set:
+            if player is op:
+                set (player time of {_p}) to {_t}
+            else:
+                set (player time of player) to {_t}
+        else:
+            set (player time of player) to {_t}
+on tab complete of ("/playertime","/ptime"):
+    set (tab completions for position 1) to ("12:00am","6:00am","12:00pm","6:00pm")

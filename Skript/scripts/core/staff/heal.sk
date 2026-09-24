@@ -1,0 +1,56 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /heal [<p:player>]:
+    permission: staff.heal
+    trigger:
+        {-player::heal::%uuid of player%} is set:
+            send "{@pa} &fYou are on cooldown for <#F68AD9>%((1 minute) - (difference between now and {-player::heal::%uuid of player%}))%"
+            stop
+
+        set {-player::heal::%uuid of player%} to now
+        if {_p} is set:
+            if player is op:
+                heal({_p})
+                send "{@pa} &fYou have healed &e%arg-1%"
+                send "{@pa} &e%player% &fhas healed you" to {_p}
+            else:
+                heal(player)
+                send "{@pa} &fYou have healed yourself!"
+        else:
+            heal(player)
+            send "{@pa} &fYou have healed yourself!"
+        wait 1 minute
+        delete {-player::heal::%uuid of player%}
+
+command /feed [<p:player>]:
+    permission: staff.feed
+    trigger:
+        {-player::feed::%uuid of player%} is set:
+            send "{@pa} &fYou are on cooldown for <#F68AD9>%((1 minute) - (difference between now and {-player::feed::%uuid of player%}))%"
+            stop
+        set {-player::feed::%uuid of player%} to now
+        if {_p} is set:
+            if player is op:
+                feed({_p})
+                send "{@pa} &fYou have fed &e%arg-1%"
+                send "{@pa} &e%player% &fhas fed you" to {_p}
+            else:
+                feed(player)
+                send "{@pa} &fYou have fed yourself!"
+        else:
+            feed(player)
+            send "{@pa} &fYou have fed yourself!"
+        wait 1 minute
+        delete {-player::feed::%uuid of player%}
+
+function heal(p:player):
+    heal {_p}
+
+function feed(p:player):
+    set (food level of {_p}) to 10
+    set (saturation of {_p}) to 20

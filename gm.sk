@@ -1,0 +1,40 @@
+command /gmc:
+    trigger:
+        if player has permission "op":
+            if player's gamemode is creative:
+                send "&8&l▸ CONSOLE&r &fYour gamemode is already &6Creative&f." to player
+            else:
+                send "&8&l▸ CONSOLE&r &fSet &7%player%'s &fgamemode to &6Creative&f." to player
+                set player's gamemode to creative
+        else:
+            send "&8&l▸ CONSOLE&r &fYou &cdo not &fhave &9permission &fto use this command!" to player
+command /gmsp:
+    trigger:
+        if player has permission "op":
+            if player's gamemode is spectator:
+                send "&8&l▸ CONSOLE&r &fYour gamemode is already &bSpectator&f." to player
+            else:
+                send "&8&l▸ CONSOLE&r &fSet &7%player%'s &fgamemode to &bSpectator&f." to player
+                set player's gamemode to spectator
+        else:
+            send "&8&l▸ CONSOLE&r &fYou &cdo not &fhave &9permission &fto use this command!" to player
+command /gma:
+    trigger:
+        if player has permission "op":
+            if player's gamemode is adventure:
+                send "&8&l▸ CONSOLE&r &fYour gamemode is already &aAdventure&f." to player
+            else:
+                send "&8&l▸ CONSOLE&r &fSet &7%player%'s &fgamemode to &aAdventure&f." to player
+                set player's gamemode to adventure
+        else:
+            send "&8&l▸ CONSOLE&r &fYou &cdo not &fhave &9permission &fto use this command!" to player
+command /gms:
+    trigger:
+        if player has permission "op":
+            if player's gamemode is survival:
+                send "&8&l▸ CONSOLE&r &fYour gamemode is already &cSurvival&f." to player
+            else:
+                send "&8&l▸ CONSOLE&r &fSet &7%player%'s &fgamemode to &cSurvival&f." to player
+                set player's gamemode to survival
+        else:
+            send "&8&l▸ CONSOLE&r &fYou &cdo not &fhave &9permission &fto use this command!" to player

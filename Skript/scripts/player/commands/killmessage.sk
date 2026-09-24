@@ -1,0 +1,44 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+
+command /killmessage <t:text> [<n:string>]:
+    permission: player.killmessage
+    trigger:
+        if {_t} is "change":
+            if {_n} contains "&#":
+                set {_n} to hex({_n})
+            set {_n} to (formatted {_n})
+            if length of (unformatted {_n}) > 50:
+                send "{@pa} &fMust be between 15-50 characters!"
+                stop
+            if length of (unformatted {_n}) < 15:
+                send "{@pa} &fMust be between 15-50 characters!"
+                stop
+            if (unformatted {_n}) does not contain ("%player%"):
+                send "{@pa} &fMust include your name: ""%player%""!"
+                stop
+            set {player::killmessage::%(player's uuid)%} to "%{_n}%&f"
+            send "{@pa} &fYour kill message has been set to {@c2}%{_n}%&f!"
+        else if {_t} is "reset":
+            if {_n} is set:
+                player is op
+                set {_p} to ({_n} parsed as player)
+                delete {player::killmessage::%({_p}'s uuid)%}
+                send "{@pa} &fYou have cleared {@c2}%{_p}%&f's kill message!"
+                send "{@pa} &fYour kill message has been cleared!" to {_p}
+                stop
+            delete {player::killmessage::%(player's uuid)%}
+            send "{@pa} &fYour kill message has been cleared!"
+        else:
+            send usage
+
+on tab complete of ("/killmessage"):
+    set tab completions for position 1 to ("change","reset")
+    if tab arg-1 is "reset":
+        player is op
+        set tab completions for position 2 to (all players)

@@ -1,0 +1,48 @@
+on break:
+    cancel drops
+
+    set {_amount} to random integer between ((level of fortune of player's tool + 1) /2) and (level of fortune of player's tool + 1) 
+
+
+    if event-block is oak log:
+        give {_amount} of oak1() to player
+    
+    if player has (minecart with chest named "&aOverworld Auto Compressor") or (smithing template named "&cNether Auto Compresssor"):
+        autocomp(player, oak1(), oak2())
+        autocomp(player, oak2(), oak3())
+
+
+function autocomp(p: player, b: item, cb: item):
+    if amount of {_b} in {_p}'s inventory >= 64:
+        set {_amount} to amount of {_b} in {_p}'s inventory
+        set {_amount2} to floor({_amount} / 64)
+        remove ({_amount2} * 64) of {_b} from player's inventory
+        give {_amount2} of {_cb} to player
+
+
+
+function oak1() :: item:
+    set {_1} to oak button named "&7Oak &8[&aTier 1&8]"
+    return {_1}
+
+function oak2() :: item:
+    set {_1} to oak pressure plate named "&7Oak &8[&aTier 2&8]"
+    return {_1}
+
+function oak3() :: item:
+    set {_1} to oak slab named "&7Oak &8[&aTier 3&8]"
+    return {_1}
+
+function overworldAutoCompressor() :: item:
+    set {_1} to minecart with chest named "&aOverworld Auto Compressor"
+    return {_1}
+
+function netherAutoCompressor() :: item:
+    set {_1} to smithing template named "&cNether Auto Compresssor"
+    return {_1}
+
+command /kol:
+    permission: op
+    trigger:
+        give player overworldAutoCompressor()
+        give player netherAutoCompressor()

@@ -1,0 +1,138 @@
+on craft:
+    if player is not op:
+        cancel event
+on right click on armor stand:
+    if player is not op:
+        cancel event
+on right click on barrel:
+    cancel event
+on place:
+    if player is not op:
+        cancel event
+on right-click on shulker box:
+    if player is not op:
+        cancel event
+
+
+command /enderchest [<player>]:
+	permission: ec.access
+	aliases: /ec
+	trigger:
+		if arg 1 is set:
+			if player has permission "op":
+				open arg 1's ender chest to the player
+				stop
+		open the player's ender chest to the player	
+
+command /showequipment:
+    permission: op
+    trigger:
+        open virtual chest inventory with 6 rows named "&6Equipment" to player
+        set slot 12 of current inventory to player's helmet slot
+        set slot 21 of current inventory to player's chestplate slot
+        set slot 30 of current inventory to player's leggings slot
+        set slot 39 of current inventory to player's boots slot
+        set slot 31 of current inventory to player's offhand
+
+command /clearall:
+    permission: op
+    permission message: &cYou don't have permission to use this command.
+    trigger:
+        clear player's inventory
+        clear player's ender chest
+        send "&aYour inventory and ender chest have been cleared." to player
+
+command /invsee <player>:
+    permission: op
+    usage: &7fUse &f/invsee &7[<&fplayer&7>]
+    trigger:
+        set {_arg1} to arg-1
+        if arg-1 is set:
+            open {_arg1}'s inventory to player
+        else:
+            send "&7fUse &f/invsee &7[<&fplayer&7>]" to player
+
+command /invarmor [<player>]:
+    permission: op
+    usage: &7fUse &f/invarmor &7[<&fplayer&7>]
+    trigger:
+        set {_arg1} to arg-1
+        if arg-1 is set:
+            create a gui with hopper inventory named "&8&l            ARMOR":
+                make gui 0 with {_arg1}'s offhand:
+                    if event-slot is air:
+                        set {_arg1}'s offhand to event-item
+                    else:
+                        give player event-item
+                        set {_arg1}'s offhand to air
+
+                make gui 1 with helmet slot of {_arg1}:
+                    if event-slot is air:
+                        set helmet slot of {_arg1} to event-item
+                    else:
+                        give player event-item
+                        set helmet slot of {_arg1} to air
+
+                make gui 2 with chestplate slot of {_arg1}:
+                    if event-slot is air:
+                        set chestplate slot of {_arg1} to event-item
+                    else:
+                        give player event-item
+                        set chestplate slot of {_arg1} to air
+
+                make gui 3 with leggings slot of {_arg1}
+
+                make gui 4 with boots slot of {_arg1}:
+                    if event-slot is air:
+                        set {_arg1}'s offhand to event-item
+                    else:
+                        give player event-item
+                        set {_arg1}'s offhand to air
+            open last gui to player
+        else:
+            send "&7fUse &f/invarmor &7[<&fplayer&7>]" to player
+
+on inventory click:
+    if inventory name of event-inventory is "&8&l            ARMOR":
+        if clicked slot is 3:
+            set {_es} to event-slot
+            if event-slot is not air:
+                set leggings slot of {_arg1} to air
+                set cursor item to event-item
+
+function blackstain() :: item:
+    set {_blackstain} to black stained glass pane named " "
+    return {_blackstain}
+function graystain() :: item:
+    set {_graystain} to gray stained glass pane named " "
+    return {_graystain}
+
+on drop:
+    if {droptimer::%uuid of player%} is not set:
+        cancel event
+        send "&7Use &f/drop &7to drop items." to player
+
+command /drop:
+    trigger:
+        if {droptimer::%uuid of player%} is not set:
+            set {droptimer::%uuid of player%} to 15
+            send "&7You can now drop items for 15 seconds." to player
+            wait 1 second
+            while {droptimer::%uuid of player%} is greater than 0:
+                add -1 to {droptimer::%uuid of player%}
+                wait 1 second
+            delete {droptimer::%uuid of player%}
+            send "&7You can no longer drop items." to player
+        else:
+            send "&7You can drop items for %{droptimer::%uuid of player%}% more seconds." to player
+
+command /pl:
+    trigger:
+        send "&fServer Plugins (5):" to player
+        send "&6Bukkit Plugins:" to player
+        send " &8- &aMultiFarmerPlugin&f, &aSkript&f, &aNuggets&f, &aMiner&f, &aTebex"
+command /plugins:
+    trigger:
+        send "&fServer Plugins (5):" to player
+        send "&6Bukkit Plugins:" to player
+        send " &8- &aMultiFarmerPlugin&f, &aSkript&f, &aNuggets&f, &aMiner&f, &aTebex"

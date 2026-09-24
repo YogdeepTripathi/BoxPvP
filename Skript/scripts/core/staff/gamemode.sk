@@ -1,0 +1,39 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /gmc:
+    permission: staff.gmc
+    trigger:
+        (gamemode of player) is creative:
+            send action bar "{@pa} &fYou are already in creative!"
+            stop
+        set (gamemode of player) to creative
+        send action bar "{@pa} &fYou are now in creative!"
+command /gms:
+    permission: staff.gms
+    trigger:
+        (gamemode of player) is survival:
+            send action bar "{@pa} &fYou are already in survival!"
+            stop
+        set (gamemode of player) to survival
+        send action bar "{@pa} &fYou are now in survival!"
+command /gmsp:
+    permission: staff.gmsp
+    trigger:
+        (gamemode of player) is spectator:
+            send action bar "{@pa} &fYou are already in spectator!"
+            stop
+        set (gamemode of player) to spectator
+        send action bar "{@pa} &fYou are now in spectator!"
+command /gma:
+    permission: staff.gma
+    trigger:
+        (gamemode of player) is adventure:
+            send action bar "{@pa} &fYou are already in adventure!"
+            stop
+        set (gamemode of player) to adventure
+        send action bar "{@pa} &fYou are now in adventure!"

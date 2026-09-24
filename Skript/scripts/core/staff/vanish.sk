@@ -1,0 +1,52 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /vanish:
+    aliases: /v
+    permission: staff.vanish
+    trigger:
+        {player::vanish::%uuid of player%} is set:
+            delete {player::vanish::%uuid of player%}
+            make player appear to (all players)
+            send "{@pa}&f You are no longer in vanish!"
+            send action bar ""
+            stop
+        
+        make player disappear from (all players where [input does not have permission "staff.vanish"])
+        set {player::vanish::%uuid of player%} to true
+        send "{@pa}&f You are now in vanish!"
+        send action bar "{@c2}You are in vanish!"
+
+function refreshVanish(p:player):
+    if {player::vanish::%uuid of {_p}%} is not set:
+        make (all players where [{player::vanish::%uuid of input%} is not set]) appear to {_p}
+        stop
+    if {_p} is op:
+        make {_p} disappear from (all players where [input is not op])
+        make {_p} appear to (all players where [input is op])
+    else if {_p} has permission "staff.vanish":
+        make {_p} disappear from (all players where [input does not have permission "staff.vanish"])
+        make {_p} appear to (all players where [input has permission "staff.vanish"])
+
+placeholderapi placeholder with prefix "ASkript":
+    if the identifier is "vanish":
+        set the result to displayVanish(player)
+
+local function displayVanish(p:player) :: string:
+    if {player::vanish::%uuid of {_p}%} is not set:
+        return ""
+    else:
+        if {data::rebirth::%uuid of {_p}%} > 0:
+            return "{@c1}[{@c2}V{@c1}] "
+        else:
+            return "{@c1}[{@c2}V{@c1}]"
+
+every 1 second:
+    loop all players:
+        refreshVanish(loop-player)
+        {player::vanish::%uuid of loop-player%} is set
+        send action bar "{@c2}You are in vanish!" to loop-player

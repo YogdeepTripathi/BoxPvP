@@ -1,0 +1,21 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /commandspy:
+    permission: staff.commandspy
+    trigger:
+        {player::commandspy::%uuid of player%} is set:
+            delete {player::commandspy::%uuid of player%}
+            send "{@pa}&f You have disabled commandspy!"
+            stop
+
+        set {player::commandspy::%uuid of player%} to true
+        send "{@pa}&f You have enabled commandspy!"
+
+on command:
+    executor is not console
+    send "&8[{@c2}&lCS&8] &f%player% &8• &b/%full command%" to all players where [{player::commandspy::%uuid of input%} is set]

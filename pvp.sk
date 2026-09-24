@@ -1,0 +1,49 @@
+on join:
+    if {pvp::%player's uuid%} is not set:
+        set {pvp::%player's uuid%} to false
+    if {season1PlayerKills::%uuid of player%} is not set:
+        set {season1PlayerKills::%uuid of player%} to 0
+    set {pvphit::%player's uuid%} to false
+
+command /pvp <text>:
+    usage: &a» &7Use &c/pvp on &7to enable PvP, use &a/pvp off &7to disable PvP.
+    trigger:
+        if {cooldown::%uuid of player%} is set:
+            send "&c&lCOMBAT ▸&r &fYou are on cooldown!"
+        else if {pvptimer::%uuid of player%} is set:
+            send "&fYou are in &ccombat&f! Wait before using commands again."
+        else if arg-1 is "on":
+            if {pvp::%uuid of player%} is true:
+                send "&c&lCOMBAT ▸&r &fYou have already enabled &cPvP&f!" to player
+            else:
+                set {pvp::%uuid of player%} to true
+                send "&6&lBLOCKS ▸&r &fYou now receive &a2x &6Blocks&f!"
+                send "&c&lCOMBAT ▸&r &fYou have enabled &cPvP&f!" to player
+                set {cooldown::%uuid of player%} to now
+                wait 15 seconds
+                delete {cooldown::%uuid of player%}
+        else if arg-1 is "off":
+            if {pvp::%uuid of player%} is false:
+                send "&c&lCOMBAT ▸&r &fYou have already disabled &cPvP&f!" to player
+            else:
+                set {pvp::%uuid of player%} to false
+                send "&6&lBLOCKS ▸&r &fYou no longer receive &a2x &6Blocks&f!"
+                send "&c&lCOMBAT ▸&r &fYou have disabled &cPvP&f!" to player
+                set {cooldown::%uuid of player%} to now
+                wait 15 seconds
+                delete {cooldown::%uuid of player%}
+
+on tab complete of "/pvp":
+	set tab completions for position 1 to "off", "on"
+
+on damage:
+    if attacker is a player:
+        if victim is a player:
+            if {pvp::%uuid of attacker%} is false:
+                send action bar "&7Your &cPvP &7is off!" to attacker
+                cancel event
+                stop
+            else if {pvp::%uuid of victim%} is false:
+                send action bar "&7That player has &cPvP &7turned off!" to attacker
+                cancel event
+                stop

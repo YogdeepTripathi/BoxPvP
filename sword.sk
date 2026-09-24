@@ -1,0 +1,46 @@
+function sword1() :: item:
+    set {_sword1} to unbreakable wooden sword named "&a[Tier 1] &fQuarry Sword" with lore "&7Sharpness 2"
+    enchant {_sword1} with sharpness 2
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_sword1}
+    return {_sword1}
+function sword2() :: item:
+    set {_sword2} to unbreakable iron sword named "&a[Tier 2] &fQuarry Sword" with lore "&7Sharpness 4"
+    enchant {_sword2} with sharpness 4
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_sword2}
+    return {_sword2}
+function sword3() :: item:
+    set {_sword3} to unbreakable diamond sword named "&a[Tier 3] &fQuarry Sword" with lore "&7Sharpness 6"
+    enchant {_sword3} with sharpness 6
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_sword3}
+    return {_sword3}
+function sword4() :: item:
+    set {_sword4} to unbreakable netherite sword named "&a[Tier 4] &fQuarry Sword" with lore "&7Sharpness 8"
+    enchant {_sword4} with sharpness 8
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_sword4}
+    return {_sword4}
+
+command /sword <text>:
+    permission: op
+    trigger:
+        if arg-1 is "1":
+            swords1(player)
+#        else if arg-1 is "2":
+#            drops2(player)
+
+function swords1(p: player):
+    create a gui with chest inventory with 2 rows named "&8&l             DROPS":
+        # first row
+        make gui 0 with sword1():
+            give sword1() to {_p}
+        make gui 1 with sword2():
+            give sword2() to {_p}
+        make gui 2 with sword3():
+            give sword3() to {_p}
+        make gui 3 with sword4():
+            give sword4() to {_p}
+        # second row
+        # third row
+        # forth row
+        # fifth row
+        # sixth row
+    open last gui to {_p}

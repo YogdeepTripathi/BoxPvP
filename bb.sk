@@ -1,0 +1,532 @@
+on load:
+    send "" to all players
+    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/principal/item&f.sk&7!" to all players
+    send "" to all players
+
+command /item <text>:
+    permission: op
+    usage: &7/&fitem &7[<&f1&7/&f2&7/&f3&7>]
+    trigger:
+        if arg-1 is "1":
+            item1(player)
+        else if arg-1 is "2":
+            item2(player)
+#        else if arg-1 is "3":
+#            item3(player)
+#        else if arg-1 is "4":
+#            item4(player)
+
+function item1(p: player):
+    create a gui with chest inventory with 5 rows named "&8&l             TOOLS":
+
+        # first row
+
+        make gui 2 with stonePickaxeTier1():
+            give stonePickaxeTier1() to {_p}
+        make gui 3 with stonePickaxeTier2():
+            give stonePickaxeTier2() to {_p}
+        make gui 4 with stonePickaxeTier3():
+            give stonePickaxeTier3() to {_p}
+        make gui 5 with stonePickaxeTier4():
+            give stonePickaxeTier4() to {_p}
+        make gui 6 with stonePickaxeTier5():
+            give stonePickaxeTier5() to {_p}
+
+        # second row
+
+        make gui 11 with stone button named "&8"
+        make gui 12 with stone button named "&8"
+        make gui 13 with stone button named "&8"
+        make gui 14 with stone button named "&8"
+        make gui 15 with stone button named "&8"
+
+        make gui 11 with ironPickaxeTier1():
+            give ironPickaxeTier1() to {_p}
+        make gui 12 with ironPickaxeTier2():
+            give ironPickaxeTier2() to {_p}
+        make gui 13 with ironPickaxeTier3():
+            give ironPickaxeTier3() to {_p}
+        make gui 14 with ironPickaxeTier4():
+            give ironPickaxeTier4() to {_p}
+        make gui 15 with ironPickaxeTier5():
+            give ironPickaxeTier5() to {_p}
+
+        # third row
+
+        make gui 20 with diamondPickaxeTier1():
+            give diamondPickaxeTier1() to {_p}
+        make gui 21 with diamondPickaxeTier2():
+            give diamondPickaxeTier2() to {_p}
+        make gui 22 with diamondPickaxeTier3():
+            give diamondPickaxeTier3() to {_p}
+        make gui 23 with diamondPickaxeTier4():
+            give diamondPickaxeTier4() to {_p}
+        make gui 24 with diamondPickaxeTier5():
+            give diamondPickaxeTier5() to {_p}
+
+        # forth row
+
+        make gui 29 with emeraldPickaxeTier1():
+            give emeraldPickaxeTier1() to {_p}
+        make gui 30 with emeraldPickaxeTier2():
+            give emeraldPickaxeTier2() to {_p}
+        make gui 31 with emeraldPickaxeTier3():
+            give emeraldPickaxeTier3() to {_p}
+        make gui 32 with emeraldPickaxeTier4():
+            give emeraldPickaxeTier4() to {_p}
+        make gui 33 with emeraldPickaxeTier5():
+            give emeraldPickaxeTier5() to {_p}
+
+        # fifth row
+
+        make gui 38 with goldPickaxeTier1():
+            give goldPickaxeTier1() to {_p}
+        make gui 39 with goldPickaxeTier2():
+            give goldPickaxeTier2() to {_p}
+        make gui 40 with goldPickaxeTier3():
+            give goldPickaxeTier3() to {_p}
+        make gui 41 with goldPickaxeTier4():
+            give goldPickaxeTier4() to {_p}
+        make gui 42 with goldPickaxeTier5():
+            give goldPickaxeTier5() to {_p}
+
+    open last gui to {_p}
+
+function item2(p: player):
+    create a gui with chest inventory with 5 rows named "&8&l             TOOLS":
+        # first row
+        make gui 2 with t1Axe():
+            give t1Axe() to {_p}
+        make gui 3 with t2Axe():
+            give t2Axe() to {_p}
+        make gui 4 with t3Axe():
+            give t3Axe() to {_p}
+        make gui 5 with t4Axe():
+            give t4Axe() to {_p}
+        make gui 6 with t5Axe():
+            give t5Axe() to {_p}
+        # second row
+        make gui 11 with t6Axe():
+            give t6Axe() to {_p}
+        make gui 12 with t7Axe():
+            give t7Axe() to {_p}
+        make gui 13 with t8Axe():
+            give t8Axe() to {_p}
+        make gui 14 with t9Axe():
+            give t9Axe() to {_p}
+        make gui 15 with t10Axe():
+            give t10Axe() to {_p}
+        # third row
+        make gui 20 with t11Axe():
+            give t11Axe() to {_p}
+        make gui 21 with t12Axe():
+            give t12Axe() to {_p}
+        make gui 22 with t13Axe():
+            give t13Axe() to {_p}
+        make gui 23 with t14Axe():
+            give t14Axe() to {_p}
+        make gui 24 with t15Axe():
+            give t15Axe() to {_p}
+        # forth row
+        make gui 29 with t16Axe():
+            give t16Axe() to {_p}
+        make gui 30 with t17Axe():
+            give t17Axe() to {_p}
+        make gui 31 with t18Axe():
+            give t18Axe() to {_p}
+        make gui 32 with t19Axe():
+            give t19Axe() to {_p}
+        make gui 33 with t20Axe():
+            give t20Axe() to {_p}
+        # fifth row
+        make gui 38 with t21Axe():
+            give t21Axe() to {_p}
+        make gui 39 with t22Axe():
+            give t22Axe() to {_p}
+        make gui 40 with t23Axe():
+            give t23Axe() to {_p}
+        make gui 41 with t24Axe():
+            give t24Axe() to {_p}
+        make gui 42 with t25Axe():
+            give t25Axe() to {_p}
+    open last gui to {_p}
+
+function yellowwhiteline():: text:
+    set {_yellowwhiteline} to "<##FFFF55>«<##FFFF55>&m <##FFFF5E>&m <##FFFF68>&m <##FFFF71>&m <##FFFF7B>&m <##FFFF84>&m <##FFFF8E>&m <##FFFF97>&m <##FFFFA1>&m <##FFFFAA>&m <##FFFFB3>&m <##FFFFBD>&m <##FFFFC6>&m <##FFFFD0>&m <##FFFFD9>&m <##FFFFE3>&m <##FFFFEC>&m <##FFFFF6>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>&m <##FFFFFF>»"
+    return {_yellowwhiteline}
+
+function t1Axe() :: item:
+    set {_t1Axe} to unbreakable wooden axe named "<##91754D>O<##A38C6B>a<##B6A388>k <##DAD1C4>A<##EDE8E1>x<##FFFFFF>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 1" and "" and "   &a🌳 &f&lFORAGES &a🌳" and "&a⋆ &7Oak" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t1Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t1Axe}
+    return {_t1Axe}
+function t2Axe() :: item:
+    set {_t2Axe} to unbreakable wooden axe named "<##91754D>O<##A38C6B>a<##B6A388>k <##DAD1C4>A<##EDE8E1>x<##FFFFFF>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 2" and "" and "   &a🌳 &f&lFORAGES &a🌳" and "&a⋆ &7Oak" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t2Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t2Axe}
+    return {_t2Axe}
+function t3Axe() :: item:
+    set {_t3Axe} to unbreakable wooden axe named "<##91754D>O<##A38C6B>a<##B6A388>k <##DAD1C4>A<##EDE8E1>x<##FFFFFF>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 3" and "" and "   &a🌳 &f&lFORAGES &a🌳" and "&a⋆ &7Oak" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t3Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t3Axe}
+    return {_t3Axe}
+function t4Axe() :: item:
+    set {_t4Axe} to unbreakable wooden axe named "<##9D8F6F>W<##A19476>o<##A5987C>o<##A89D83>d<##ACA28A>e<##B0A690>n <##B7B09E>A<##BBB4A4>x<##BFB9AB>e &8[&fIV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+4 &fOak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t4Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t4Axe}
+    return {_t4Axe}
+function t5Axe() :: item:
+    set {_t5Axe} to unbreakable wooden axe named "<##9D8F6F>W<##A19476>o<##A5987C>o<##A89D83>d<##ACA28A>e<##B0A690>n <##B7B09E>A<##BBB4A4>x<##BFB9AB>e &8[&fV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t5Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t5Axe}
+    return {_t5Axe}
+function t6Axe() :: item:
+    set {_t6Axe} to unbreakable stone axe named "<##999999>S<##A0A0A0>t<##A7A7A7>o<##AEAEAE>n<##B6B6B6>e <##C4C4C4>A<##CBCBCB>x<##D2D2D2>e &8[&fI&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+1 &fBirch" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t6Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t6Axe}
+    return {_t6Axe}
+function t7Axe() :: item:
+    set {_t7Axe} to unbreakable stone axe named "<##999999>S<##A0A0A0>t<##A7A7A7>o<##AEAEAE>n<##B6B6B6>e <##C4C4C4>A<##CBCBCB>x<##D2D2D2>e &8[&fII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+2 &fBirch" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t7Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t7Axe}
+    return {_t7Axe}
+function t8Axe() :: item:
+    set {_t8Axe} to unbreakable stone axe named "<##999999>S<##A0A0A0>t<##A7A7A7>o<##AEAEAE>n<##B6B6B6>e <##C4C4C4>A<##CBCBCB>x<##D2D2D2>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+3 &fBirch" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t8Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t8Axe}
+    return {_t8Axe}
+function t9Axe() :: item:
+    set {_t9Axe} to unbreakable stone axe named "<##999999>S<##A0A0A0>t<##A7A7A7>o<##AEAEAE>n<##B6B6B6>e <##C4C4C4>A<##CBCBCB>x<##D2D2D2>e &8[&fIV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+4 &fBirch" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t9Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t9Axe}
+    return {_t9Axe}
+function t10Axe() :: item:
+    set {_t10Axe} to unbreakable stone axe named "<##999999>S<##A0A0A0>t<##A7A7A7>o<##AEAEAE>n<##B6B6B6>e <##C4C4C4>A<##CBCBCB>x<##D2D2D2>e &8[&fV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t10Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t10Axe}
+    return {_t10Axe}
+function t11Axe() :: item:
+    set {_t11Axe} to unbreakable iron axe named "<##FAFAFA>I<##FBFBFB>r<##FBFBFB>o<##FCFCFC>n <##FEFEFE>A<##FEFEFE>x<##FFFFFF>e &8[&fI&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+1 &fDark Oak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t11Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t11Axe}
+    return {_t11Axe}
+function t12Axe() :: item:
+    set {_t12Axe} to unbreakable iron axe named "<##FAFAFA>I<##FBFBFB>r<##FBFBFB>o<##FCFCFC>n <##FEFEFE>A<##FEFEFE>x<##FFFFFF>e &8[&fII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+2 &fDark Oak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t12Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t12Axe}
+    return {_t12Axe}
+function t13Axe() :: item:
+    set {_t13Axe} to unbreakable iron axe named "<##FAFAFA>I<##FBFBFB>r<##FBFBFB>o<##FCFCFC>n <##FEFEFE>A<##FEFEFE>x<##FFFFFF>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+3 &fDark Oak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t13Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t13Axe}
+    return {_t13Axe}
+function t14Axe() :: item:
+    set {_t14Axe} to unbreakable iron axe named "<##FAFAFA>I<##FBFBFB>r<##FBFBFB>o<##FCFCFC>n <##FEFEFE>A<##FEFEFE>x<##FFFFFF>e &8[&fIV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+4 &fDark Oak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t14Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t14Axe}
+    return {_t14Axe}
+function t15Axe() :: item:
+    set {_t15Axe} to unbreakable iron axe named "<##FAFAFA>I<##FBFBFB>r<##FBFBFB>o<##FCFCFC>n <##FEFEFE>A<##FEFEFE>x<##FFFFFF>e &8[&fV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t15Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t15Axe}
+    return {_t15Axe}
+function t16Axe() :: item:
+    set {_t16Axe} to unbreakable diamond axe named "<##2FA8CF>D<##45ADCE>i<##5AB2CD>a<##70B6CD>m<##85BBCC>o<##9BC0CB>n<##A4C5CF>d <##B7D0D8>A<##C1D6DC>x<##CADBE0>e &8[&fI&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "&7+1 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t16Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t16Axe}
+    return {_t16Axe}
+function t17Axe() :: item:
+    set {_t17Axe} to unbreakable diamond axe named "<##2FA8CF>D<##45ADCE>i<##5AB2CD>a<##70B6CD>m<##85BBCC>o<##9BC0CB>n<##A4C5CF>d <##B7D0D8>A<##C1D6DC>x<##CADBE0>e &8[&fII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "&7+2 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t17Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t17Axe}
+    return {_t17Axe}
+function t18Axe() :: item:
+    set {_t18Axe} to unbreakable diamond axe named "<##2FA8CF>D<##45ADCE>i<##5AB2CD>a<##70B6CD>m<##85BBCC>o<##9BC0CB>n<##A4C5CF>d <##B7D0D8>A<##C1D6DC>x<##CADBE0>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "&7+3 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t18Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t18Axe}
+    return {_t18Axe}
+function t19Axe() :: item:
+    set {_t19Axe} to unbreakable diamond axe named "<##2FA8CF>D<##45ADCE>i<##5AB2CD>a<##70B6CD>m<##85BBCC>o<##9BC0CB>n<##A4C5CF>d <##B7D0D8>A<##C1D6DC>x<##CADBE0>e &8[&fIV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "&7+4 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t19Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t19Axe}
+    return {_t19Axe}
+function t20Axe() :: item:
+    set {_t20Axe} to unbreakable diamond axe named "<##2FA8CF>D<##45ADCE>i<##5AB2CD>a<##70B6CD>m<##85BBCC>o<##9BC0CB>n<##A4C5CF>d <##B7D0D8>A<##C1D6DC>x<##CADBE0>e &8[&fV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+5 &fOak" and "&7+5 &fBirch" and "&7+5 &fDark Oak" and "&7+5 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t20Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t20Axe}
+    return {_t20Axe}
+function t21Axe() :: item:
+    set {_t21Axe} to unbreakable golden axe named "<##D6AE2A>G<##D7B23B>o<##D8B74B>l<##D8BB5C>d<##D9C06C>e<##DAC47D>n <##DBCD9E>A<##DCD2AE>x<##DDD6BF>e &8[&fI&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+6 &fOak" and "&7+6 &fBirch" and "&7+6 &fDark Oak" and "&7+6 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t21Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t21Axe}
+    return {_t21Axe}
+function t22Axe() :: item:
+    set {_t22Axe} to unbreakable golden axe named "<##D6AE2A>G<##D7B23B>o<##D8B74B>l<##D8BB5C>d<##D9C06C>e<##DAC47D>n <##DBCD9E>A<##DCD2AE>x<##DDD6BF>e &8[&fII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+7 &fOak" and "&7+7 &fBirch" and "&7+7 &fDark Oak" and "&7+7 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t22Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t22Axe}
+    return {_t22Axe}
+function t23Axe() :: item:
+    set {_t23Axe} to unbreakable golden axe named "<##D6AE2A>G<##D7B23B>o<##D8B74B>l<##D8BB5C>d<##D9C06C>e<##DAC47D>n <##DBCD9E>A<##DCD2AE>x<##DDD6BF>e &8[&fIII&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+8 &fOak" and "&7+8 &fBirch" and "&7+8 &fDark Oak" and "&7+8 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t23Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t23Axe}
+    return {_t23Axe}
+function t24Axe() :: item:
+    set {_t24Axe} to unbreakable golden axe named "<##D6AE2A>G<##D7B23B>o<##D8B74B>l<##D8BB5C>d<##D9C06C>e<##DAC47D>n <##DBCD9E>A<##DCD2AE>x<##DDD6BF>e &8[&fIV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+9 &fOak" and "&7+9 &fBirch" and "&7+9 &fDark Oak" and "&7+9 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t24Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t24Axe}
+    return {_t24Axe}
+function t25Axe() :: item:
+    set {_t25Axe} to unbreakable golden axe named "<##D6AE2A>G<##D7B23B>o<##D8B74B>l<##D8BB5C>d<##D9C06C>e<##DAC47D>n <##DBCD9E>A<##DCD2AE>x<##DDD6BF>e &8[&fV&8]" with lore "&8ꜰᴏʀᴀɢɪɴɢ ᴛᴏᴏʟ" and "" and "&8[&e🌳&8] &7Forages" and "&7+10 &fOak" and "&7+10 &fBirch" and "&7+10 &fDark Oak" and "&7+10 &fAcacia" and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_t25Axe} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_t25Axe}
+    return {_t25Axe}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function stonepickname(r: int) :: text:
+    if {_r} = 1:
+        set {_stonepickname} to "<##818181>S<##888888>t<##909090>o<##979797>n<##9E9E9E>e<##A6A6A6> <##ADADAD>P<##B4B4B4>i<##BCBCBC>c<##C3C3C3>k<##CACACA>a<##D2D2D2>x<##D9D9D9>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_stonepickname} to "<##818181>S<##888888>t<##909090>o<##979797>n<##9E9E9E>e<##A6A6A6> <##ADADAD>P<##B4B4B4>i<##BCBCBC>c<##C3C3C3>k<##CACACA>a<##D2D2D2>x<##D9D9D9>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_stonepickname} to "<##818181>S<##888888>t<##909090>o<##979797>n<##9E9E9E>e<##A6A6A6> <##ADADAD>P<##B4B4B4>i<##BCBCBC>c<##C3C3C3>k<##CACACA>a<##D2D2D2>x<##D9D9D9>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_stonepickname} to "<##818181>S<##888888>t<##909090>o<##979797>n<##9E9E9E>e<##A6A6A6> <##ADADAD>P<##B4B4B4>i<##BCBCBC>c<##C3C3C3>k<##CACACA>a<##D2D2D2>x<##D9D9D9>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_stonepickname} to "<##818181>S<##888888>t<##909090>o<##979797>n<##9E9E9E>e<##A6A6A6> <##ADADAD>P<##B4B4B4>i<##BCBCBC>c<##C3C3C3>k<##CACACA>a<##D2D2D2>x<##D9D9D9>e &8[&fV&8]"
+    return {_stonepickname}
+function coalpickname(r: int) :: text:
+    if {_r} = 1:
+        set {_coalpickname} to "<##565656>C<##5F5F5F>o<##676767>a<##707070>l<##797979> <##818181>P<##8A8A8A>i<##929292>c<##9B9B9B>k<##A4A4A4>a<##ACACAC>x<##B5B5B5>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_coalpickname} to "<##565656>C<##5F5F5F>o<##676767>a<##707070>l<##797979> <##818181>P<##8A8A8A>i<##929292>c<##9B9B9B>k<##A4A4A4>a<##ACACAC>x<##B5B5B5>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_coalpickname} to "<##565656>C<##5F5F5F>o<##676767>a<##707070>l<##797979> <##818181>P<##8A8A8A>i<##929292>c<##9B9B9B>k<##A4A4A4>a<##ACACAC>x<##B5B5B5>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_coalpickname} to "<##565656>C<##5F5F5F>o<##676767>a<##707070>l<##797979> <##818181>P<##8A8A8A>i<##929292>c<##9B9B9B>k<##A4A4A4>a<##ACACAC>x<##B5B5B5>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_coalpickname} to "<##565656>C<##5F5F5F>o<##676767>a<##707070>l<##797979> <##818181>P<##8A8A8A>i<##929292>c<##9B9B9B>k<##A4A4A4>a<##ACACAC>x<##B5B5B5>e &8[&fV&8]"
+    return {_coalpickname}
+function ironpickname(r: int) :: text:
+    if {_r} = 1:
+        set {_ironpickname} to "<##CBCBCB>I<##D0D0D0>r<##D4D4D4>o<##D9D9D9>n<##DEDEDE> <##E3E3E3>P<##E7E7E7>i<##ECECEC>c<##F1F1F1>k<##F6F6F6>a<##FAFAFA>x<##FFFFFF>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_ironpickname} to "<##CBCBCB>I<##D0D0D0>r<##D4D4D4>o<##D9D9D9>n<##DEDEDE> <##E3E3E3>P<##E7E7E7>i<##ECECEC>c<##F1F1F1>k<##F6F6F6>a<##FAFAFA>x<##FFFFFF>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_ironpickname} to "<##CBCBCB>I<##D0D0D0>r<##D4D4D4>o<##D9D9D9>n<##DEDEDE> <##E3E3E3>P<##E7E7E7>i<##ECECEC>c<##F1F1F1>k<##F6F6F6>a<##FAFAFA>x<##FFFFFF>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_ironpickname} to "<##CBCBCB>I<##D0D0D0>r<##D4D4D4>o<##D9D9D9>n<##DEDEDE> <##E3E3E3>P<##E7E7E7>i<##ECECEC>c<##F1F1F1>k<##F6F6F6>a<##FAFAFA>x<##FFFFFF>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_ironpickname} to "<##CBCBCB>I<##D0D0D0>r<##D4D4D4>o<##D9D9D9>n<##DEDEDE> <##E3E3E3>P<##E7E7E7>i<##ECECEC>c<##F1F1F1>k<##F6F6F6>a<##FAFAFA>x<##FFFFFF>e &8[&fV&8]"
+    return {_ironpickname}
+function diamondpickname(r: int) :: text:
+    if {_r} = 1:
+        set {_diamondpickname} to "<##32C8C8>D<##37CCCC>i<##3CD0D0>a<##41D4D4>m<##46D8D8>o<##4BDCDC>n<##50E0E0>d<##55E4E4> <##59E7E7>P<##5EEBEB>i<##63EFEF>c<##68F3F3>k<##6DF7F7>a<##72FBFB>x<##77FFFF>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_diamondpickname} to "<##32C8C8>D<##37CCCC>i<##3CD0D0>a<##41D4D4>m<##46D8D8>o<##4BDCDC>n<##50E0E0>d<##55E4E4> <##59E7E7>P<##5EEBEB>i<##63EFEF>c<##68F3F3>k<##6DF7F7>a<##72FBFB>x<##77FFFF>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_diamondpickname} to "<##32C8C8>D<##37CCCC>i<##3CD0D0>a<##41D4D4>m<##46D8D8>o<##4BDCDC>n<##50E0E0>d<##55E4E4> <##59E7E7>P<##5EEBEB>i<##63EFEF>c<##68F3F3>k<##6DF7F7>a<##72FBFB>x<##77FFFF>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_diamondpickname} to "<##32C8C8>D<##37CCCC>i<##3CD0D0>a<##41D4D4>m<##46D8D8>o<##4BDCDC>n<##50E0E0>d<##55E4E4> <##59E7E7>P<##5EEBEB>i<##63EFEF>c<##68F3F3>k<##6DF7F7>a<##72FBFB>x<##77FFFF>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_diamondpickname} to "<##32C8C8>D<##37CCCC>i<##3CD0D0>a<##41D4D4>m<##46D8D8>o<##4BDCDC>n<##50E0E0>d<##55E4E4> <##59E7E7>P<##5EEBEB>i<##63EFEF>c<##68F3F3>k<##6DF7F7>a<##72FBFB>x<##77FFFF>e &8[&fV&8]"
+    return {_diamondpickname}
+function emeraldpickname(r: int) :: text:
+    if {_r} = 1:
+        set {_emeraldpickname} to "<##44C44D>E<##47C850>m<##4BCC54>e<##4ED157>r<##51D55B>a<##55D95E>l<##58DD62>d<##5CE265> <##5FE668>P<##62EA6C>i<##66EE6F>c<##69F273>k<##6CF776>a<##70FB7A>x<##73FF7D>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_emeraldpickname} to "<##44C44D>E<##47C850>m<##4BCC54>e<##4ED157>r<##51D55B>a<##55D95E>l<##58DD62>d<##5CE265> <##5FE668>P<##62EA6C>i<##66EE6F>c<##69F273>k<##6CF776>a<##70FB7A>x<##73FF7D>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_emeraldpickname} to "<##44C44D>E<##47C850>m<##4BCC54>e<##4ED157>r<##51D55B>a<##55D95E>l<##58DD62>d<##5CE265> <##5FE668>P<##62EA6C>i<##66EE6F>c<##69F273>k<##6CF776>a<##70FB7A>x<##73FF7D>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_emeraldpickname} to "<##44C44D>E<##47C850>m<##4BCC54>e<##4ED157>r<##51D55B>a<##55D95E>l<##58DD62>d<##5CE265> <##5FE668>P<##62EA6C>i<##66EE6F>c<##69F273>k<##6CF776>a<##70FB7A>x<##73FF7D>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_emeraldpickname} to "<##44C44D>E<##47C850>m<##4BCC54>e<##4ED157>r<##51D55B>a<##55D95E>l<##58DD62>d<##5CE265> <##5FE668>P<##62EA6C>i<##66EE6F>c<##69F273>k<##6CF776>a<##70FB7A>x<##73FF7D>e &8[&fV&8]"
+    return {_emeraldpickname}
+function goldpickname(r: int) :: text:
+    if {_r} = 1:
+        set {_goldpickname} to "<##ECC132>G<##ECC43F>o<##EDC74B>l<##EDCB58>d<##EDCE65> <##EDD171>P<##EED47E>i<##EED78A>c<##EEDA97>k<##EEDEA4>a<##EFE1B0>x<##EFE4BD>e &8[&fI&8]"
+    if {_r} = 2:
+        set {_goldpickname} to "<##ECC132>G<##ECC43F>o<##EDC74B>l<##EDCB58>d<##EDCE65> <##EDD171>P<##EED47E>i<##EED78A>c<##EEDA97>k<##EEDEA4>a<##EFE1B0>x<##EFE4BD>e &8[&fII&8]"
+    if {_r} = 3:
+        set {_goldpickname} to "<##ECC132>G<##ECC43F>o<##EDC74B>l<##EDCB58>d<##EDCE65> <##EDD171>P<##EED47E>i<##EED78A>c<##EEDA97>k<##EEDEA4>a<##EFE1B0>x<##EFE4BD>e &8[&fIII&8]"
+    if {_r} = 4:
+        set {_goldpickname} to "<##ECC132>G<##ECC43F>o<##EDC74B>l<##EDCB58>d<##EDCE65> <##EDD171>P<##EED47E>i<##EED78A>c<##EEDA97>k<##EEDEA4>a<##EFE1B0>x<##EFE4BD>e &8[&fIV&8]"
+    if {_r} = 5:
+        set {_goldpickname} to "<##ECC132>G<##ECC43F>o<##EDC74B>l<##EDCB58>d<##EDCE65> <##EDD171>P<##EED47E>i<##EED78A>c<##EEDA97>k<##EEDEA4>a<##EFE1B0>x<##EFE4BD>e &8[&fV&8]"
+    return {_goldpickname}
+
+function stonePickaxeTier1() :: item:
+    set {_stonePickaxeTier1} to unbreakable stone pickaxe named stonepickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+1&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_stonePickaxeTier1} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_stonePickaxeTier1}
+    return {_stonePickaxeTier1}
+function stonePickaxeTier2() :: item:
+    set {_stonePickaxeTier2} to unbreakable stone pickaxe named stonepickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+2&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_stonePickaxeTier2} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_stonePickaxeTier2}
+    return {_stonePickaxeTier2}
+function stonePickaxeTier3() :: item:
+    set {_stonePickaxeTier3} to unbreakable stone pickaxe named stonepickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+3&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_stonePickaxeTier3} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_stonePickaxeTier3}
+    return {_stonePickaxeTier3}
+function stonePickaxeTier4() :: item:
+    set {_stonePickaxeTier4} to unbreakable stone pickaxe named stonepickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+4&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_stonePickaxeTier4} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_stonePickaxeTier4}
+    return {_stonePickaxeTier4}
+function stonePickaxeTier5() :: item:
+    set {_stonePickaxeTier5} to unbreakable stone pickaxe named stonepickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_stonePickaxeTier5} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_stonePickaxeTier5}
+    return {_stonePickaxeTier5}
+
+#function coalPickaxeTier1() :: item:
+#    set {_coalPickaxeTier1} to unbreakable stone pickaxe named coalpickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 1" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+#    enchant {_coalPickaxeTier1} with efficiency 81
+#    add hide enchants and hide attributes and hide unbreakable to item flags of {_coalPickaxeTier1}
+#    return {_coalPickaxeTier1}
+#function coalPickaxeTier2() :: item:
+#    set {_coalPickaxeTier2} to unbreakable stone pickaxe named coalpickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 2" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+#    enchant {_coalPickaxeTier2} with efficiency 81
+#    add hide enchants and hide attributes and hide unbreakable to item flags of {_coalPickaxeTier2}
+#    return {_coalPickaxeTier2}
+#function coalPickaxeTier3() :: item:
+#    set {_coalPickaxeTier3} to unbreakable stone pickaxe named coalpickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 2" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+#    enchant {_coalPickaxeTier3} with efficiency 81
+#    add hide enchants and hide attributes and hide unbreakable to item flags of {_coalPickaxeTier3}
+#    return {_coalPickaxeTier3}
+#function coalPickaxeTier4() :: item:
+#    set {_coalPickaxeTier4} to unbreakable stone pickaxe named coalpickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 2" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+#    enchant {_coalPickaxeTier4} with efficiency 81
+#    add hide enchants and hide attributes and hide unbreakable to item flags of {_coalPickaxeTier4}
+#    return {_coalPickaxeTier4}
+#function coalPickaxeTier5() :: item:
+#    set {_coalPickaxeTier5} to unbreakable stone pickaxe named coalpickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "&b⋆ &7Fortune 3" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+#    enchant {_coalPickaxeTier5} with efficiency 81
+#    add hide enchants and hide attributes and hide unbreakable to item flags of {_coalPickaxeTier5}
+#    return {_coalPickaxeTier5}
+
+function ironPickaxeTier1() :: item:
+    set {_ironPickaxeTier1} to unbreakable iron pickaxe named ironpickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+1&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_ironPickaxeTier1} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_ironPickaxeTier1}
+    return {_ironPickaxeTier1}
+function ironPickaxeTier2() :: item:
+    set {_ironPickaxeTier2} to unbreakable iron pickaxe named ironpickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+2&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_ironPickaxeTier2} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_ironPickaxeTier2}
+    return {_ironPickaxeTier2}
+function ironPickaxeTier3() :: item:
+    set {_ironPickaxeTier3} to unbreakable iron pickaxe named ironpickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+3&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_ironPickaxeTier3} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_ironPickaxeTier3}
+    return {_ironPickaxeTier3}
+function ironPickaxeTier4() :: item:
+    set {_ironPickaxeTier4} to unbreakable iron pickaxe named ironpickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+4&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_ironPickaxeTier4} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_ironPickaxeTier4}
+    return {_ironPickaxeTier4}
+function ironPickaxeTier5() :: item:
+    set {_ironPickaxeTier5} to unbreakable iron pickaxe named ironpickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_ironPickaxeTier5} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_ironPickaxeTier5}
+    return {_ironPickaxeTier5}
+
+function diamondPickaxeTier1() :: item:
+    set {_diamondPickaxeTier1} to unbreakable diamond pickaxe named diamondpickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+1&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_diamondPickaxeTier1} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_diamondPickaxeTier1}
+    return {_diamondPickaxeTier1}
+function diamondPickaxeTier2() :: item:
+    set {_diamondPickaxeTier2} to unbreakable diamond pickaxe named diamondpickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+2&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_diamondPickaxeTier2} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_diamondPickaxeTier2}
+    return {_diamondPickaxeTier2}
+function diamondPickaxeTier3() :: item:
+    set {_diamondPickaxeTier3} to unbreakable diamond pickaxe named diamondpickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+3&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_diamondPickaxeTier3} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_diamondPickaxeTier3}
+    return {_diamondPickaxeTier3}
+function diamondPickaxeTier4() :: item:
+    set {_diamondPickaxeTier4} to unbreakable diamond pickaxe named diamondpickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+4&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_diamondPickaxeTier4} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_diamondPickaxeTier4}
+    return {_diamondPickaxeTier4}
+function diamondPickaxeTier5() :: item:
+    set {_diamondPickaxeTier5} to unbreakable diamond pickaxe named diamondpickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_diamondPickaxeTier5} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_diamondPickaxeTier5}
+    return {_diamondPickaxeTier5}
+
+function emeraldPickaxeTier1() :: item:
+    set {_emeraldPickaxeTier1} to unbreakable netherite pickaxe named emeraldpickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and "&a⋆ &7Emerald &8[&f+1&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_emeraldPickaxeTier1} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_emeraldPickaxeTier1}
+    return {_emeraldPickaxeTier1}
+function emeraldPickaxeTier2() :: item:
+    set {_emeraldPickaxeTier2} to unbreakable netherite pickaxe named emeraldpickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and "&a⋆ &7Emerald &8[&f+2&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_emeraldPickaxeTier2} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_emeraldPickaxeTier2}
+    return {_emeraldPickaxeTier2}
+function emeraldPickaxeTier3() :: item:
+    set {_emeraldPickaxeTier3} to unbreakable netherite pickaxe named emeraldpickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and "&a⋆ &7Emerald &8[&f+3&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_emeraldPickaxeTier3} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_emeraldPickaxeTier3}
+    return {_emeraldPickaxeTier3}
+function emeraldPickaxeTier4() :: item:
+    set {_emeraldPickaxeTier4} to unbreakable netherite pickaxe named emeraldpickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and "&a⋆ &7Emerald &8[&f+4&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_emeraldPickaxeTier4} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_emeraldPickaxeTier4}
+    return {_emeraldPickaxeTier4}
+function emeraldPickaxeTier5() :: item:
+    set {_emeraldPickaxeTier5} to unbreakable netherite pickaxe named emeraldpickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+5&8]" and "&a⋆ &7Iron &8[&f+5&8]" and "&a⋆ &7Diamond &8[&f+5&8]" and "&a⋆ &7Emerald &8[&f+5&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_emeraldPickaxeTier5} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_emeraldPickaxeTier5}
+    return {_emeraldPickaxeTier5}
+function goldPickaxeTier1() :: item:
+    set {_goldPickaxeTier1} to unbreakable golden pickaxe named goldpickname(1) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+6&8]" and "&a⋆ &7Iron &8[&f+6&8]" and "&a⋆ &7Diamond &8[&f+6&8]" and "&a⋆ &7Emerald &8[&f+6&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_goldPickaxeTier1} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_goldPickaxeTier1}
+    return {_goldPickaxeTier1}
+function goldPickaxeTier2() :: item:
+    set {_goldPickaxeTier2} to unbreakable golden pickaxe named goldpickname(2) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+7&8]" and "&a⋆ &7Iron &8[&f+7&8]" and "&a⋆ &7Diamond &8[&f+7&8]" and "&a⋆ &7Emerald &8[&f+7&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_goldPickaxeTier2} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_goldPickaxeTier2}
+    return {_goldPickaxeTier2}
+function goldPickaxeTier3() :: item:
+    set {_goldPickaxeTier3} to unbreakable golden pickaxe named goldpickname(3) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+8&8]" and "&a⋆ &7Iron &8[&f+8&8]" and "&a⋆ &7Diamond &8[&f+8&8]" and "&a⋆ &7Emerald &8[&f+8&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_goldPickaxeTier3} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_goldPickaxeTier3}
+    return {_goldPickaxeTier3}
+function goldPickaxeTier4() :: item:
+    set {_goldPickaxeTier4} to unbreakable golden pickaxe named goldpickname(4) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+9&8]" and "&a⋆ &7Iron &8[&f+9&8]" and "&a⋆ &7Diamond &8[&f+9&8]" and "&a⋆ &7Emerald &8[&f+9&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_goldPickaxeTier4} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_goldPickaxeTier4}
+    return {_goldPickaxeTier4}
+function goldPickaxeTier5() :: item:
+    set {_goldPickaxeTier5} to unbreakable golden pickaxe named goldpickname(5) with lore "&8ᴍɪɴɪɴɢ ᴛᴏᴏʟ" and "" and yellowwhiteline() and "  &b🌟 &f&lENCHANTS &b🌟" and "&b⋆ &7Instabreak" and "" and "   &a⛏ &f&lMINES &a⛏" and "&a⋆ &7Stone &8[&f+10&8]" and "&a⋆ &7Iron &8[&f+10&8]" and "&a⋆ &7Diamond &8[&f+10&8]" and "&a⋆ &7Emerald &8[&f+10&8]" and yellowwhiteline() and "" and "&fRight click to upgrade." and "" and "&f&lCOMMON TOOL"
+    enchant {_goldPickaxeTier5} with efficiency 81
+    add hide enchants and hide attributes and hide unbreakable to item flags of {_goldPickaxeTier5}
+    return {_goldPickaxeTier5}

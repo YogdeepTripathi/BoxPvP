@@ -1,0 +1,105 @@
+on load:
+#    set {skript::lastLoader} to player
+#    set {skript::lastFile} to name of script
+#    set {skript::lastPath} to path of script
+    send "" to all players
+
+
+every 2 seconds:
+    loop all players:
+        set {_progress} to (({level::playerExp::%uuid of loop-player%} / {level::xptolevel::%uuid of loop-player%}) * 100)
+        set {_level} to levelDisplay(loop-player)
+        set {_playermultiplier} to {playerMultiplier::%uuid of loop-player%}
+        set {_kills} to {playerKills::%uuid of loop-player%}
+        set {_global} to {global blocks}
+        set {_tokens} to numberFormat({playerToken::%uuid of loop-player%})
+        set {_line} to xpLine(loop-player, 1)
+        set {_mined} to numberFormat({mined::%uuid of loop-player%})
+        set {_blockrank} to 1
+        set {_globalblocks} to 0
+        set {_prestige} to {playerPrestige::%uuid of loop-player%}
+        set {_group} to group of loop-player
+        if {_group} is "ultimate":
+            set {_rankmulti} to "&c* 1.25"
+        else if {_group} is "champion":
+            set {_rankmulti} to "&c* 1.5"
+        else if {_group} is "royal":
+            set {_rankmulti} to "&c* 1.75"
+        else if {_group} is "guardian":
+            set {_rankmulti} to "&c* 2"
+        else if {_group} is "angel":
+            set {_rankmulti} to "&c* 3"
+#        loop all players:
+
+
+#            loop {player's uuids::*}:
+#                set {_uuid} to loop-value-3
+#                set {_blockCounter} to {player's block counter::%{_uuid}%}
+#                if {_blockCounter} is a number:
+#                    add {_blockCounter} to {_globalblocks}
+#                    if {_globalblocks} >= 1000000000:
+#                        set {_block} to ({_globalblocks} / 1000000000)
+#                        set {_formatted_block} to "%{_block}%B"
+#                    else if {_globalblocks} >= 1000000:
+#                        set {_block} to ({_globalblocks} / 1000000)
+#                        set {_formatted_block} to "%{_block}%M"
+#                    else if {_globalblocks} >= 1000:
+#                        set {_block} to ({_globalblocks} / 1000)
+#                        set {_formatted_block} to "%{_block}%K"
+#                    else:
+#                        set {_formatted_block} to {_globalblocks}
+#                    set {formatted_block} to {_formatted_block}
+
+#            if {_playerblock} < {player's block counter::%uuid of loop-player-2%}:
+#                add 1 to {_blockrank}
+
+        wipe loop-player's sidebar
+        set name of sidebar of loop-player to "&7(&a%number of players%&7/&a100&7)"
+        set score "‌‌ " in sidebar of loop-player to 12
+        set score "&e«&e&m                          &e»" in sidebar of loop-player to 11
+        set score "&e◆ &7ʟᴇᴠᴇʟ  %{_level}%" in sidebar of loop-player to 10
+        set score "%{_line}%" in sidebar of loop-player to 9
+        if {_rankmulti} is set:
+            set score "&e◆ &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d%{_playermultiplier}%x %{_rankmulti}%" in sidebar of loop-player to 8
+        else if {_rankmulti} is not set:
+            set score "&e◆ &7ᴍᴜʟᴛɪᴘʟɪᴇʀ &d%{_playermultiplier}%x" in sidebar of loop-player to 8
+        set score "&e◆ &7ᴛᴏᴋᴇɴꜱ &e⛃%{_tokens}%" in sidebar of loop-player to 7
+        set score "&e◆ &7ᴋɪʟʟꜱ &4🗡%{_kills}%" in sidebar of loop-player to 6
+        set score "&e◆ &7ʙʟᴏᴄᴋꜱ &6🧱%{_mined}%" in sidebar of loop-player to 5
+        set score "&e◆ &7ᴘʀᴇꜱᴛɪɢᴇ &9🌀%{_prestige}%" in sidebar of loop-player to 4
+        set score "&e◆ &7ʙᴏᴏꜱᴛᴇʀ &b⚡%{boosterplayers}%/50" in sidebar of loop-player to 3
+        set score "&e«&e&m                          &r&e»" in sidebar of loop-player to 2
+#        set score " &f・ &7ʀᴀɴᴋ &c%{_blockrank}%" in sidebar of loop-player to 2
+        set score "‌  " in sidebar of loop-player to 1
+#        set score "&7ᴍᴜʟᴛɪꜰᴀʀᴍᴇʀ.ᴍɪɴᴇʜᴜᴛ.ɢɢ" in sidebar of loop-player to 0
+
+function sbprefix(p: player):
+    set {_group} to group of {_p}
+    if {_group} is "default":
+        set {sbprefix::%uuid of {_p}%} to "&8[MEMBER]"
+    else if {_group} is "helper":
+        set {sbprefix::%uuid of {_p}%} to "&x&5&6&&C&4&D[HELPER]"
+    else if {_group} is "moderator":
+        set {sbprefix::%uuid of {_p}%} to "&x&4&0&2&D&B&A[MOD]"
+    else if {_group} is "manager":
+        set {sbprefix::%uuid of {_p}%} to "&x&D&D&F&F&6&0[MANAGER]"
+    else if {_group} is "owner":
+        set {sbprefix::%uuid of {_p}%} to "[OWNER]"
+
+on join:
+    if {playerMultiplier::%uuid of player%} is not set:
+        set {playerMultiplier::%uuid of player%} to 1
+    if {playerToken::%uuid of player%} is not set:
+        set {playerToken::%uuid of player%} to 0
+    if {playerKills::%uuid of player%} is not set:
+        set {playerKills::%uuid of player%} to 0
+    if {playerPrestige::%uuid of player%} is not set:
+        set {playerPrestige::%uuid of player%} to 0
+    if {boosterplayers} is not set:
+        set {boosterplayers} to 0
+    
+    if player has not played before:
+        add 1 to {boosterplayers}
+    if {boosterplayers} = 50:
+        set {boosterplayers} to 0
+        

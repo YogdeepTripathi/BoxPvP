@@ -1,0 +1,19 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+    
+
+placeholderapi placeholder with prefix "ASkript":
+    loop {-economy::*}:
+        if the identifier is "scoreboard.%loop-value%":
+            set the result to getScoreboard(player, loop-value)
+            stop
+
+local function getScoreboard(player:player, economy:string) :: string:
+    if {_economy} = ("money" or "credits"):
+        return "%{-economy::%{_economy}%::symbol}%%regex({data::%{_economy}%::%{_player}'s uuid%}*1)%&f %small({_economy})%"
+    else:
+        return "&f%small({_economy})% %{-economy::%{_economy}%::symbol}%%regex({data::%{_economy}%::%{_player}'s uuid%}*1)%"

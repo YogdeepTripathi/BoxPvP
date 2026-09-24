@@ -1,0 +1,32 @@
+on join:
+    if {playtime::%uuid of player%} is not set:
+        set {playtime::%uuid of player%} to 0 seconds
+    if {join::%uuid of player%} is not set:
+        set {join::%uuid of player%} to now
+    set {jointime::%uuid of player%} to now
+on quit:
+    set {playtime::%uuid of player%} to {playtime::%uuid of player%} + (difference between now and {jointime::%uuid of player%})
+    delete {jointime::%uuid of player%}
+command /playtime [<player>]:
+    trigger:
+        if arg-1 is set:
+            if player has permission "playtime.view":
+                set {_playtime} to {playtime::%uuid of arg-1%} + (difference between now and {jointime::%uuid of arg-1%})
+                set {_sessionTime} to difference between now and {jointime::%uuid of arg-1%}
+                send "" to player
+                send "&b&lPLAYTIME&r &7(%arg-1%)" to player
+                send "&3&l» &7First join: &3%{join::%uuid of arg-1%}%" to player
+                send "&3&l» &7Session: &3%{_sessionTime}%" to player
+                send "&3&l» &7Total: &b%{_playtime}%" to player
+                send "" to player
+            else if player does not have permission "playtime.view":
+                send "&c&lCONSOLE ▸&r &fYou need a higher rank to see others playtime's." to player
+        else if arg-1 is not set:
+            set {_playtime} to {playtime::%uuid of player%} + (difference between now and {jointime::%uuid of player%})
+            set {_sessionTime} to difference between now and {jointime::%uuid of player%}
+            send "" to player
+            send "&b&lPLAYTIME&r &7(%player%)" to player
+            send "&3&l» &7First join: &3%{join::%uuid of player%}%" to player
+            send "&3&l» &7Session: &3%{_sessionTime}%" to player
+            send "&3&l» &7Total: &b%{_playtime}%" to player
+            send "" to player

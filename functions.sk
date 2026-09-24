@@ -1,0 +1,12 @@
+function numberFormat(i: number) :: text:
+    if {_i} >= 1000000:
+        set {_mined} to "%({_i} / 1000000)%M"
+    else if {_i} >= 1000:
+        set {_mined} to "%({_i} / 1000)%K"
+    if {_i} < 1000:
+        set {_mined} to "%({_i})%"
+    return {_mined}
+    
+command /oo:
+    trigger:
+        send numberFormat({mined::%uuid of player%}) to player

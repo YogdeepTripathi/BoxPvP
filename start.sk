@@ -1,0 +1,17 @@
+on join:
+    if player has not played before:
+        add 1 to {new players}
+        send "&7Welcome&r&x&C&3&C&F&7&7 %player%&r &7to <##C3CF77>&lM<##B9C97E>&lu<##AFC386>&ll<##A6BD8D>&lt<##9CB795>&li<##92B19C>&lF<##88AAA3>&la<##7EA4AB>&lr<##759EB2>&lm<##6B98BA>&le<##6192C1>&lr&r &8(&7%{new players}%&8)" to all players
+        send "&8[&a&l✔&r&8]&r&x&C&3&C&F&7&7 %player's displayname%" to all players
+    else:
+        send "&8[&a&l✔&r&8]&r&x&C&3&C&F&7&7 %player's displayname%" to all players
+
+on quit:
+    send "&8[&c&l❌&r&8]&r&x&C&3&C&F&7&7 %player's displayname%" to all players
+
+on explode:
+    if entity is an ender crystal:
+        cancel event
+on damage of ender crystal:
+    if attacker is not op:    
+        cancel event

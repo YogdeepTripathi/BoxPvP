@@ -1,0 +1,31 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /statistics [<p:player=%player%>]:
+    aliases: /statistic, /stats, /stat
+    trigger:
+        playerStatsGUI(player,{_p})
+
+function playerStatsGUI(o:player,s:player):
+    set {_} to ({_s}'s uuid)
+    set {_head} to (({_s}'s skull) named "{@c2}%{_s}%")
+    add ("&8ᴘʟᴀʏᴇʀ","","{@l} ɪɴғᴏʀᴍᴀᴛɪᴏɴ") to (lore of {_head})
+    add "{@l} &fɴᴀᴍᴇ: {@c2}%{_s}%" to (lore of {_head})
+    add "{@l} &fʀᴀɴᴋ: %(formatted hex({_s}'s prefix))%" to (lore of {_head}) # MUST HAVE VAULT INSTALLED AND LUCKPERMS PREFIX SETUP
+    add "{@l} &fᴘʟᴀʏᴛɪᴍᴇ: <#F65DCD>⌚<#F68AD9>%getShortTime({data::playtime::%{_}%}*1)%" to (lore of {_head})
+    add ("","{@l} ꜱᴛᴀᴛɪꜱᴛɪᴄꜱ") to (lore of {_head})
+    loop {-economy::*}:
+        set {_eco} to (loop-value)
+        add ("{@l} &f%small(loop-value)% %{-economy::%loop-value%::symbol}%%regex({data::%loop-value%::%{_}%}*1)%") to (lore of {_head})
+    add ("","&8→ &fᴜɴᴄʟɪᴄᴋᴀʙʟᴇ") to (lore of {_head})
+
+    create gui with dispenser inventory named "&0Statistics &7(&8%small(lowercase (name of {_s}))%&7)":
+
+        make gui slot (0,1,2,3,5,6,7,8) with glass("purple")
+        make gui slot (4) with {_head}
+
+    open last gui for {_o}

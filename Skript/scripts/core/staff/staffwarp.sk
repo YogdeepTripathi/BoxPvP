@@ -1,0 +1,51 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /staffwarp <text> [<text>]:
+    usage: /staffwarp <create/delete/name> [<name>]
+    permission: staff.warp
+    trigger:
+        if arg-1 is "create":
+            player is op
+            arg-2 is not set:
+                send "{@pa}&f Input a name!"
+                stop
+            if:
+                arg-2 contains ("create" or "delete")
+                {staffwarp::name::*} contains arg-2
+            then:
+                send "{@pa}&f Cannot use this name!"
+                stop
+
+            set {staffwarp::%arg-2%} to arg-2
+            set {staffwarp::%arg-2%::location} to location of player
+            send "%getPrefix("staffwarp",true)%&f Created &e%arg-1%&f warp!"
+
+        else if arg-1 is "delete":
+            player is op
+            arg-2 is not set:
+                send "{@pa}&f Input a name!"
+                stop
+            {staffwarp::*} does not contain arg-2:
+                send "{@pa}&f This warp does not exist!"
+                stop
+            delete {staffwarp::%arg-2%::*}
+            remove arg-2 from {staffwarp::*}
+            send "%getPrefix("staffwarp",true)%&f Deleted &e%arg-1%&f warp!"
+        
+        else:
+            {staffwarp::*} does not contain arg-1:
+                send "{@pa}&f This warp does not exist!"
+                stop
+            teleport player to {staffwarp::%arg-1%::location}
+            send "%getPrefix("staffwarp",true)%&f Teleported to &e%arg-1%&f!"
+
+on tab complete of "/staffwarp":
+    if player is op:
+        set tab completions for position 1 to ({staffwarp::*}, "create", "delete")
+    if tab arg-1 is "delete":
+        set tab completions for position 2 to ({staffwarp::*})

@@ -1,0 +1,580 @@
+on join:
+    if {personalBlockBroken::%uuid of player%} is not set:
+        set {personalBlockBroken::%uuid of player%} to 0
+
+on break:
+    cancel drops
+
+    set {_fortune} to level of fortune of player's tool
+    if {_fortune} is not set:
+        set {_amount} to 1
+    else:
+        set {_amount} to random integer between floor(({_fortune} + 1) / 2) and ({_fortune} + 1) 
+    set {_noamount} to 1
+
+    # oak
+    if event-block is oak log:
+        compgive(player, oak log, {_noamount})
+    if event-block is dark oak log:
+        compgive(player, oak log, ({_noamount} * 4))
+    # stone
+    if event-block is stone:
+        compgive(player, stone, {_noamount})
+    if event-block is smooth stone:
+        compgive(player, stone, ({_noamount} * 4))
+    # coal
+    if event-block is coal ore:
+        compgive(player, coal, {_amount})
+    if event-block is coal block:
+        compgive(player, coal, ({_noamount} * 4))
+    # iron
+    if event-block is iron ore:
+        compgive(player, iron ingot, {_amount})
+    if event-block is iron block:
+        compgive(player, iron ingot, ({_noamount} * 4))
+    # gold
+    if event-block is gold ore:
+        compgive(player, gold ingot, {_amount})
+    if event-block is gold block:
+        compgive(player, gold ingot, ({_noamount} * 4))
+    # diamond
+    if event-block is diamond ore:
+        compgive(player, diamond, {_amount})
+    if event-block is diamond block:
+        compgive(player, diamond, ({_noamount} * 4))
+    # emerald
+    if event-block is emerald ore:
+        compgive(player, emerald, {_amount})
+    if event-block is emerald block:
+        compgive(player, emerald, ({_noamount} * 4))
+    # glass
+    if event-block is glass:
+        compgive(player, glass, {_noamount})
+    if event-block is black stained glass:
+        compgive(player, glass, ({_noamount} * 4))
+
+    # netherrack
+    if event-block is netherrack:
+        give {_noamount} of netherrack to player
+    if event-block is red concrete:
+        give ({_noamount} * 4) of netherrack to player
+    # nether bricks
+    if event-block is nether bricks:
+        give {_noamount} of nether bricks to player
+    if event-block is red nether bricks:
+        give ({_noamount} * 4) of nether bricks to player
+    # nether gold
+    if event-block is nether gold ore:
+        give {_amount} of gold nugget to player
+    # quartz
+    if event-block is nether quartz ore:
+        give {_noamount} of quartz to player
+    if event-block is quartz block:
+        give ({_noamount} * 4) of quartz to player
+    # obsidian
+    if event-block is obsidian:
+        give {_noamount} of obsidian to player
+    # netherite
+    if event-block is ancient debris:
+        give {_noamount} of netherite ingot to player
+
+
+    add 1 to {personalBlockBroken::%uuid of player%}
+
+    if compcheck(player, oak log) = true:
+        thickcomp(player, dark oak log, oak log)
+        autocomp(player, oak log, compOak(), 16)
+    if compcheck(player, stone) = true:
+        thickcomp(player, smooth stone named "&fSmooth Stone", cobblestone)
+        autocomp(player, cobblestone, compStone(), 16)
+    if compcheck(player, coal) = true:
+        thickcomp(player, coal block named "&fBlock of Coal", coal)
+        autocomp(player, coal, compCoal(), 32)
+    if compcheck(player, iron ingot) = true:
+        thickcomp(player, iron block named "&fBlock of Iron", iron ingot)
+        autocomp(player, iron ingot, compIron(), 32)
+    if compcheck(player, gold ingot) = true:
+        thickcomp(player, gold block named "&fBlock of Gold", gold ingot)
+        autocomp(player, gold ingot, compGold(), 48)
+    if compcheck(player, diamond) = true:
+        thickcomp(player, diamond block named "&fBlock of Diamond", diamond)
+        autocomp(player, diamond, compDiamond(), 64)
+    if compcheck(player, emerald) = true:
+        thickcomp(player, emerald block named "&fBlock of Emerald", emerald)
+        autocomp(player, emerald, compEmerald(), 64)
+    if compcheck(player, glass) = true:
+        thickcomp(player, black stained glass, glass)
+        autocomp(player, glass, compGlass(), 64)
+
+    if compcheck(player, netherrack) = true:
+        autocomp(player, netherrack, compNetherrack(), 64)
+    if compcheck(player, nether brick) = true:
+        autocomp(player, nether brick, compNetherBrick(), 64)
+    if compcheck(player, gold nugget) = true:
+        autocomp(player, gold nugget, compNetherGold(), 64)
+    if compcheck(player, quartz) = true:
+        autocomp(player, quartz, compQuartz(), 64)
+    if compcheck(player, obsidian) = true:
+        autocomp(player, obsidian, compObsidian(), 64)
+    if compcheck(player, netherite ingot) = true:
+        autocomp(player, netherite ingot, compNetherite(), 64)
+
+    if compcheck(player, end stone) = true:
+        autocomp(player, end stone, compEndStone(), 64)
+    if compcheck(player, end stone bricks) = true:
+        autocomp(player, end stone bricks, compEndBricks(), 64)
+    if compcheck(player, purpur block) = true:
+        autocomp(player, purpur block, compPurpur(), 64)
+    if compcheck(player, purpur pillar) = true:
+        autocomp(player, purpur pillar, compPurpurPillar(), 64)
+    if compcheck(player, purple stained glass) = true:
+        autocomp(player, purple stained glass, compPurpleGlass(), 64)
+    if compcheck(player, crying obsidian) = true:
+        autocomp(player, crying obsidian, compCryingObsidian(), 64)
+
+    if compcheck(player, spruce log) = true:
+        autocomp(player, spruce log, compSpruce(), 80)
+    if compcheck(player, birch log) = true:
+        autocomp(player, birch log, compBirch(), 80)
+    if compcheck(player, jungle log) = true:
+        autocomp(player, jungle log, compJungle(), 80)
+    if compcheck(player, acacia log) = true:
+        autocomp(player, acacia log, compAcacia(), 80)
+    if compcheck(player, mangrove log) = true:
+        autocomp(player, mangrove log, compMangrove(), 80)
+    if compcheck(player, warped stem) = true:
+        autocomp(player, warped stem, compWarped(), 80)
+    if compcheck(player, bamboo block) = true:
+        autocomp(player, bamboo block, compBamboo(), 80)
+    if compcheck(player, crimson stem) = true:
+        autocomp(player, crimson stem, compCrimson(), 80)
+    if compcheck(player, cherry log) = true:
+        autocomp(player, cherry log, compCherry(), 96)
+    
+
+
+
+    # sec
+
+function autocomp(p: player, b: item, cb: item, a: int):
+    if amount of {_b} in {_p}'s inventory >= {_a}:
+        set {_amount} to amount of {_b} in {_p}'s inventory
+        set {_amount2} to floor({_amount} / {_a})
+        remove ({_amount2} * {_a}) of {_b} from {_p}'s inventory
+        give {_p} {_amount2} of {_cb}
+
+function thickcomp(p: player, b: item, cb: item):
+    if amount of {_b} in {_p}'s inventory >= 1:
+        set {_amount} to amount of {_b} in {_p}'s inventory
+        set {_amount2} to ({_amount} * 4)
+        remove {_amount} of {_b} from {_p}'s inventory
+        give {_p} {_amount2} of {_cb}
+
+function compgive(p: player, b: item, a: int):
+
+    if {_b} = oak log:
+        set {_i} to oak log
+    if {_b} = stone:
+        set {_i} to stone
+    if {_b} = coal:
+        set {_i} to coal
+    if {_b} = iron ingot:
+        set {_i} to iron ingot
+    if {_b} = gold ingot:
+        set {_i} to gold ingot
+    if {_b} = diamond:
+        set {_i} to diamond
+    if {_b} = emerald:
+        set {_i} to emerald
+    if {_b} = glass:
+        set {_i} to glass
+
+    if {_b} = netherrack:
+        set {_i} to netherrack
+    if {_b} = nether bricks:
+        set {_i} to nether bricks
+    if {_b} = coal:
+        set {_i} to coal
+    if {_b} = iron ingot:
+        set {_i} to iron ingot
+    if {_b} = gold ingot:
+        set {_i} to gold ingot
+    if {_b} = diamond:
+        set {_i} to diamond
+
+    if {_p} has space for {_a} of {_i}:
+        give {_a} of {_i} to {_p}
+    else:
+        send title "&c&lFULL INVENTORY" with subtitle "&fCompress your items!" to {_p} for 3 seconds
+
+function compcheck(p: player, b: item) :: boolean:
+
+    if {_b} = oak log:
+        if {_p} has overworldAutoCompressor1() or overworldAutoCompressor2() or overworldAutoCompressor3() or overworldAutoCompressor4() or overworldAutoCompressor5() or overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = stone:
+        if {_p} has overworldAutoCompressor2() or overworldAutoCompressor3() or overworldAutoCompressor4() or overworldAutoCompressor5() or overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = coal:
+        if {_p} has overworldAutoCompressor3() or overworldAutoCompressor4() or overworldAutoCompressor5() or overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = iron ingot:
+        if {_p} has overworldAutoCompressor4() or overworldAutoCompressor5() or overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = gold ingot:
+        if {_p} has overworldAutoCompressor5() or overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = diamond:
+        if {_p} has overworldAutoCompressor6() or overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = emerald:
+        if {_p} has overworldAutoCompressor7() or overworldAutoCompressor8():
+            return true
+    if {_b} = glass:
+        if {_p} has overworldAutoCompressor8():
+            return true
+
+    if {_b} = netherrack:
+        if {_p} has netherAutoCompressor1() or netherAutoCompressor2() or netherAutoCompressor3() or netherAutoCompressor4() or netherAutoCompressor5() or netherAutoCompressor6():
+            return true
+    if {_b} = nether brick:
+        if {_p} has netherAutoCompressor2() or netherAutoCompressor3() or netherAutoCompressor4() or netherAutoCompressor5() or netherAutoCompressor6():
+            return true
+    if {_b} = gold nugget:
+        if {_p} has netherAutoCompressor3() or netherAutoCompressor4() or netherAutoCompressor5() or netherAutoCompressor6():
+            return true
+    if {_b} = quartz:
+        if {_p} has netherAutoCompressor4() or netherAutoCompressor5() or netherAutoCompressor6():
+            return true
+    if {_b} = obsidian:
+        if {_p} has netherAutoCompressor5() or netherAutoCompressor6():
+            return true
+    if {_b} = netherite ingot:
+        if {_p} has netherAutoCompressor6():
+            return true
+
+    if {_b} = end stone:
+        if {_p} has endAutoCompressor1() or endAutoCompressor2() or endAutoCompressor3() or endAutoCompressor4() or endAutoCompressor5() or endAutoCompressor6():
+            return true
+    if {_b} = end stone bricks:
+        if {_p} has endAutoCompressor2() or endAutoCompressor3() or endAutoCompressor4() or endAutoCompressor5() or endAutoCompressor6():
+            return true
+    if {_b} = purpur block:
+        if {_p} has endAutoCompressor3() or endAutoCompressor4() or endAutoCompressor5() or endAutoCompressor6():
+            return true
+    if {_b} = purpur pillar:
+        if {_p} has endAutoCompressor4() or endAutoCompressor5() or endAutoCompressor6():
+            return true
+    if {_b} = purple stained glass:
+        if {_p} has endAutoCompressor5() or endAutoCompressor6():
+            return true
+    if {_b} = crying obsidian:
+        if {_p} has endAutoCompressor6():
+            return true
+    
+
+    # sec
+
+function compOak() :: item:
+    set {_comp} to shiny oak wood named "<##DEA65C>Compressed Oak"
+    return {_comp}
+function compStone() :: item:
+    set {_comp} to shiny smooth stone named "&7Compressed Stone"
+    return {_comp}
+function compCoal() :: item:
+    set {_comp} to shiny coal block named "<##454545>Compressed Coal"
+    return {_comp}
+function compIron() :: item:
+    set {_comp} to shiny iron block named "&fCompressed Iron"
+    return {_comp}
+function compGold() :: item:
+    set {_comp} to shiny gold block named "<##D99D2F>Compressed Gold"
+    return {_comp}
+function compDiamond() :: item:
+    set {_comp} to shiny diamond block named "<##50E3C6>Compressed Diamond"
+    return {_comp}
+function compEmerald() :: item:
+    set {_comp} to shiny emerald block named "<##49E739>Compressed Emerald"
+    return {_comp}
+function compGlass() :: item:
+    set {_comp} to shiny black stained glass named "<##344056>Compressed Glass"
+    return {_comp}
+
+function compNetherrack() :: item:
+    set {_comp} to shiny red concrete named "<##773538>Compressed Netherrack"
+    return {_comp}
+function compNetherBrick() :: item:
+    set {_comp} to shiny nether bricks named "<##391618>Compressed Nether Brick"
+    return {_comp}
+function compNetherGold() :: item:
+    set {_comp} to shiny nether gold ore named "<##FFB33D>Compressed Nether Gold"
+    return {_comp}
+function compQuartz() :: item:
+    set {_comp} to shiny quartz block named "<##E3E3E3>Compressed Quartz"
+    return {_comp}
+function compObsidian() :: item:
+    set {_comp} to shiny black concrete named "<##25184E>Compressed Obsidian"
+    return {_comp}
+function compNetherite() :: item:
+    set {_comp} to shiny netherite block named "<##5A3A32>Compressed Netherite"
+    return {_comp}
+
+function uncompEndStone() :: item:
+    set {_uncomp} to yellow dye named "&fEnd stone"
+    return {_uncomp}
+function compEndStone() :: item:
+    set {_comp} to shiny end stone named "<##E2E39E>Compressed End Stone"
+    return {_comp}
+function compEndBricks() :: item:
+    set {_comp} to shiny end stone bricks named "<##E2E39E>Compressed End Bricks"
+    return {_comp}
+function compPurpur() :: item:
+    set {_comp} to shiny purpur block named "<##DF98F3>Compressed Purpur"
+    return {_comp}
+function compPurpurPillar() :: item:
+    set {_comp} to shiny purpur pillar named "<##DF98F3>Compressed Purpur Pillar"
+    return {_comp}
+function compPurpleGlass() :: item:
+    set {_comp} to shiny purple stained glass named "<##934BDB>Compressed Purple Glass"
+    return {_comp}
+function compCryingObsidian() :: item:
+    set {_comp} to shiny crying obsidian named "<##6016AB>Compressed Crying Obi"
+    return {_comp}
+
+function compSpruce() :: item:
+    set {_comp} to shiny spruce wood named "<#&#41352D>Compressed Spruce"
+    return {_comp}
+function compBirch() :: item:
+    set {_comp} to shiny birch wood named "<##D2D2D2>Compressed Birch"
+    return {_comp}
+function compJungle() :: item:
+    set {_comp} to shiny jungle wood named "<##927951>Compressed Jungle"
+    return {_comp}
+function compAcacia() :: item:
+    set {_comp} to shiny acacia wood named "<##F67435>Compressed Acacia"
+    return {_comp}
+function compMangrove() :: item:
+    set {_comp} to shiny mangrove wood named "<##DB4154>Compressed Mangrove"
+    return {_comp}
+function compWarped() :: item:
+    set {_comp} to shiny warped hyphae named "<##19B8BA>Compressed Warped"
+    return {_comp}
+function compBamboo() :: item:
+    set {_comp} to shiny bamboo block named "<##7C9F43>Compressed Bamboo"
+    return {_comp}
+function compCrimson() :: item:
+    set {_comp} to shiny crimson hyphae named "<##CA1F1F>Compressed Crimson"
+    return {_comp}
+function compCherry() :: item:
+    set {_comp} to shiny cherry wood named "<##EAA1AA>Compressed Cherry"
+    return {_comp}
+
+function compSandstone() :: item:
+    set {_comp} to shiny sandstone named "<##F5F3B2>Compressed Sandstone"
+    return {_comp}
+function compPrismarine() :: item:
+    set {_comp} to shiny prismarine named "<##39C6AA>Compressed Prismarine"
+    return {_comp}
+function compPrismarineBricks() :: item:
+    set {_comp} to shiny prismarine bricks named "<##39C6AA>Compressed Prismarine Bricks"
+    return {_comp}
+function compDarkPrismarine() :: item:
+    set {_comp} to shiny dark prismarine named "<##1E5F3F>Compressed Dark Prismarine"
+    return {_comp}
+function compBrainCoral() :: item:
+    set {_comp} to shiny brain coral block named "<##E27BDF>Compressed Brain Coral"
+    return {_comp}
+function compFireCoral() :: item:
+    set {_comp} to shiny fire coral block named "<##C8263A>Compressed Fire Coral"
+    return {_comp}
+function compBubbleCoral() :: item:
+    set {_comp} to shiny bubble coral block named "<##CE16D0>Compressed Bubble Coral"
+    return {_comp}
+function compTubeCoral() :: item:
+    set {_comp} to shiny tube coral block named "<##3553FF>Compressed Tube Coral"
+    return {_comp}
+
+function overworldAutoCompressor1() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f1&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak"
+    return {_oac}
+function overworldAutoCompressor2() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f2&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone"
+    return {_oac}
+function overworldAutoCompressor3() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f3&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal"
+    return {_oac}
+function overworldAutoCompressor4() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f4&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal" and "&8 • &fIron"
+    return {_oac}
+function overworldAutoCompressor5() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f5&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal" and "&8 • &fIron" and "&8 • <##D99D2F>Gold"
+    return {_oac}
+function overworldAutoCompressor6() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f6&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal" and "&8 • &fIron" and "&8 • <##D99D2F>Gold" and "&8 • <##50E3C6>Diamond"
+    return {_oac}
+function overworldAutoCompressor7() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f7&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal" and "&8 • &fIron" and "&8 • <##D99D2F>Gold" and "&8 • <##50E3C6>Diamond" and "&8 • <##49E739>Emerald"
+    return {_oac}
+function overworldAutoCompressor8() :: item:
+    set {_oac} to minecart with chest named "&aOverworld Auto Compressor &8[&f8&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##DEA65C>Oak" and "&8 • &7Stone" and "&8 • <##454545>Coal" and "&8 • &fIron" and "&8 • <##D99D2F>Gold" and "&8 • <##50E3C6>Diamond" and "&8 • <##49E739>Emerald" and "&8 • <##344056>Glass"
+    return {_oac}
+
+function netherAutoCompressor1() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f1&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+function netherAutoCompressor2() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f2&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack" and "&8 • <##391618>Nether Brick"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+function netherAutoCompressor3() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f3&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack" and "&8 • <##391618>Nether Brick" and "&8 • <##FFB33D>Nether Gold"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+function netherAutoCompressor4() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f4&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack" and "&8 • <##391618>Nether Brick" and "&8 • <##FFB33D>Nether Gold" and "&8 • <##E3E3E3>Quartz"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+function netherAutoCompressor5() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f5&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack" and "&8 • <##391618>Nether Brick" and "&8 • <##FFB33D>Nether Gold" and "&8 • <##E3E3E3>Quartz" and "&8 • <#25184E>Obsidian"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+function netherAutoCompressor6() :: item:
+    set {_nac} to netherite upgrade smithing template named "&cNether Auto Compressor &8[&f6&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##773538>Netherrack" and "&8 • <##391618>Nether Brick" and "&8 • <##FFB33D>Nether Gold" and "&8 • <##E3E3E3>Quartz" and "&8 • <#25184E>Obsidian" and "&8 • <##5A3A32>Netherite"
+    add hide potion effects to item flags of {_nac}
+    return {_nac}
+
+function endAutoCompressor1() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f1&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone"
+    return {_eac}
+function endAutoCompressor2() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f2&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone" and "&8 • <##E2E39E>End Bricks"
+    return {_eac}
+function endAutoCompressor3() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f3&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone" and "&8 • <##E2E39E>End Bricks" and "&8 • <##DF98F3>Purpur"
+    return {_eac}
+function endAutoCompressor4() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f4&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone" and "&8 • <##E2E39E>End Bricks" and "&8 • <##DF98F3>Purpur" and "&8 • <##DF98F3>Purpur Pillar"
+    return {_eac}
+function endAutoCompressor5() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f5&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone" and "&8 • <##E2E39E>End Bricks" and "&8 • <##DF98F3>Purpur" and "&8 • <##DF98F3>Purpur Pillar" and "&8 • <##934BDB>Purple Glass"
+    return {_eac}
+function endAutoCompressor6() :: item:
+    set {_eac} to nether star named "&eEnd Auto Compressor &8[&f6&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##E2E39E>End Stone" and "&8 • <##E2E39E>End Bricks" and "&8 • <##DF98F3>Purpur" and "&8 • <##DF98F3>Purpur Pillar" and "&8 • <##934BDB>Purple Glass" and "&8 • <##6016AB>Crying Obsidian"
+    return {_eac}
+
+function forestAutoCompressor1() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f1&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce"
+    return {_fac}
+function forestAutoCompressor2() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f2&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch"
+    return {_fac}
+function forestAutoCompressor3() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f3&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle"
+    return {_fac}
+function forestAutoCompressor4() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f4&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia"
+    return {_fac}
+function forestAutoCompressor5() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f5&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia" and "&8 • <##DB4154>Mangrove"
+    return {_fac}
+function forestAutoCompressor6() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f6&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia" and "&8 • <##DB4154>Mangrove" and "&8 • <##19B8BA>Warped"
+    return {_fac}
+function forestAutoCompressor7() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f7&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia" and "&8 • <##DB4154>Mangrove" and "&8 • <##19B8BA>Warped" and "&8 • <##7C9F43>Bamboo"
+    return {_fac}
+function forestAutoCompressor8() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f8&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia" and "&8 • <##DB4154>Mangrove" and "&8 • <##19B8BA>Warped" and "&8 • <##7C9F43>Bamboo" and "&8 • <##CA1F1F>Crimson"
+    return {_fac}
+function forestAutoCompressor9() :: item:
+    set {_fac} to oak sapling named "<##2F9224>Forest Auto Compressor &8[&f9&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##41352D>Spruce" and "&8 • <##D2D2D2>Birch" and "&8 • <##927951>Jungle" and "&8 • <##F67435>Acacia" and "&8 • <##DB4154>Mangrove" and "&8 • <##19B8BA>Warped" and "&8 • <##7C9F43>Bamboo" and "&8 • <##CA1F1F>Crimson" and "&8 • <##EAA1AA>Cherry"
+    return {_fac}
+
+function oceanAutoCompressor1() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f1&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone"
+    return {_oac}
+function oceanAutoCompressor2() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f2&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine"
+    return {_oac}
+function oceanAutoCompressor3() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f3&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks"
+    return {_oac}
+function oceanAutoCompressor4() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f4&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks" and "&8 • <##1E5F3F>Dark Prismarine"
+    return {_oac}
+function oceanAutoCompressor5() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f5&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks" and "&8 • <##1E5F3F>Dark Prismarine" and "&8 • <##E27BDF>Brain Coral"
+    return {_oac}
+function oceanAutoCompressor6() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f6&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks" and "&8 • <##1E5F3F>Dark Prismarine" and "&8 • <##E27BDF>Brain Coral" and "&8 • <##C8263A>Fire Coral"
+    return {_oac}
+function oceanAutoCompressor7() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f7&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks" and "&8 • <##1E5F3F>Dark Prismarine" and "&8 • <##E27BDF>Brain Coral" and "&8 • <##C8263A>Fire Coral" and "&8 • <##CE16D0>Bubble Coral"
+    return {_oac}
+function oceanAutoCompressor8() :: item:
+    set {_oac} to conduit named "<##1BBCE5>Ocean Auto Compressor &8[&f8&8]" with lore "&8ɪɴᴠᴇɴᴛᴏʀʏ ɪᴛᴇᴍ" and "" and "&7Compresses:" and "&8 • <##F5F3B2>Sandstone" and "&8 • <##39C6AA>Prismarine" and "&8 • <##39C6AA>Prismarine Bricks" and "&8 • <##1E5F3F>Dark Prismarine" and "&8 • <##E27BDF>Brain Coral" and "&8 • <##C8263A>Fire Coral" and "&8 • <##CE16D0>Bubble Coral" and "&8 • <##3553FF>Tube Coral"
+    return {_oac}
+
+
+command /oac:
+    permission: op
+    trigger:
+        give player overworldAutoCompressor1()
+        give player overworldAutoCompressor2()
+        give player overworldAutoCompressor3()
+        give player overworldAutoCompressor4()
+        give player overworldAutoCompressor5()
+        give player overworldAutoCompressor6()
+        give player overworldAutoCompressor7()
+        give player overworldAutoCompressor8()
+
+command /nac:
+    permission: op
+    trigger:
+        give player netherAutoCompressor1()
+        give player netherAutoCompressor2()
+        give player netherAutoCompressor3()
+        give player netherAutoCompressor4()
+        give player netherAutoCompressor5()
+        give player netherAutoCompressor6()
+
+command /eac:
+    permission: op
+    trigger:
+        give player endAutoCompressor1()
+        give player endAutoCompressor2()
+        give player endAutoCompressor3()
+        give player endAutoCompressor4()
+        give player endAutoCompressor5()
+        give player endAutoCompressor6()
+
+command /fac:
+    permission: op
+    trigger:
+        give player forestAutoCompressor1()
+        give player forestAutoCompressor2()
+        give player forestAutoCompressor3()
+        give player forestAutoCompressor4()
+        give player forestAutoCompressor5()
+        give player forestAutoCompressor6()
+        give player forestAutoCompressor7()
+        give player forestAutoCompressor8()
+        give player forestAutoCompressor9()
+
+command /ocac:
+    permission: op
+    trigger:
+        give player oceanAutoCompressor1()
+        give player oceanAutoCompressor2()
+        give player oceanAutoCompressor3()
+        give player oceanAutoCompressor4()
+        give player oceanAutoCompressor5()
+        give player oceanAutoCompressor6()
+        give player oceanAutoCompressor7()
+        give player oceanAutoCompressor8()
+
+
+placeholderapi placeholder with the prefix "skript":
+	if the identifier is "block":
+		set the result to "%{personalBlockBroken::%uuid of player%}%"

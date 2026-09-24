@@ -1,0 +1,135 @@
+function helmet1() :: item:
+    set {_helmet1} to unbreakable leather helmet named "&a[Tier 1] &fQuarry Helmet" with lore "&7Protection 2"
+    enchant {_helmet1} with protection 2
+    dye {_helmet1} (129, 129, 129)
+    return {_helmet1}
+function chestplate1() :: item:
+    set {_chestplate1} to unbreakable leather chestplate named "&a[Tier 1] &fQuarry Chestplate" with lore "&7Protection 2"
+    enchant {_chestplate1} with protection 2
+    dye {_chestplate1} (129, 129, 129)
+    return {_chestplate1}
+function leggings1() :: item:
+    set {_leggings1} to unbreakable leather leggings named "&a[Tier 1] &fQuarry Leggings" with lore "&7Protection 2"
+    enchant {_leggings1} with protection 2
+    dye {_leggings1} (129, 129, 129)
+    return {_leggings1}
+function boots1() :: item:
+    set {_boots1} to unbreakable leather boots named "&a[Tier 1] &fQuarry Boots" with lore "&7Protection 2"
+    enchant {_boots1} with protection 2
+    dye {_boots1} (129, 129, 129)
+    return {_boots1}
+
+function helmet2() :: item:
+    set {_helmet2} to unbreakable leather helmet named "&a[Tier 2] &fQuarry Helmet" with lore "&7Protection 4"
+    enchant {_helmet2} with protection 4
+    dye {_helmet2} (203, 203, 203)
+    return {_helmet2}
+function chestplate2() :: item:
+    set {_chestplate2} to unbreakable leather chestplate named "&a[Tier 2] &fQuarry Chestplate" with lore "&7Protection 4"
+    enchant {_chestplate2} with protection 4
+    dye {_chestplate2} (203, 203, 203)
+    return {_chestplate2}
+function leggings2() :: item:
+    set {_leggings2} to unbreakable leather leggings named "&a[Tier 2] &fQuarry Leggings" with lore "&7Protection 4"
+    enchant {_leggings2} with protection 4
+    dye {_leggings2} (203, 203, 203)
+    return {_leggings2}
+function boots2() :: item:
+    set {_boots2} to unbreakable leather boots named "&a[Tier 2] &fQuarry Boots" with lore "&7Protection 4"
+    enchant {_boots2} with protection 4
+    dye {_boots2} (203, 203, 203)
+    return {_boots2}
+
+function helmet3() :: item:
+    set {_helmet3} to unbreakable leather helmet named "&a[Tier 3] &fQuarry Helmet" with lore "&7Protection 6"
+    enchant {_helmet3} with protection 6
+    dye {_helmet3} (50, 200, 200)
+    return {_helmet3}
+function chestplate3() :: item:
+    set {_chestplate3} to unbreakable leather chestplate named "&a[Tier 3] &fQuarry Chestplate" with lore "&7Protection 6"
+    enchant {_chestplate3} with protection 6
+    dye {_chestplate3} (50, 200, 200)
+    return {_chestplate3}
+function leggings3() :: item:
+    set {_leggings3} to unbreakable leather leggings named "&a[Tier 3] &fQuarry Leggings" with lore "&7Protection 6"
+    enchant {_leggings3} with protection 6
+    dye {_leggings3} (50, 200, 200)
+    return {_leggings3}
+function boots3() :: item:
+    set {_boots3} to unbreakable leather boots named "&a[Tier 3] &fQuarry Boots" with lore "&7Protection 6"
+    enchant {_boots3} with protection 6
+    dye {_boots3} (50, 200, 200)
+    return {_boots3}
+
+function helmet4() :: item:
+    set {_helmet4} to unbreakable leather helmet named "&a[Tier 4] &fQuarry Helmet" with lore "&7Protection 8"
+    enchant {_helmet4} with protection 8
+    dye {_helmet4} (68, 196, 77)
+    return {_helmet4}
+function chestplate4() :: item:
+    set {_chestplate4} to unbreakable leather chestplate named "&a[Tier 4] &fQuarry Chestplate" with lore "&7Protection 8"
+    enchant {_chestplate4} with protection 8
+    dye {_chestplate4} (68, 196, 77)
+    return {_chestplate4}
+function leggings4() :: item:
+    set {_leggings4} to unbreakable leather leggings named "&a[Tier 4] &fQuarry Leggings" with lore "&7Protection 8"
+    enchant {_leggings4} with protection 8
+    dye {_leggings4} (68, 196, 77)
+    return {_leggings4}
+function boots4() :: item:
+    set {_boots4} to unbreakable leather boots named "&a[Tier 4] &fQuarry Boots" with lore "&7Protection 8"
+    enchant {_boots4} with protection 8
+    dye {_boots4} (68, 196, 77)
+    return {_boots4}
+
+command /armor <text>:
+    permission: op
+    trigger:
+        if arg-1 is "1":
+            armor1(player)
+#        else if arg-1 is "2":
+#            drops2(player)
+
+function armor1(p: player):
+    create a gui with chest inventory with 2 rows named "&8&l             DROPS":
+        # first row
+        make gui 0 with helmet1():
+            give helmet1() to {_p}
+        make gui 1 with chestplate1():
+            give chestplate1() to {_p}
+        make gui 2 with leggings1():
+            give leggings1() to {_p}
+        make gui 3 with boots1():
+            give boots1() to {_p}
+            
+        make gui 5 with helmet2():
+            give helmet2() to {_p}
+        make gui 6 with chestplate2():
+            give chestplate2() to {_p}
+        make gui 7 with leggings2():
+            give leggings2() to {_p}
+        make gui 8 with boots2():
+            give boots2() to {_p}
+        # second row
+        make gui 9 with helmet3():
+            give helmet3() to {_p}
+        make gui 10 with chestplate3():
+            give chestplate3() to {_p}
+        make gui 11 with leggings3():
+            give leggings3() to {_p}
+        make gui 12 with boots3():
+            give boots3() to {_p}
+            
+        make gui 14 with helmet4():
+            give helmet4() to {_p}
+        make gui 15 with chestplate4():
+            give chestplate4() to {_p}
+        make gui 16 with leggings4():
+            give leggings4() to {_p}
+        make gui 17 with boots4():
+            give boots4() to {_p}
+        # third row
+        # forth row
+        # fifth row
+        # sixth row
+    open last gui to {_p}

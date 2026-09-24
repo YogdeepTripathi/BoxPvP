@@ -1,0 +1,20 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /invsee [<p:player=%player%>]:
+    permission: staff.invsee
+    trigger:
+        make player execute command "openinv check %{_p}%"
+
+command /endersee [<p:player=%player%>]:
+    permission: staff.endersee
+    trigger:
+        open ({_p}'s enderchest) to player
+        send "{@pa}&f Opened &e%{_p}%'s&f enderchest"
+
+on tab complete of "/invsee" or "/endersee":
+    set tab completions for position 1 to all players

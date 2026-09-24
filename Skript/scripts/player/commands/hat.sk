@@ -1,0 +1,13 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /hat:
+    permission: player.hat # LOCKED FOR RANKS
+    trigger:
+        set {_head} to (player's helmet item)
+        set (player's helmet item) to (player's tool)
+        set (player's tool) to {_head}

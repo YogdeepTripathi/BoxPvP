@@ -1,0 +1,15 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /clearchat:
+    aliases: /cc
+    permission: staff.clearchat
+    trigger:
+        set {chatFrozen} to true
+        broadcast repeat("%nl% ",250)
+        broadcast "{@pa} &fChat cleared by &e%player%"
+        delete {chatFrozen}

@@ -1,0 +1,70 @@
+on load:
+    send "" to all players
+    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/joueur/economy&f.sk&7!" to all players
+    send "" to all players
+
+on join:
+    if {season1PlayerToken::%uuid of player%} is not set:
+        set {season1PlayerToken::%uuid of player%} to 0
+    if {multiCost::%uuid of player%} is not set:
+        set {multiCost::%uuid of player%} to 15
+
+command /upgrade:
+    aliases: /upg, /u
+    trigger:
+        multiUpgradeGUI(player)
+
+function multiUpgradeGUI(p: player):
+    create a gui with dispenser inventory named "&8&lUPGRADER":
+        make gui 0 with black stained glass pane named " "
+        make gui 1 with black stained glass pane named " "
+        make gui 2 with black stained glass pane named " "
+        make gui 3 with black stained glass pane named " "
+        make gui 4 with nether star named "&a&lMULTIPLIER" with lore "&8ᴜᴘɢʀᴀᴅᴇʀ" and "" and " &fCost: &e⛃%{multiCost::%uuid of {_p}%}% &8(%{season1PlayerToken::%uuid of {_p}%}%)" and "" and " &fReceive: &d+0.25x Multiplier" and "" and "&fClick to upgrade."
+        make gui 5 with black stained glass pane named " "
+        make gui 6 with black stained glass pane named " "
+        make gui 7 with black stained glass pane named " "
+        make gui 8 with black stained glass pane named " "
+    open last gui to {_p}
+
+on inventory click:
+    if inventory name of current inventory is "&8&lUPGRADER":
+        if clicked slot is 1:
+            if {multiCost::%uuid of player%} > {season1PlayerToken::%uuid of player%}:
+                send "&8&lUPGRADER ▸&r &7You do not have enough tokens." to player
+                cancel event
+            else if {season1PlayerToken::%uuid of player%} >= {multiCost::%uuid of player%}:
+                remove {multiCost::%uuid of player%} from {season1PlayerToken::%uuid of player%}
+                add 0.25 to {season1PlayerMultiplier::%uuid of player%}
+                multiplierCost(player)
+                multiUpgradeGUI(player)
+
+function multiplierCost(p: player):
+    if {multiCost::%uuid of {_p}%} >= 1000000000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.000244140625)
+    else if {multiCost::%uuid of {_p}%} >= 100000000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.00048828125)
+    else if {multiCost::%uuid of {_p}%} >= 10000000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.0009765625)
+    else if {multiCost::%uuid of {_p}%} >= 1000000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.001953125)
+    else if {multiCost::%uuid of {_p}%} >= 100000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.00390625)
+    else if {multiCost::%uuid of {_p}%} >= 10000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.0078125)
+    else if {multiCost::%uuid of {_p}%} >= 1000000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.015625)
+    else if {multiCost::%uuid of {_p}%} >= 100000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.03125)
+    else if {multiCost::%uuid of {_p}%} >= 10000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.0625)
+    else if {multiCost::%uuid of {_p}%} >= 1000:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.125)
+    else if {multiCost::%uuid of {_p}%} <= 999:
+        set {multiCost::%uuid of {_p}%} to floor({multiCost::%uuid of {_p}%} * 1.25)
+
+command /upgradewipe:
+    permission: op
+    trigger:
+        set {multiCost::%uuid of player%} to 15
+        set {season1PlayerMultiplier::%uuid of player%} to 1

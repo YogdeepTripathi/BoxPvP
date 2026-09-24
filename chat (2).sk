@@ -1,0 +1,513 @@
+#on load:
+#    send "" to all players
+#    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/joueur/chat&f.sk&7!" to all players
+#    send "" to all players
+
+#on placeholder request with prefix "skript":
+#    if the identifier is "onlychat": # %skript_kills%
+#        set the result to "%{chatColour::%uuid of player%}%" #Will return the variable
+#    else if the identifier is "chat": # %skript_deaths%
+#        set the result to "%{prefix::%uuid of player%}% %{chatColour::%uuid of player%}%" #Will return the variable
+
+on chat:
+    cancel event
+    prefix(player)
+    set {_message} to message
+    if {_message} contains ":skull:":
+        replace all ":skull:" in {_message} with "%{chatColour::%uuid of player%}%💀"
+        
+    if {_message} contains ":blocks:":
+        replace all ":blocks:" in {_message} with "&8[&6🧱%{mined::%uuid of player%}%&8]%{chatColour::%uuid of player%}%"
+        
+    if {_message} contains ":prestige:":
+        replace all ":prestige:" in {_message} with "&8[&9🌀%{playerPrestige::%uuid of player%}%&8]%{chatColour::%uuid of player%}%"
+        
+    if {_message} contains ":multiplier:":
+        replace all ":multiplier:" in {_message} with "&8[&d×%{playerMultiplier::%uuid of player%}%&8]%{chatColour::%uuid of player%}%"
+        
+    if {_message} contains ":kills:":
+        replace all ":kills:" in {_message} with "&8[&4🗡%{playerKills::%uuid of player%}%&8]%{chatColour::%uuid of player%}%"
+        
+    if {_message} contains ":tokens:":
+        replace all ":tokens:" in {_message} with "&8[&e⛃%{playerToken::%uuid of player%}%&8]%{chatColour::%uuid of player%}%"
+        
+    if {season1PlayerPrestige::%uuid of player%} >= 1:
+        send "&8[&9🌀%{playerPrestige::%uuid of player%}%&8] %{prefix::%uuid of player%}% %{chatColour::%uuid of player%}%%{_message}%" to all players
+    else if {playerPrestige::%uuid of player%} = 0:
+        send "%{prefix::%uuid of player%}% %{chatColour::%uuid of player%}%%{_message}%" to all players
+
+command /chat:
+    aliases: /chatcolor, /chatcolour
+    trigger:
+        chatColour(player)
+
+function prefix(p: player):
+    set {_group} to group of {_p}
+    if {_group} is "default":
+        set {prefix::%uuid of {_p}%} to "&8[MEMBER] &r%{_p}'s displayname% &8»"
+    else if {_group} is "helper":
+        set {prefix::%uuid of {_p}%} to "<##56EC4D>[HELPER] &r%{_p}'s displayname% &8»"
+    else if {_group} is "moderator":
+        set {prefix::%uuid of {_p}%} to "<##402DBA>[MOD] &r%{_p}'s displayname% &8»"
+    else if {_group} is "builder":
+        set {prefix::%uuid of {_p}%} to "<##4075C6>[<##4A7CC9>B<##5483CC>U<##5E8ACF>I<##6892D2>L<##7199D5>D<##7BA0D8>E<##85A7DB>R<##8FAEDE>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "manager":
+        set {prefix::%uuid of {_p}%} to "<##920F0F>[MANAGER] &r%{_p}'s displayname% &8»"
+    else if {_group} is "owner":
+        set {prefix::%uuid of {_p}%} to "<##7E2AD2>[<##8C2ABF>O<##9A2AAC>W<##A82A99>N<##B62A86>E<##C42A73>R<##D22A60>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "ultimate":
+        set {prefix::%uuid of {_p}%} to "<##00FFD6>[<##00FFC8>U<##00FFBA>L<##00FFAD>T<##00FF9F>I<##00FF88>M<##00FF68>A<##00FF47>T<##00FF27>E<##00FF07>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "champion":
+        set {prefix::%uuid of {_p}%} to "<##2532E2>[<##3933CF>C<##4D34BD>H<##6035AA>A<##743697>M<##883685>P<##9C3772>I<##AF385F>O<##C3394D>N<##D73A3A>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "royal":
+        set {prefix::%uuid of {_p}%} to "<##EEF105>[<##ECCA2C>R<##EBA254>O<##E97B7B>Y<##E754A2>A<##E62CCA>L<##E405F1>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "guardian":
+        set {prefix::%uuid of {_p}%} to "<##FF0053>[<##FB0066>G<##F70079>U<##F4008C>A<##F0009F>R<##EC00B3>D<##E800C6>I<##E500D9>A<##E100EC>N<##DD00FF>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "angel":
+        set {prefix::%uuid of {_p}%} to "<##D4D4D4>[<##D7D4BC>A<##DAD4A3>N<##DED58B>G<##E1D573>E<##E4D55A>L<##E7D542>] &r%{_p}'s displayname% &8»"
+    else if {_group} is "coowner":
+        set {prefix::%uuid of {_p}%} to "<##59CDD7>[<##65CFD8>C<##70D1D9>O<##7CD3DB>-<##88D5DC>O<##93D7DD>W<##9FD9DE>N<##ABDBE0>E<##B6DDE1>R<##C2DFE2>] &r%{_p}'s displayname% &8»"
+
+function graystain() :: item:
+    set {_i} to gray stained glass pane named " "
+    return {_i}
+
+on join:
+    if {lightgrayColour%uuid of player%} is not set:
+        set {lightgrayColour%uuid of player%} to true
+
+function chatColour(p: player):
+    rankColour({_p})
+    set {_group} to group of {_p}
+    create a gui with virtual chest inventory with 5 rows named "&8&l        CHAT COLOURS":
+        # first row
+        make gui 0 with graystain()
+        make gui 1 with graystain()
+        make gui 2 with graystain()
+        make gui 3 with graystain()
+        make gui 4 with graystain()
+        make gui 5 with graystain()
+        make gui 6 with graystain()
+        make gui 7 with graystain()
+        make gui 8 with graystain()
+        # second row
+        make gui 9 with graystain()
+
+        if {blackColour%uuid of {_p}%} is not set:
+            make gui 10 with black dye named "&fChat Colour" with lore "" and "&fPreview: &0Diamond Potato" and "" and "&c&nNot unlocked!"
+        else if {blackColour%uuid of {_p}%} is false:
+            make gui 10 with black dye named "&fChat Colour" with lore "" and "&fPreview: &0Diamond Potato" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {blackColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&0"
+                chatColour({_p})
+        else if {blackColour%uuid of {_p}%} is true:
+            make gui 10 with black dye named "&fChat Colour" with lore "" and "&fPreview: &0Diamond Potato" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {darkBlueColour%uuid of {_p}%} is not set:
+            make gui 11 with blue dye named "&fChat Colour" with lore "" and "&fPreview: &1Deepslate Bamboo" and "" and "&c&nNot unlocked!"
+        else if {darkBlueColour%uuid of {_p}%} is false:
+            make gui 11 with blue dye named "&fChat Colour" with lore "" and "&fPreview: &1Deepslate Bamboo" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {darkBlueColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&1"
+                chatColour({_p})
+        else if {darkBlueColour%uuid of {_p}%} is true:
+            make gui 11 with blue dye named "&fChat Colour" with lore "" and "&fPreview: &1Deepslate Bamboo" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        
+        if {darkGreenColour%uuid of {_p}%} is not set:
+            make gui 12 with green dye named "&fChat Colour" with lore "" and "&fPreview: &2Glazed Terracotta" and "" and "&c&nNot unlocked!"
+        else if {darkGreenColour%uuid of {_p}%} is false:
+            make gui 12 with green dye named "&fChat Colour" with lore "" and "&fPreview: &2Glazed Terracotta" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {darkGreenColour::%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&2"
+                chatColour({_p})
+        else if {darkGreenColour%uuid of {_p}%} is true:
+            make gui 12 with green dye named "&fChat Colour" with lore "" and "&fPreview: &2Glazed Terracotta" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        
+        if {cyanColour%uuid of {_p}%} is not set:
+            make gui 13 with cyan dye named "&fChat Colour" with lore "" and "&fPreview: &3Iron Bookshelf" and "" and "&c&nNot unlocked!"
+        else if {cyanColour%uuid of {_p}%} is false:
+            make gui 13 with cyan dye named "&fChat Colour" with lore "" and "&fPreview: &3Iron Bookshelf" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {cyanColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&3"
+                chatColour({_p})
+        else if {cyanColour%uuid of {_p}%} is true:
+            make gui 13 with cyan dye named "&fChat Colour" with lore "" and "&fPreview: &3Iron Bookshelf" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        
+        if {darkRedColour%uuid of {_p}%} is not set:
+            make gui 14 with redstone named "&fChat Colour" with lore "" and "&fPreview: &4Cauldron Bell" and "" and "&c&nNot unlocked!"
+        else if {darkRedColour%uuid of {_p}%} is false:
+            make gui 14 with redstone named "&fChat Colour" with lore "" and "&fPreview: &4Cauldron Bell" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {darkRedColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&4"
+                chatColour({_p})
+        else if {darkRedColour%uuid of {_p}%} is true:
+            make gui 14 with redstone named "&fChat Colour" with lore "" and "&fPreview: &4Cauldron Bell" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        
+        if {purpleColour%uuid of {_p}%} is not set:
+            make gui 15 with purple dye named "&fChat Colour" with lore "" and "&fPreview: &5Basalt Hoe" and "" and "&c&nNot unlocked!"
+        else if {purpleColour%uuid of {_p}%} is false:
+            make gui 15 with purple dye named "&fChat Colour" with lore "" and "&fPreview: &5Basalt Hoe" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {purpleColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&5"
+                chatColour({_p})
+        else if {purpleColour%uuid of {_p}%} is true:
+            make gui 15 with purple dye named "&fChat Colour" with lore "" and "&fPreview: &5Basalt Hoe" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        
+        if {goldColour%uuid of {_p}%} is not set:
+            make gui 16 with orange dye named "&fChat Colour" with lore "" and "&fPreview: &6Smithing Torch" and "" and "&c&nNot unlocked!"
+        else if {goldColour%uuid of {_p}%} is false:
+            make gui 16 with orange dye named "&fChat Colour" with lore "" and "&fPreview: &6Smithing Torch" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {goldColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&6"
+                chatColour({_p})
+        else if {goldColour%uuid of {_p}%} is true:
+            make gui 16 with orange dye named "&fChat Colour" with lore "" and "&fPreview: &6Smithing Torch" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        make gui 17 with graystain()
+        # third row
+        make gui 18 with graystain()
+
+        if {lightgrayColour%uuid of {_p}%} is not set:
+            make gui 19 with light gray dye named "&fChat Colour" with lore "" and "&fPreview: &7Minecart Ore" and "" and "&c&nNot unlocked!"
+        else if {lightgrayColour%uuid of {_p}%} is false:
+            make gui 19 with light gray dye named "&fChat Colour" with lore "" and "&fPreview: &7Minecart Ore" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+        else if {lightgrayColour%uuid of {_p}%} is true:
+            make gui 19 with light gray dye named "&fChat Colour" with lore "" and "&fPreview: &7Minecart Ore" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {grayColour%uuid of {_p}%} is not set:
+            make gui 20 with gray dye named "&fChat Colour" with lore "" and "&fPreview: &8Mud Banner" and "" and "&c&nNot unlocked!"
+        else if {grayColour%uuid of {_p}%} is false:
+            make gui 20 with gray dye named "&fChat Colour" with lore "" and "&fPreview: &8Mud Banner" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {grayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&8"
+                chatColour({_p})
+        else if {grayColour%uuid of {_p}%} is true:
+            make gui 20 with gray dye named "&fChat Colour" with lore "" and "&fPreview: &8Mud Banner" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {blueColour%uuid of {_p}%} is not set:
+            make gui 21 with lapis lazuli named "&fChat Colour" with lore "" and "&fPreview: &9Carpet Button" and "" and "&c&nNot unlocked!"
+        else if {blueColour%uuid of {_p}%} is false:
+            make gui 21 with lapis lazuli named "&fChat Colour" with lore "" and "&fPreview: &9Carpet Button" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {blueColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&9"
+                chatColour({_p})
+        else if {blueColour%uuid of {_p}%} is true:
+            make gui 21 with lapis lazuli named "&fChat Colour" with lore "" and "&fPreview: &9Carpet Button" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {limeColour%uuid of {_p}%} is not set:
+            make gui 22 with lime dye named "&fChat Colour" with lore "" and "&fPreview: &aMagma Fungus" and "" and "&c&nNot unlocked!"
+        else if {limeColour%uuid of {_p}%} is false:
+            make gui 22 with lime dye named "&fChat Colour" with lore "" and "&fPreview: &aMagma Fungus" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {limeColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&a"
+                chatColour({_p})
+        else if {limeColour%uuid of {_p}%} is true:
+            make gui 22 with lime dye named "&fChat Colour" with lore "" and "&fPreview: &aMagma Fungus" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {lightBlueColour%uuid of {_p}%} is not set:
+            make gui 23 with light blue dye named "&fChat Colour" with lore "" and "&fPreview: &bCoral Flower" and "" and "&c&nNot unlocked!"
+        else if {lightBlueColour%uuid of {_p}%} is false:
+            make gui 23 with light blue dye named "&fChat Colour" with lore "" and "&fPreview: &bCoral Flower" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {lightBlueColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&b"
+                chatColour({_p})
+        else if {lightBlueColour%uuid of {_p}%} is true:
+            make gui 23 with light blue dye named "&fChat Colour" with lore "" and "&fPreview: &bCoral Flower" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {redColour%uuid of {_p}%} is not set:
+            make gui 24 with red dye named "&fChat Colour" with lore "" and "&fPreview: &cSoul Glass" and "" and "&c&nNot unlocked!"
+        else if {redColour%uuid of {_p}%} is false:
+            make gui 24 with red dye named "&fChat Colour" with lore "" and "&fPreview: &cSoul Glass" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {redColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&c"
+                chatColour({_p})
+        else if {redColour%uuid of {_p}%} is true:
+            make gui 24 with red dye named "&fChat Colour" with lore "" and "&fPreview: &cSoul Glass" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {magentaColour%uuid of {_p}%} is not set:
+            make gui 25 with magenta dye named "&fChat Colour" with lore "" and "&fPreview: &dStone Quartz" and "" and "&c&nNot unlocked!"
+        else if {magentaColour%uuid of {_p}%} is false:
+            make gui 25 with magenta dye named "&fChat Colour" with lore "" and "&fPreview: &dStone Quartz" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {magentaColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&d"
+                chatColour({_p})
+        else if {magentaColour%uuid of {_p}%} is true:
+            make gui 25 with magenta dye named "&fChat Colour" with lore "" and "&fPreview: &dStone Quartz" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        make gui 26 with graystain()
+        # forth row
+        make gui 27 with graystain()
+
+        if {yellowColour%uuid of {_p}%} is not set:
+            make gui 28 with yellow dye named "&fChat Colour" with lore "" and "&fPreview: &eBed Head" and "" and "&c&nNot unlocked!"
+        else if {yellowColour%uuid of {_p}%} is false:
+            make gui 28 with yellow dye named "&fChat Colour" with lore "" and "&fPreview: &eBed Head" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {yellowColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&e"
+                chatColour({_p})
+        else if {yellowColour%uuid of {_p}%} is true:
+            make gui 28 with yellow dye named "&fChat Colour" with lore "" and "&fPreview: &eBed Head" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        if {whiteColour%uuid of {_p}%} is not set:
+            make gui 29 with white dye named "&fChat Colour" with lore "" and "&fPreview: &fSea Gold" and "" and "&c&nNot unlocked!"
+        else if {whiteColour%uuid of {_p}%} is false:
+            make gui 29 with white dye named "&fChat Colour" with lore "" and "&fPreview: &fSea Gold" and "" and "&7&nClick to activate!":
+                colourFalse({_p})
+                set {whiteColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&f"
+                chatColour({_p})
+        else if {whiteColour%uuid of {_p}%} is true:
+            make gui 29 with white dye named "&fChat Colour" with lore "" and "&fPreview: &fSea Gold" and "" and "&e&nClick to deactivate!":
+                colourFalse({_p})
+                set {lightgrayColour%uuid of {_p}%} to true
+                set {chatColour::%uuid of {_p}%} to "&7"
+                chatColour({_p})
+
+        make gui 30 with colourButton()
+        make gui 31 with colourButton()
+        make gui 32 with colourButton()
+        make gui 33 with colourButton()
+        make gui 34 with colourButton()
+        make gui 35 with graystain()
+        # fifth row
+        make gui 36 with graystain()
+        make gui 37 with graystain()
+        make gui 38 with graystain()
+        make gui 39 with graystain()
+        make gui 40 with graystain()
+        make gui 41 with graystain()
+        make gui 42 with graystain()
+        make gui 43 with graystain()
+        make gui 44 with graystain()
+
+    open last gui to {_p}
+
+function colourButton() :: item:
+    set {_colourButton} to stone button named " "
+    return {_colourButton}
+
+function rankColour(p: player):
+    set {_group} to group of {_p}
+
+    if {_group} is "ultimate":
+        if {limeColour%uuid of {_p}%} is not set:
+            set {limeColour%uuid of {_p}%} to false
+
+    if {_group} is "champion":
+        if {limeColour%uuid of {_p}%} is not set:
+            set {limeColour%uuid of {_p}%} to false
+        if {blueColour%uuid of {_p}%} is not set:
+            set {blueColour%uuid of {_p}%} to false
+
+    if {_group} is "royal":
+        if {limeColour%uuid of {_p}%} is not set:
+            set {limeColour%uuid of {_p}%} to false
+        if {blueColour%uuid of {_p}%} is not set:
+            set {blueColour%uuid of {_p}%} to false
+        if {yellowColour%uuid of {_p}%} is not set:
+            set {yellowColour%uuid of {_p}%} to false
+
+    if {_group} is "guardian":
+        if {limeColour%uuid of {_p}%} is not set:
+            set {limeColour%uuid of {_p}%} to false
+        if {blueColour%uuid of {_p}%} is not set:
+            set {blueColour%uuid of {_p}%} to false
+        if {yellowColour%uuid of {_p}%} is not set:
+            set {yellowColour%uuid of {_p}%} to false
+        if {magentaColour%uuid of {_p}%} is not set:
+            set {magentaColour%uuid of {_p}%} to false
+
+    if {_group} is "angel":
+        if {limeColour%uuid of {_p}%} is not set:
+            set {limeColour%uuid of {_p}%} to false
+        if {blueColour%uuid of {_p}%} is not set:
+            set {blueColour%uuid of {_p}%} to false
+        if {yellowColour%uuid of {_p}%} is not set:
+            set {yellowColour%uuid of {_p}%} to false
+        if {magentaColour%uuid of {_p}%} is not set:
+            set {magentaColour%uuid of {_p}%} to false
+        if {whiteColour%uuid of {_p}%} is not set:
+            set {whiteColour%uuid of {_p}%} to false
+
+function colourFalse(p: player):
+    if {blackColour%uuid of {_p}%} is true:
+        set {blackColour%uuid of {_p}%} to false
+    if {darkBlueColour%uuid of {_p}%} is true:
+        set {darkBlueColour%uuid of {_p}%} to false
+    if {darkGreenColour%uuid of {_p}%} is true:
+        set {darkGreenColour%uuid of {_p}%} to false
+    if {cyanColour%uuid of {_p}%} is true:
+        set {cyanColour%uuid of {_p}%} to false
+    if {darkRedColour%uuid of {_p}%} is true:
+        set {darkRedColour%uuid of {_p}%} to false
+    if {purpleColour%uuid of {_p}%} is true:
+        set {purpleColour%uuid of {_p}%} to false
+    if {goldColour%uuid of {_p}%} is true:
+        set {goldColour%uuid of {_p}%} to false
+    if {lightgrayColour%uuid of {_p}%} is true:
+        set {lightgrayColour%uuid of {_p}%} to false
+    if {grayColour%uuid of {_p}%} is true:
+        set {grayColour%uuid of {_p}%} to false
+    if {blueColour%uuid of {_p}%} is true:
+        set {blueColour%uuid of {_p}%} to false
+    if {limeColour%uuid of {_p}%} is true:
+        set {limeColour%uuid of {_p}%} to false
+    if {lightBlueColour%uuid of {_p}%} is true:
+        set {lightBlueColour%uuid of {_p}%} to false
+    if {redColour%uuid of {_p}%} is true:
+        set {redColour%uuid of {_p}%} to false
+    if {magentaColour%uuid of {_p}%} is true:
+        set {magentaColour%uuid of {_p}%} to false
+    if {yellowColour%uuid of {_p}%} is true:
+        set {yellowColour%uuid of {_p}%} to false
+    if {whiteColour%uuid of {_p}%} is true:
+        set {whiteColour%uuid of {_p}%} to false
+
+command /color:
+    permission: op
+    trigger:
+        colourTrue(player)
+
+function colourTrue(p: player):
+    if {blackColour%uuid of {_p}%} is not set:
+        set {blackColour%uuid of {_p}%} to false
+    if {darkBlueColour%uuid of {_p}%} is not set:
+        set {darkBlueColour%uuid of {_p}%} to false
+    if {darkGreenColour%uuid of {_p}%} is not set:
+        set {darkGreenColour%uuid of {_p}%} to false
+    if {cyanColour%uuid of {_p}%} is not set:
+        set {cyanColour%uuid of {_p}%} to false
+    if {darkRedColour%uuid of {_p}%} is not set:
+        set {darkRedColour%uuid of {_p}%} to false
+    if {purpleColour%uuid of {_p}%} is not set:
+        set {purpleColour%uuid of {_p}%} to false
+    if {goldColour%uuid of {_p}%} is not set:
+        set {goldColour%uuid of {_p}%} to false
+    if {lightgrayColour%uuid of {_p}%} is not set:
+        set {lightgrayColour%uuid of {_p}%} to false
+    if {grayColour%uuid of {_p}%} is not set:
+        set {grayColour%uuid of {_p}%} to false
+    if {blueColour%uuid of {_p}%} is not set:
+        set {blueColour%uuid of {_p}%} to false
+    if {limeColour%uuid of {_p}%} is not set:
+        set {limeColour%uuid of {_p}%} to false
+    if {lightBlueColour%uuid of {_p}%} is not set:
+        set {lightBlueColour%uuid of {_p}%} to false
+    if {redColour%uuid of {_p}%} is not set:
+        set {redColour%uuid of {_p}%} to false
+    if {magentaColour%uuid of {_p}%} is not set:
+        set {magentaColour%uuid of {_p}%} to false
+    if {yellowColour%uuid of {_p}%} is not set:
+        set {yellowColour%uuid of {_p}%} to false
+    if {whiteColour%uuid of {_p}%} is not set:
+        set {whiteColour%uuid of {_p}%} to false
+    if {blackColour%uuid of {_p}%} is true:
+        set {blackColour%uuid of {_p}%} to false
+    if {darkBlueColour%uuid of {_p}%} is true:
+        set {darkBlueColour%uuid of {_p}%} to false
+    if {darkGreenColour%uuid of {_p}%} is true:
+        set {darkGreenColour%uuid of {_p}%} to false
+    if {cyanColour%uuid of {_p}%} is true:
+        set {cyanColour%uuid of {_p}%} to false
+    if {darkRedColour%uuid of {_p}%} is true:
+        set {darkRedColour%uuid of {_p}%} to false
+    if {purpleColour%uuid of {_p}%} is true:
+        set {purpleColour%uuid of {_p}%} to false
+    if {goldColour%uuid of {_p}%} is true:
+        set {goldColour%uuid of {_p}%} to false
+    if {lightgrayColour%uuid of {_p}%} is true:
+        set {lightgrayColour%uuid of {_p}%} to false
+    if {grayColour%uuid of {_p}%} is true:
+        set {grayColour%uuid of {_p}%} to false
+    if {blueColour%uuid of {_p}%} is true:
+        set {blueColour%uuid of {_p}%} to false
+    if {limeColour%uuid of {_p}%} is true:
+        set {limeColour%uuid of {_p}%} to false
+    if {lightBlueColour%uuid of {_p}%} is true:
+        set {lightBlueColour%uuid of {_p}%} to false
+    if {redColour%uuid of {_p}%} is true:
+        set {redColour%uuid of {_p}%} to false
+    if {magentaColour%uuid of {_p}%} is true:
+        set {magentaColour%uuid of {_p}%} to false
+    if {yellowColour%uuid of {_p}%} is true:
+        set {yellowColour%uuid of {_p}%} to false
+    if {whiteColour%uuid of {_p}%} is true:
+        set {whiteColour%uuid of {_p}%} to false

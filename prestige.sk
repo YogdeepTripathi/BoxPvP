@@ -1,0 +1,87 @@
+on load:
+    send "" to all players
+    send "<##FFFF55>&lM<##FFFF6A>&lU<##FFFF80>&lT<##FFFF95>&lL<##FFFFAA>&lI<##FFFFBF>&lF<##FFFFD5>&lA<##FFFFEA>&lR<##FFFFFF>&lM<##FFFFFF>&lE<##FFFFFF>&lR &7Reloaded &e/MultiFarmer/joueur/prestige&f.sk&7!" to all players
+    send "" to all players
+
+command /setprestige [<player>] [<integer>]:
+    permission: op
+    trigger:
+        if arg-2 is set:
+            set {_player} to arg-1
+        else:
+            set {_player} to player
+        set {season1PlayerPrestige::%uuid of player%} to arg-2
+
+command /gem <integer>:
+    permission: op
+    trigger:
+        set {prestige::season1PlayerPrestigeGems::%uuid of player%} to arg-1
+
+command /prestige:
+    aliases: /p, /pres
+    permission: op
+    permission message: &fSoon...
+    trigger:
+        prestigeopen(player)
+        send "%{prestige::season1PlayerPrestigeGems::%uuid of {_p}%}%" to player
+
+function prestigeopen(p: player):   
+    create a gui with virtual hopper inventory named "&8&l           PRESTIGE":
+        set {_playerLevel} to {level::playerLevel::%uuid of {_p}%}
+        set {_playerToken} to {season1PlayerToken::%uuid of {_p}%}
+#        add amount of {_oakt4} in the inventory of {_p} to {_playerToken}
+        make gui 0 with prestigeinfo({_p})
+        if {_playerLevel} = 100:
+            if {_playerToken} >= 50000:
+                make gui 1 with prestigenow3({_p})
+            else:
+                make gui 1 with prestigenow2({_p})
+        else if {_playerToken} >= 50000:
+            make gui 1 with prestigenow4({_p})
+        else:
+            make gui 1 with prestigenow1({_p})
+        make gui 2 with graystain()
+        make gui 3 with graystain()
+        make gui 4 with emerald named "&aPrestige Shop & Stats" with lore "", "&fSpend your gems here to get", "&apermanent boosts &fto make your life easier!", "", "&fPrestige Gems: &e%{prestige::season1PlayerPrestigeGems::%uuid of {_p}%}%":
+            prestigeshopopen(player)
+        open last gui to {_p}
+
+function prestigeshopopen(p: player):
+    create a gui with virtual chest inventory with 2 rows named "&8&l       Evolution SHOP":
+        make gui 2 with emerald
+        open last gui to {_p}
+
+function clicktoclose() :: item:
+    set {_close} to barrier named "&cclick to close"
+    return {_close}
+
+on load:
+    if {prestige::season1PlayerPrestigeGems::%uuid of player%} is not set:
+        set {prestige::season1PlayerPrestigeGems::%uuid of player%} to 0
+
+function prestigeinfo(p: player) :: item:
+    set {_prestigeinfo} to book named "&aPrestige Information" with lore "&7The Prestige is an upgrade system.", "", "&7The Prestige system is a way to reset", "&7your progress in exchange for boosts.", "&7Every time you evolve, you recieve", "&ePrestige Gems &7you can spend in the shop", "&7and an &9Prestige Block Multi&7.", "", "&cResets with prestige:", "&e»&r &7Tokens", "&e»&r &7Gathered Items", "&e»&r &7Inventory, Enderchest"
+    return {_prestigeinfo}
+function prestigeshop(p: player, g: int) :: item:
+    set {_prestigeshop} to emerald named "&aPrestige Shop & Stats" with lore "", "&fSpend your gems here to get", "&apermanent boosts &fto make your life easier!", "", "&fPrestige Gems: &e%{prestige::season1PlayerPrestigeGems::%uuid of {_p}%}%"
+    return {_prestigeshop}
+function prestigenow2(p: player) :: item:
+    set {_prestigenow2} to golden axe named "&aPrestige Now" with lore "", "&fPrestiging will wipe &cSOME &fof your progress,", "&fgiving you &ePrestige Coins &fin exchange.", "", "&7Check the information icon for more info!", "", "&eRequirements:", "&e»&r &7ʟᴇᴠᴇʟ &8[&a100&8] &a&l✔", "&e»&r &7ᴛᴏᴋᴇɴꜱ ⛃50000 &c&l❌", "", "&eRewards", "&e»&r &7+250 Prestige Gems", "&e»&r &7+1x Prestige Multi &8(Permanent)"
+    enchant {_prestigenow2} with unbreaking 1
+    add hide enchants and hide attributes to item flags of {_prestigenow2}
+    return {_prestigenow2}
+function prestigenow1(p: player) :: item:
+    set {_prestigenow1} to golden axe named "&aPrestige Now" with lore "", "&fPrestiging will wipe &cSOME &fof your progress,", "&fgiving you &ePrestige Coins &fin exchange.", "", "&7Check the information icon for more info!", "", "&eRequirements:", "&e»&r &7ʟᴇᴠᴇʟ [100] &c&l❌", "&e»&r &7ᴛᴏᴋᴇɴꜱ ⛃50000 &c&l❌", "", "&eRewards", "&e»&r &7+250 Prestige Gems", "&e»&r &7+1x Prestige Multi &8(Permanent)"
+    enchant {_prestigenow1} with unbreaking 1
+    add hide enchants and hide attributes to item flags of {_prestigenow1}
+    return {_prestigenow1}
+function prestigenow3(p: player) :: item:
+    set {_prestigenow3} to golden axe named "&aPrestige Now" with lore "", "&fPrestiging will wipe &cSOME &fof your progress,", "&fgiving you &ePrestige Coins &fin exchange.", "", "&7Check the information icon for more info!", "", "&eRequirements:", "&e»&r &7ʟᴇᴠᴇʟ &8[&a100&8] &a&l✔", "&e»&r &7ᴛᴏᴋᴇɴꜱ &e⛃50000 &a&l✔", "", "&eRewards", "&e»&r &7+250 Prestige Gems", "&e»&r &7+1x Prestige Multi &8(Permanent)"
+    enchant {_prestigenow3} with unbreaking 1
+    add hide enchants and hide attributes to item flags of {_prestigenow3}
+    return {_prestigenow3}
+function prestigenow4(p: player) :: item:
+    set {_prestigenow4} to golden axe named "&aPrestige Now" with lore "", "&fPrestiging will wipe &cSOME &fof your progress,", "&fgiving you &ePrestige Coins &fin exchange.", "", "&7Check the information icon for more info!", "", "&eRequirements:", "&e»&r &7ʟᴇᴠᴇʟ [100] &c&l❌", "&e»&r &7ᴛᴏᴋᴇɴꜱ &e⛃50000 &a&l✔", "", "&eRewards", "&e»&r &7+250 Prestige Gems", "&e»&r &7+1x Prestige Multi &8(Permanent)"
+    enchant {_prestigenow4} with unbreaking 1
+    add hide enchants and hide attributes to item flags of {_prestigenow4}
+    return {_prestigenow4}

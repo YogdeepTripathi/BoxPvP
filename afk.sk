@@ -1,0 +1,14 @@
+on player move:
+    if player is in region "afk":
+        if {afktimer::%uuid of player%} is not set:
+            set {afktimer::%uuid of player%} to now + 5 minutes
+    else:
+        delete {afktimer::%uuid of player%}
+
+every 1 second:
+    loop all players:
+        if {afktimer::%uuid of loop-player%} is set:
+            if now is greater than or equal to {afktimer::%uuid of loop-player%}:
+                add 1 to {afkcrates::%uuid of loop-player%}
+                send "&9&lCRATES ▸&r &fYou have received your Afk Key." to loop-player
+                set {afktimer::%uuid of loop-player%} to now + 5 minutes

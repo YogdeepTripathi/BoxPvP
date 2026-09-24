@@ -1,0 +1,102 @@
+command /crates:
+    trigger:
+        crate(player)
+
+on join:
+    if {cratemessages::%uuid of player%} is not set:
+        set {cratemessages::%uuid of player%} to true
+    if {afkCrate::%uuid of player%} is not set:
+        set {afkCrate::%uuid of player%} to 0
+    if {mineCrate::%uuid of player%} is not set:
+        set {mineCrate::%uuid of player%} to 0
+    if {ultimateCrate::%uuid of player%} is not set:
+        set {ultimateCrate::%uuid of player%} to 0
+
+function crate(p: player):
+    create a gui with chest inventory with 3 rows named "&8&l            CRATES":
+        # first row
+        make gui 0 with black stained glass pane named " "
+        make gui 1 with black stained glass pane named " "
+        make gui 2 with black stained glass pane named " "
+        make gui 3 with black stained glass pane named " "
+        make gui 4 with black stained glass pane named " "
+        make gui 5 with black stained glass pane named " "
+        make gui 6 with black stained glass pane named " "
+        make gui 7 with black stained glass pane named " "
+        make gui 8 with black stained glass pane named " "
+        # second row
+        make gui 9 with black stained glass pane named " "
+        make gui 10 with light gray shulker box named "&7Mine Crate" with lore "&8ᴄʀᴀᴛᴇ" and "" and "&7Common &fRewards:" and "&f » &78 <##A0A0A0>&lSUPER <##818181>Compressed Stone &8- &b30%%" and "&f » &76 <##FFFFFF>&lSUPER <##CBCBCB>Compressed Iron &8- &b30%%" and "&f » &74 <##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond &8- &b20%%" and "&f » &72 <##56EC60>&lSUPER <##44C44D>Compressed Emerald &8- &b19%%" and "" and "&9Rare &fRewards:" and "&f » &a+0.5x Multiplier &8- &b1%%" and "" and "<##BA5AC4>M<##BD66C6>y<##BF71C7>t<##C27DC9>h<##C588CB>i<##C894CD>c<##CA9FCE>a<##CDABD0>l &fRewards:" and "&f » <##00FFD6>[<##00FFC8>U<##00FFBA>L<##00FFAD>T<##00FF9F>I<##00FF88>M<##00FF68>A<##00FF47>T<##00FF27>E<##00FF07>]&f Rank &8- &b0.04%%" and "" and "&fYour Crates:" and "&f » &e%{mineCrate::%uuid of {_p}%}%"
+
+        if {cratemessages::%uuid of {_p}%} is true:
+            make gui 16 with end crystal named "&f&lOPEN MESSAGE" with lore "&7Toggle for crate" and "&7open messages." and "" and "&8&o(( &e&oactivated &8&o))"
+        else if {cratemessages::%uuid of {_p}%} is false:
+            make gui 16 with end crystal named "&f&lOPEN MESSAGE" with lore "&7Toggle for crate" and "&7open messages." and "" and "&8&o(( &7&odeactivated &8&o))"
+        else if {cratemessages::%uuid of {_p}%} is not set:
+            make gui 16 with end crystal named "&f&lOPEN MESSAGE" with lore "&7Toggle for crate" and "&7open messages." and "" and "&8&o(( &7&odeactivated &8&o))"
+        make gui 17 with black stained glass pane named " "
+        # third row
+        make gui 18 with black stained glass pane named " "
+        make gui 19 with black stained glass pane named " "
+        make gui 20 with black stained glass pane named " "
+        make gui 21 with black stained glass pane named " "
+        make gui 22 with black stained glass pane named " "
+        make gui 23 with black stained glass pane named " "
+        make gui 24 with black stained glass pane named " "
+        make gui 25 with black stained glass pane named " "
+        make gui 26 with black stained glass pane named " "
+    open last gui to {_p}
+
+on inventory click:
+    if inventory name of current inventory is "&8&l            CRATES":
+        if clicked slot is 10:
+            set {_crates} to {mineCrate::%uuid of player%}
+            if {_crates} <= 0:
+                send "&7You do not have any Mine Crate's." to player
+                stop
+            if click type is left mouse button:
+                set {_times} to 1
+                remove 1 from {mineCrate::%uuid of player%}
+                crate(player)
+#            else if click type is right mouse button:
+#                set {_times} to {_crates}
+#                set {afkcrates::%uuid of player%} to 0
+#                crate(player)
+            loop {_times} times:
+                set {_random} to a random integer between 1 and 2500 # 30 | 30 | 20 | 19
+                if {_random} <= 750:
+                    set {_reward} to 8 of stone3()
+                    give 8 of stone3() to player
+                    if {cratemessages::%uuid of player%} is true:
+                        send "&9&lCRATES ▸&r &7You just opened &f8 <##A0A0A0>&lSUPER <##818181>Compressed Stone&7!" to player
+                else if {_random} <= 1500:
+                    set {_reward} to 6 of iron3()
+                    give 6 of iron3() to player
+                    if {cratemessages::%uuid of player%} is true:
+                        send "&9&lCRATES ▸&r &7You just opened &f6 <##FFFFFF>&lSUPER <##CBCBCB>Compressed Iron&7!" to player
+                else if {_random} <= 2000:
+                    set {_reward} to 4 of diamond3()
+                    give 4 of diamond3() to player
+                    if {cratemessages::%uuid of player%} is true:
+                        send "&9&lCRATES ▸&r &7You just opened &f4 <##5AD6D6>&lSUPER <##32C8C8>Compressed Diamond&7!" to player
+                else if {_random} <= 2474:
+                    set {_reward} to 2 of emerald3()
+                    give 2 of emerald3() to player
+                    if {cratemessages::%uuid of player%} is true:
+                        send "&9&lCRATES ▸&r &7You just opened &f2 <##56EC60>&lSUPER <##44C44D>Compressed Emerald&7!" to player
+                else if {_random} <= 2499:
+                    add 0.5 to {player's personal multiplier::%uuid of player%}
+                    if {cratemessages::%uuid of player%} is true:
+                        send "&9&lCRATES ▸&r &7You just opened &a+0.5x Multiplier&7!" to player
+                else if {_random} <= 2500:
+                    execute console command "lp user %uuid of player% parent set ultimate"
+                    send " " to all players
+                    send "&b&lRANKS ▸&r &f%player% &7just opened <##00FFD6>[<##00FFC8>U<##00FFBA>L<##00FFAD>T<##00FF9F>I<##00FF88>M<##00FF68>A<##00FF47>T<##00FF27>E<##00FF07>]&f Rank&7!" to all players
+                    send " " to all players
+        if clicked slot is 16:
+            if {cratemessages::%uuid of player%} is true:
+                set {cratemessages::%uuid of player%} to false
+                crate(player)
+            else if {cratemessages::%uuid of player%} is false:
+                set {cratemessages::%uuid of player%} to true
+                crate(player)

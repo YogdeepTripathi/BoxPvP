@@ -1,0 +1,32 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+    placeholders:
+        attacker: \b(theattacker|attacker|att)\b
+        victim: \b(thevictim|victim|vic)\b
+
+
+# Make sure you use `/gamerule showDeathMessages false` in-game.
+# These messages only send if the they are both players.
+
+on load:
+    delete {-deathMessages::*}
+    registerDeathMessage("victim has died")
+    registerDeathMessage("att has slain vic")
+
+local function registerDeathMessage(message:string):
+    add makeTextComponent({_message}) to {-deathMessages::*}
+
+# You may have to adjust this depending on your PvP system
+on death:
+    victim is a player
+    attacker is a player
+    set {_deathMessage} to ({player::deathmessage::%(victim's uuid)%} ? (random element of {-deathMessages::*}))
+    set color format of {_deathMessage} to white
+    component regex replace "{@placeholders.attacker}" with makeTextComponent("&e%attacker%&f") in {_deathMessage}
+    component regex replace "{@placeholders.victim}" with makeTextComponent("&c%victim%&f") in {_deathMessage}
+    send (merge components ("%getPrefix("death",true)%&f "+{_deathMessage})) to attacker

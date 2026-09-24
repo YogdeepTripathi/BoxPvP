@@ -1,0 +1,21 @@
+options:
+    pa: %{serverPrefixArrow}%
+    p: %{serverPrefix}%
+    c1: <##DA6FEA>
+    c2: <##E999F5>
+    l: <##DA6FEA>│
+
+command /walkspeed <n:number> [<p:player>]:
+    permission: op
+    trigger:
+        if {_p} is set:
+            set (walkspeed of {_p}) to {_n}
+        else:
+            set (walkspeed of player) to {_n}
+            send action bar "{@pa} &fYour walkspeed is now at &e%{_n}%"
+
+command /flyspeed <number>:
+    permission: op
+    trigger:
+        set (flyspeed of player) to arg-1
+        send action bar "{@pa} &fYour flyspeed is now at &e%arg-1%"
